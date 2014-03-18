@@ -207,18 +207,6 @@
                      placement="Genomics"
                      types="Gene,Transcript,Exon,Intron,UTR,CDS"/>
 
-    <reportdisplayer javaClass="org.intermine.bio.web.displayer.JBrowseDisplayer"
-                     jspName="model/jbrowseDisplayer.jsp"
-                     replacesFields=""
-                     placement="Genomics"
-                     types="Gene,MRNA,MiRNA,NcRNA,RRNA,SnRNA,SnoRNA,TRNA,Pseudogene,PseudogenicTranscript,TransposableElementGene"/>
-
-    <reportdisplayer javaClass="org.intermine.bio.web.displayer.OverlappingFeaturesDisplayer"
-                     jspName="model/overlappingFeaturesDisplayer.jsp"
-                     replacesFields="overlappingFeatures"
-                     placement="Genomics"
-                     types="SequenceFeature"/>
-
     <reportdisplayer javaClass="org.intermine.bio.web.displayer.SequenceFeatureDisplayer"
                      jspName="model/sequenceFeatureDisplayer.jsp"
                      replacesFields="chromosome,chromosomeLocation,sequence,length,sequenceOntologyTerm,locations,cytoLocation"
