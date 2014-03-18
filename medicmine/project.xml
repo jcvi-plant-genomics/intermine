@@ -11,7 +11,7 @@
       <property name="gff3.dataSourceName" value="JCVI"/>
       <property name="gff3.seqClsName" value="Chromosome"/>
       <property name="gff3.dataSetTitle" value="Barrel medic genome"/>
-      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/genome/gff" />
+      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/genome/gff" />
       <!--  <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/genome/gff"/> -->
     </source>
 
@@ -21,7 +21,7 @@
       <property name="fasta.dataSetTitle" value="Barrel medic chromosome sequence"/>
       <property name="fasta.taxonId" value="3880"/>
       <property name="fasta.includes" value="*v4*fasta"/>
-      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/genome/fasta"/>
+      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/genome/fasta"/>
     </source>
 
     <source name="medicago-cds-fasta" type="fasta">
@@ -33,7 +33,7 @@
       <property name="fasta.includes" value="*GenesCDSSeq*fasta"/>
       <property name="fasta.dataSetTitle" value="CDS FASTA data set for Medicago trunctula"/>
       <property name="fasta.dataSourceName" value="JCVI"/>
-      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/genome/fasta/"/>
+      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/genome/fasta/"/>
     </source>
 
     <source name="so" type="so">
@@ -41,18 +41,18 @@
     </source>
 
     <source name="medicago-expression" type="medicago-expression">
-      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/expression/"/>
+      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/expression/"/>
     </source>
 
     <!--
     <source name="go" type="go">
-      <property name="src.data.file" location="/usr/local/projects/MTG4/medicmine/go/gene_ontology.obo"/>
+      <property name="src.data.file" location="/usr/local/projects/MTG4/medicmine/complete/go/gene_ontology.obo"/>
       <property name="createrelations" value="false"/>
     </source>
 
     <source name="go-annotation" type="go-annotation" dump="true">
-      <property name="ontologyfile" location="/usr/local/projects/MTG4/medicmine/go/gene_ontology.obo"/>
-      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/go-annotation/"/>
+      <property name="ontologyfile" location="/usr/local/projects/MTG4/medicmine/complete/go/gene_ontology.obo"/>
+      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/go-annotation/"/>
     </source>
     -->
 
@@ -75,8 +75,8 @@
     <post-process name="create-bioseg-location-index" />
     <post-process name="create-overlap-view" />
     <post-process name="create-attribute-indexes"/>
-    <post-process name="summarise-objectstore"/>
-    <!-- <post-process name="create-autocomplete-index"/> -->
+   <post-process name="summarise-objectstore"/>
+    <post-process name="create-autocomplete-index"/>
     <post-process name="create-search-index"/>
   </post-processing>
 

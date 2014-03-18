@@ -32,7 +32,7 @@ public class BarInteractionsConverter extends BioDBConverter
 {
     private static final String DATASET_TITLE = "Interactions data set";
     private static final String DATA_SOURCE_NAME = "BAR";
-    private static final int TAXON_ID = 3702;
+    private static final int TAXON_ID = 3880;
     private Map<String, String> genes = new HashMap<String, String>();
     private Map<String, String> publications = new HashMap<String, String>();
     private Map<String, String> terms = new HashMap<String, String>();

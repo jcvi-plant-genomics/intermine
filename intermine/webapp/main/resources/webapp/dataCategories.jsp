@@ -9,42 +9,26 @@
 <html:xhtml/>
 
 <div class="body">
-  <div id="leftCol">
-      <div id="pageDesc" class="pageDesc"><p><fmt:message key="dataCategories.intro"/></p></div>
-      <im:boxarea title="Actions" stylename="plainbox" >
-           <html:link action="/templates">
-             <fmt:message key="dataCategories.viewTemplates"/>
-             <img border="0" class="arrow" src="images/right-arrow.gif" alt="Go"/>
-           </html:link>
-      </im:boxarea>
-   </div>
-<div id="rightCol">
-   <im:boxarea titleKey="dataCategories.title" stylename="gradientbox">
-    <c:choose>
-        <c:when test="${!empty ASPECTS}">
-           <tiles:insert name="aspects.tile"/>
-        </c:when>
-        <c:otherwise>
-          <c:forEach items="${CATEGORIES}" var="category">
-            <c:if test="${!empty CATEGORY_CLASSES[category]}">
-              <div class="heading"><c:out value="${category}"/></div>
-              <div class="body">
-                <c:set var="classes" value="${CATEGORY_CLASSES[category]}"/>
-                <c:forEach items="${classes}" var="classname" varStatus="status">
-                  <a href="<html:rewrite page="/queryClassSelect.do"/>?action=<fmt:message key="button.selectClass"/>&amp;className=${classname}" title="<c:out value="${classDescriptions[classname]}"/>">
-                    ${classname}</a><c:if test="${!status.last}">,</c:if>
-                </c:forEach>
-                <c:if test="${!empty CATEGORY_TEMPLATES[category]}">
-                  <br/><span class="smallnote"><fmt:message key="begin.or"/> <html:link action="/templates" paramId="category" paramName="category"><fmt:message key="begin.related.templates"/></html:link></span>
-                </c:if>
-              </div>
-              <im:vspacer height="5"/>
-            </c:if>
-          </c:forEach>
-        </c:otherwise>
-      </c:choose>
-     </im:boxarea>
-</div>
-</div>
-</div>
+<im:boxarea title="Data" stylename="plainbox"><p><fmt:message key="dataCategories.intro"/></p></im:boxarea>
+<table cellpadding="0" cellspacing="0" border="0" class="dbsources">
+  <tr>
+    <th>Data Category</th>
+    <th>Data</th>
+    <th>Source</th>
+    <th>Note</th>
+  </tr>
+<tr>
+   <td  class="leftcol"> <h2><p>Genes</p></h2></td>
+    <td> Genome annotation for M. truncatula</td>
+    <td><a href="http://www.jcvi.org/cgi-bin/medicago/overview.cgi" target="_new" class="extlink">Project Overview</a> - Version 4.0 </td>
+    <td>31661 High Confidence and 19233 Low Confidence Genes</td>
+</tr>
+<tr>
+ <td   class="leftcol"> <p><h2>Expression</h2></p></td>
+    <td> Expression patterns of mRNAs for 6 different tissue types: nodule, seedpod, blade, bud, open flower and root </td>
+    <td> &nbsp; </td>
+    <td> &nbsp; </td>
+</tr>
+
+</table>
 <!-- /dataCategories -->
