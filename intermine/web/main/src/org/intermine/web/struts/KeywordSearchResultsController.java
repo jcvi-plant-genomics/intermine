@@ -263,8 +263,8 @@ public class KeywordSearchResultsController extends TilesAction
             searchLog = Logger.getLogger(KeywordSearchResultsController.class.getName()
                         + ".searches");
 
-	    String logFileName = projectName + "_searches.log";
-	    //String logFileName = System.getProperty("catalina.base") + "/logs/" + projectName + "_searches.log";
+	    //String logFileName = projectName + "_searches.log";
+	    String logFileName = System.getProperty("catalina.base") + "/logs/" + projectName + "_searches.log";
             Layout layout = new PatternLayout("%d{ISO8601}\t%m%n");
             try {
                 RollingFileAppender appender = new RollingFileAppender(layout, logFileName, true);
