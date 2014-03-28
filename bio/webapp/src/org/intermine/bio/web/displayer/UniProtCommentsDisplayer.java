@@ -1,14 +1,14 @@
 package org.intermine.bio.web.displayer;
 
 /*
- * Copyright (C) 2002-2013 FlyMine
- *
- * This code may be freely distributed and modified under the
- * terms of the GNU Lesser General Public Licence.  This should
- * be distributed with the code.  See the LICENSE file for more
- * information or http://www.gnu.org/copyleft/lesser.html.
- *
- */
+* Copyright (C) 2002-2013 FlyMine
+*
+* This code may be freely distributed and modified under the
+* terms of the GNU Lesser General Public Licence. This should
+* be distributed with the code. See the LICENSE file for more
+* information or http://www.gnu.org/copyleft/lesser.html.
+*
+*/
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -37,20 +37,20 @@ import org.intermine.web.logic.results.ReportObject;
 import org.intermine.web.logic.session.SessionMethods;
 
 /**
- * metabolicMine UniProt curated comments displayer on Gene report page
- * @author radek
- *
- */
+* metabolicMine UniProt curated comments displayer on Gene report page
+* @author radek
+*
+*/
 public class UniProtCommentsDisplayer extends ReportDisplayer
 {
 
     protected static final Logger LOG = Logger.getLogger(UniProtCommentsDisplayer.class);
 
     /**
-     * Construct with config and the InterMineAPI.
-     * @param config to describe the report displayer
-     * @param im the InterMine API
-     */
+* Construct with config and the InterMineAPI.
+* @param config to describe the report displayer
+* @param im the InterMine API
+*/
     public UniProtCommentsDisplayer(ReportDisplayerConfig config, InterMineAPI im) {
         super(config, im);
     }
@@ -110,12 +110,12 @@ public class UniProtCommentsDisplayer extends ReportDisplayer
     }
 
     /**
-     * Create a HashMap of comments (for all Gene Proteins).
-     * @author radek
-     *
-     * @param values
-     * @return
-     */
+* Create a HashMap of comments (for all Gene Proteins).
+* @author radek
+*
+* @param values
+* @return
+*/
     @SuppressWarnings("unchecked")
     private Object geneComments2(ExportResultsIterator values) {
         // returned result columns positions
@@ -167,12 +167,12 @@ public class UniProtCommentsDisplayer extends ReportDisplayer
     }
 
     /**
-     * Create a HashMap of comments.
-     * @author radek
-     *
-     * @param values
-     * @return
-     */
+* Create a HashMap of comments.
+* @author radek
+*
+* @param values
+* @return
+*/
     private Object proteinComments2(ExportResultsIterator values) {
         // returned result columns positions
         int posCommentText = 0, posCommentType = 1;
@@ -192,13 +192,13 @@ public class UniProtCommentsDisplayer extends ReportDisplayer
     }
 
     /**
-     * Return an API query fetching all Comments for Proteins for Genes, ordered by type
-     * @author radek
-     *
-     * @param geneID
-     * @param query
-     * @return
-     */
+* Return an API query fetching all Comments for Proteins for Genes, ordered by type
+* @author radek
+*
+* @param geneID
+* @param query
+* @return
+*/
     private PathQuery geneCommentsQuery(String geneID, PathQuery query) {
         query.addViews(
                 "Gene.proteins.comments.description",
@@ -215,13 +215,13 @@ public class UniProtCommentsDisplayer extends ReportDisplayer
     }
 
     /**
-     * Return an API query fetching all Comments for Genes, ordered by type
-     * @author radek
-     *
-     * @param proteinID
-     * @param query
-     * @return
-     */
+* Return an API query fetching all Comments for Genes, ordered by type
+* @author radek
+*
+* @param proteinID
+* @param query
+* @return
+*/
     private PathQuery proteinCommentsQuery(String proteinID, PathQuery query) {
         query.addViews(
                 "Protein.comments.description",
@@ -230,7 +230,7 @@ public class UniProtCommentsDisplayer extends ReportDisplayer
         query.addOrderBy("Protein.comments.type", OrderDirection.ASC);
         query.addConstraint(Constraints.eq("Protein.id", proteinID));
        // query.addConstraint(Constraints.oneOfValues("Protein.comments.type",
-       //         Arrays.asList(allowedCommentTypes)));
+       // Arrays.asList(allowedCommentTypes)));
         return query;
     }
 }

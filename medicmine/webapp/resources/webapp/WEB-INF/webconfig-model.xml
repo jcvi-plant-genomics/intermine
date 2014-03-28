@@ -8,7 +8,7 @@
   <class className="org.intermine.model.bio.BioEntity">
     <headerconfig>
       <titles>
-        <title mainTitles="symbol|primaryIdentifier" numberOfMainTitlesToShow="1" subTitles="*organism.shortName*" />
+        <title mainTitles="primaryIdentifier" numberOfMainTitlesToShow="1" subTitles="*organism.shortName*" />
       </titles>
     </headerconfig>
     <fields>
@@ -84,20 +84,6 @@
     </fields>
   </class>
 
-  <class className="org.intermine.model.bio.Interaction">
-    <fields>
-      <fieldconfig fieldExpr="gene1.symbol" />
-      <fieldconfig fieldExpr="gene2.symbol" />
-    </fields>
-  </class>
-
-  <class className="org.intermine.model.bio.InteractionExperiment">
-    <fields>
-      <fieldconfig fieldExpr="name"/>
-      <fieldconfig fieldExpr="description"/>
-    </fields>
-  </class>
-
  <class className="org.intermine.model.bio.Location">
     <fields>
       <fieldconfig fieldExpr="feature.primaryIdentifier"/>
@@ -106,7 +92,6 @@
       <fieldconfig fieldExpr="strand"/>
     </fields>
   </class>
-
 
   <class className="org.intermine.model.bio.SequenceFeature">
     <fields>
@@ -200,6 +185,15 @@
     </fields>
   </class>
 
+  <class className="org.intermine.model.bio.Homologue">
+    <fields>
+      <fieldconfig fieldExpr="gene.primaryIdentifier" showInResults="false" showInInlineCollection="false" />
+      <fieldconfig fieldExpr="homologue.primaryIdentifier"/>
+      <fieldconfig fieldExpr="homologue.organism.shortName"/>
+      <fieldconfig fieldExpr="type"/>
+    </fields>
+  </class>
+
   <class className="org.intermine.model.bio.Sequence">
     <fields>
       <fieldconfig fieldExpr="residues" fieldExporter="org.intermine.bio.web.export.ResidueFieldExporter"
@@ -265,6 +259,13 @@
                      placement="Genomics"
                      types="Gene,Transcript,Exon,Intron,UTR,CDS"/>
 
+    <reportdisplayer javaClass="org.intermine.bio.web.displayer.HomologueDisplayer"
+                     jspName="model/homologueDisplayer.jsp"
+                     replacesFields="homologues"
+                     placement="Homology"
+                     parameters="{'dataSets': ['Panther data set']}"
+                     types="Gene"/>
+
     <reportdisplayer javaClass="org.intermine.bio.web.displayer.JBrowseDisplayer"
                      jspName="model/jbrowseDisplayer.jsp"
                      replacesFields=""
@@ -289,11 +290,11 @@
                      placement="Proteins"
                      types="Genomics,Protein"/>
 
-    <reportdisplayer javaClass="org.medicmine.web.displayer.BarEfpBrowserDisplayer"
+    <reportdisplayer javaClass="org.intermine.bio.web.displayer.BarEfpBrowserDisplayer"
                      jspName="model/eFPBrowserDisplayer.jsp"
                      replacesFields=""
                      placement="Expression"
-                     types="Gene"/>
+                     types="Gene,MRNA"/>
 
   </reportdisplayers>
 
@@ -331,7 +332,6 @@
                                        publications.title, publications.firstAuthor,
                                        publications.journal, publications.year, publications.pubMedId"
                                  externalLink="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;dopt=Abstract&amp;list_uids="/>
-
 
 </widgets>
 </webconfig>

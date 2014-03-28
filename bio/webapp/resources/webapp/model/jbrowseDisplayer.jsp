@@ -25,7 +25,7 @@
   <c:when test="${WEB_PROPERTIES['jbrowse.database.source'] != null}">
   <div>
       <iframe style="border: 1px solid black"
-          src="${WEB_PROPERTIES['jbrowse.prefix']}/?data=${WEB_PROPERTIES['jbrowse.database.source']}&loc=${name}&tracklist=1&nav=0&overview=0&tracks=TAIR10_loci,TAIR10_genes"
+          src="${WEB_PROPERTIES['jbrowse.prefix']}/?data=${WEB_PROPERTIES['jbrowse.database.source']}&loc=${name}&nav=0&overview=0&tracks=Root20(Control)%20RNAseq%20Coverage%2Cgene_models%2CTE_gene_models"
           width="820" height="250">
       </iframe>
   </div>
