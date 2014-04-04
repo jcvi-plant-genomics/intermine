@@ -1,0 +1,16 @@
+log_dir: "/usr/local/projects/MTG4/soymine/log"
+data_dir: "/usr/local/projects/MTG4/soymine/complete/uniprot"
+
+default_sources:
+  - "GOAnnotation"
+  - "IntAct"
+  - "IntActVocabulary"
+  - "InterPro"
+  - "InterProGO"
+  - "NCBIGene"
+  - "PubMed"
+  - "UniProt"
+
+UniProt:
+    organisms:
+        - 3847

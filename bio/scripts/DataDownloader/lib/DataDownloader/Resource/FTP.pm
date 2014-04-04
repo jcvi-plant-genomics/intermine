@@ -11,8 +11,8 @@ sub fetch {
     my $self = shift;
     my $file = $self->get_file;
     my $host = $self->get_host;
-    #my $temp = $self->get_temp_file;
-    my $temp = "/usr/local/scratch/CORE/msarmien/MEDICAGO/GO/tempfile.$$";
+    my $temp = $self->get_temp_file;
+    #my $temp = "/usr/local/scratch/CORE/msarmien/MEDICAGO/GO/tempfile.$$";
     my $con  = $self->get_ftp;
 
     my $bytes = $con->size($file);

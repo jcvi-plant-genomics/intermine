@@ -118,7 +118,7 @@ has extract => (
 
 my $default_post_processor = sub {
     my ($self, $given_file, $new_file) = @_;
-    $given_file = "/usr/local/scratch/CORE/msarmien/MEDICAGO/GO/tempfile.$$";
+    #$given_file = "/usr/local/scratch/CORE/msarmien/MEDICAGO/GO/tempfile.$$";
     $self->debug(sprintf "Copying '%s' => '%s'", $given_file, $new_file);
     move($given_file, $new_file);
 };

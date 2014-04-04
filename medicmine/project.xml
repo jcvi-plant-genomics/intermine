@@ -11,7 +11,7 @@
       <property name="gff3.dataSourceName" value="JCVI"/>
       <property name="gff3.seqClsName" value="Chromosome"/>
       <property name="gff3.dataSetTitle" value="Medicago truncatula gff general annotation"/>
-      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/genome/gff" />
+      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/genome/gff" />
       <!--  <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/genome/gff"/> -->
     </source>
 
@@ -21,7 +21,7 @@
       <property name="fasta.dataSetTitle" value="Medicago truncatula chromosome sequence"/>
       <property name="fasta.taxonId" value="3880"/>
       <property name="fasta.includes" value="*v4*fasta"/>
-      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/genome/fasta"/>
+      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/genome/fasta"/>
     </source>
 
     <source name="medicago-cds-fasta" type="fasta">
@@ -33,12 +33,11 @@
       <property name="fasta.includes" value="*GenesCDSSeq*fasta"/>
       <property name="fasta.dataSetTitle" value="CDS FASTA data set for Medicago trunctula"/>
       <property name="fasta.dataSourceName" value="JCVI"/>
-      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/genome/fasta/"/>
+      <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/genome/fasta/"/>
     </source>
     <source name="panther" type="panther">
 	<property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/orthologs/panther"/>
 	<property name="panther.organisms" value="3880 3702"/>
-	<property name="panther.dataSetTitle" value="Custom JCVI Reciprocal BLASTP Analysis"/>
     </source>
     <source name="so" type="so">
       <property name="src.data.file" location="../../bio/sources/so/so.obo"/>

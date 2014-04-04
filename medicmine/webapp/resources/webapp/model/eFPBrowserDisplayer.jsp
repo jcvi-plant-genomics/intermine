@@ -33,7 +33,7 @@
   </div>
   </c:when>
   <c:otherwise>
-   	<p>There was a problem rendering the BAR eFP Browser</code>.</p>
+   	<p>There are no probeset data available for this gene.</code>.</p>
 	<script type="text/javascript">
 		jQuery('#eFPBrowser').addClass('warning');
 	</script>

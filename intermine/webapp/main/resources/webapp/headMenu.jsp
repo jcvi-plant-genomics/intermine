@@ -50,7 +50,7 @@
           <fmt:message key="menu.begin"/>
         </a>
       </li>
-      <li id="templates"  <c:if test="${tab == 'templates'}">class="activelink"</c:if>>
+      <li id="templates" <c:if test="${tab == 'templates'}">class="activelink"</c:if>>
          <a href="/${WEB_PROPERTIES['webapp.path']}/templates.do">
           <fmt:message key="menu.templates"/>
         </a>
@@ -77,12 +77,12 @@
           <fmt:message key="menu.dataCategories"/>
         </a>
       </li>
-      <li id="api"  <c:if test="${tab == 'api'}">class="activelink"</c:if>>
+      <li id="api" <c:if test="${tab == 'api'}">class="activelink"</c:if>>
         <a href="/${WEB_PROPERTIES['webapp.path']}/api.do">
           <fmt:message key="menu.api"/>
         </a>
       </li>
-      <li id="mymine"  <c:if test="${tab == 'mymine'}">class="activelink"</c:if>>
+      <li id="mymine" <c:if test="${tab == 'mymine'}">class="activelink"</c:if>>
         <a href="/${WEB_PROPERTIES['webapp.path']}/mymine.do">
           <span><fmt:message key="menu.mymine"/></span>
         </a>
@@ -209,14 +209,14 @@
           </c:if>
         </c:forTokens>
         <!--
-        <c:if test="${pageName == 'begin'}">
-          <li>
-          <div>
-            <a href="${WEB_PROPERTIES['project.sitePrefix']}/what.shtml">What is ${WEB_PROPERTIES['project.title']}?</a>
-          </div>
-          </li>
-        </c:if>
-         -->
+<c:if test="${pageName == 'begin'}">
+<li>
+<div>
+<a href="${WEB_PROPERTIES['project.sitePrefix']}/what.shtml">What is ${WEB_PROPERTIES['project.title']}?</a>
+</div>
+</li>
+</c:if>
+-->
         </ul>
     </div>
   </div>
