@@ -35,13 +35,10 @@
       <property name="fasta.dataSourceName" value="JCVI"/>
       <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/genome/fasta/"/>
     </source>
-
-    <source name="medicago-ortho" type="medicago-ortho">
-	<!--<property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/orthologs/panther"/>-->
-	<property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/orthologs/medicagoOrtho/"/>
+    <source name="panther" type="panther">
+	<property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/orthologs/panther"/>
 	<property name="panther.organisms" value="3880 3702"/>
     </source>
-
     <source name="so" type="so">
       <property name="src.data.file" location="../../bio/sources/so/so.obo"/>
     </source>
@@ -80,7 +77,6 @@
       <property name="src.data.dir" location="/usr/local/projects/MTG4/medicmine/complete/uniprot/2014_02"/>
       <property name="src.data.dir.includes" value="keywlist.xml"/>
     </source>
-
     <source name="entrez-organism" type="entrez-organism">
       <property name="src.data.file" location="build/organisms.xml"/>
     </source>

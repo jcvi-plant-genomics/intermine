@@ -63,7 +63,7 @@
 </tr>
 
 <tr>
-    <td>Electronic Fluorescent Pictograph (eFP) Visualization paints gene expression information from one of the AtGenExpress data sets or other compendia for a desired gene onto a diagrammatic representation of <em>Arabidopsis thaliana</em> plants.</td>
+    <td>Electronic Fluorescent Pictograph (eFP) Visualization paints gene expression information from one of the AtGenExpress data sets or other compendia for a desired gene onto a diagrammatic representation of <em>Medicago truncatula</em> plants.</td>
     <td><a href="http://bar.utoronto.ca/efpmedicago/cgi-bin/efpWeb.cgi" target="_blank" class="extlink">Medicago eFP Browser</a></td>
     <td>Winter et al., 2007 - <a href="http://www.ncbi.nlm.nih.gov/pubmed/17684564" target="_blank" class="extlink">PMID:17684564</a>
 </tr>

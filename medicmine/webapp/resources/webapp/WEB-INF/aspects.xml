@@ -59,7 +59,7 @@
     <intro-text>
       Orthologues and Paralogues.
     </intro-text>
-    <aspect-source name="CustomJCVIAnalysis" url="http://medicago.jcvi.org/medicago/index.php"/>
+    <aspect-source name="CustomJCVIReciprocalBLASTPAnalysis" url="http://medicago.jcvi.org/medicago/index.php"/>
   </aspect>
 
 </aspects>

@@ -80,7 +80,7 @@ public class MedicagoExpressionConverter extends BioFileConverter
             if (StringUtils.isNotEmpty(score)) {
 		 try {
 		     //    Float score = Float.valueOf(fpkm).floatValue();
-                    result.setAttribute("expressionScore", score);
+                    result.setAttribute("expressionLevel", score);
 		     } catch (NumberFormatException e) {
 		     LOG.warn("bad score: " + score, e);
 

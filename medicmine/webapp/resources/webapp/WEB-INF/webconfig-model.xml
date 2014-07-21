@@ -263,7 +263,7 @@
                      jspName="model/homologueDisplayer.jsp"
                      replacesFields="homologues"
                      placement="Homology"
-                     parameters="{'dataSets': ['Panther data set']}"
+                     parameters="{'dataSets': ['Custom JCVI Reciprocal BLASTP Analysis']}"
                      types="Gene"/>
 
     <reportdisplayer javaClass="org.intermine.bio.web.displayer.JBrowseDisplayer"
@@ -295,6 +295,11 @@
                      replacesFields=""
                      placement="Expression"
                      types="Gene,MRNA"/>
+    <reportdisplayer javaClass="org.intermine.bio.web.displayer.MedicagoExpressionDisplayer"
+                     jspName="model/medicagoExpressionDisplayer.jsp"
+                     replacesFields=""
+                     placement="Expression"
+                     types="MRNA"/>
 
   </reportdisplayers>
 

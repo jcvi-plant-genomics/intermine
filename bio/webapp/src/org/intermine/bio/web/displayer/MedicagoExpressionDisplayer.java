@@ -139,7 +139,7 @@ public class MedicagoExpressionDisplayer extends ReportDisplayer
     private PathQuery getQuery(String geneId, PathQuery query) {
         query.addViews(
                 "MRNA.rnaSeqResults.stage",
-                "MRNA.rnaSeqResults.expressionScore",
+                "MRNA.rnaSeqResults.expressionLevel",
                 "MRNA.primaryIdentifier");
         query.addConstraint(Constraints.eq("MRNA.id", geneId));
         query.addOrderBy("MRNA.rnaSeqResults.stage", OrderDirection.ASC);

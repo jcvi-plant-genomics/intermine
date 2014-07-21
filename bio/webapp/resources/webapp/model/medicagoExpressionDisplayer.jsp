@@ -11,14 +11,24 @@
 
 <c:choose>
   <c:when test="${empty(medicagoResults)}">
-    <h3 class="goog gray">Expression by Stage</h3>
+    <h3 class="goog gray">Rna Seq Results</h3>
     <p>No expression data available for this gene.</p>
   </c:when>
   <c:otherwise>
-    <h3 class="goog">Expression by Stage</h3>
-    <div class="chart" id="medicago-expression-chart"></div>
+    <!--<div class="chart" id="medicago-expression-chart"></div>-->
 
-    <input class="toggle" type="button" value="Toggle table" />
+    <div class="data-table collection-table">
+    <h3 class="goog">Rna Seq Results</h3>
+      <c:set var="inlineResultsTable" value="${medicagoCollection}" />
+      <tiles:insert page="/reportCollectionTable.jsp">
+        <tiles:put name="inlineResultsTable" beanName="inlineResultsTable" />
+        <tiles:put name="object" beanName="reportObject.object" />
+        <tiles:put name="fieldName" value="medicagoExpression" />
+      </tiles:insert>
+      <th>*Expression Levels are in FPKM units</th>
+    </div>
+
+    <!--<input class="toggle" type="button" value="Toggle table" />-->
 
     <%-- collection table --%>
     <div class="data-table collection-table" style="display:none;">
@@ -29,6 +39,7 @@
         <tiles:put name="object" beanName="reportObject.object" />
         <tiles:put name="fieldName" value="medicagoExpression" />
       </tiles:insert>
+      <th>*Expression Levels are in FPKM units</th>
     </div>
 
     <script type="text/javascript">

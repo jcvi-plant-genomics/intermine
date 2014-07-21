@@ -15,7 +15,7 @@
   <ol>
     <li>going to the <a href="/medicmine">home page</a></li>
     <li>using the <a href="/medicmine/keywordSearchResults.do">quicksearch</a></li>
-    <li>or <a href="#" onclick="showContactForm()">Contact us</a> at araport@jcvi.org </li>
+    <li>or <a href="#" onclick="showContactForm()">Contact us</a> at mtruncatula@jcvi.org </li>
   </ol>
 </div>
 <a href="${WEB_PROPERTIES['project.sitePrefix']}" alt="Home" rel="NOFOLLOW"><img id="logo" src="${WEB_PROPERTIES['project.siteLogo']}" width="45px" height="43px" alt="Logo" /></a>

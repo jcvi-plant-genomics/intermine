@@ -43,8 +43,11 @@
 </c:when>
 <c:otherwise>
 <div id="eFPBrowser" class="feature basic-table warning">
-  <h3><fmt:message key="sequenceFeature.eFPBrowser.message"/></h3>
-  <p>There was a problem rendering the BAR eFP Browser.</p>
+
+   	<p>There are no probeset data available for this gene.</code>.</p>
+	<script type="text/javascript">
+		jQuery('#eFPBrowser').addClass('warning');
+	</script>
 </div>
 </c:otherwise>
 </c:choose>
