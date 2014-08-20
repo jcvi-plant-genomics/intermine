@@ -102,7 +102,24 @@
               <c:if test="${!field.doNotTruncate && !empty field.value}">
               <!-- Short summary fields: change field description to bold, text to normal -->
                 <td class="label"><strong>${fieldDisplayText}&nbsp;<im:typehelp type="${field.pathString}"/></strong></td>
-                <td style="vertical-align: top"><c:out escapeXml="${field.escapeXml}" value="${field.value}" /></td>
+
+
+<c:choose>
+<c:when test="${fn:trim(fieldDisplayText) == 'Computational Description' && fn:contains(field.value,'; Has ')}" >
+<td style="vertical-align: top"><c:out escapeXml="${field.escapeXml}" value="${fn:substringBefore(fn:replace(field.value, 'TAIR:', 'AGI:'), '; Has ')}. <em><strong>Source:</strong> TAIR - August 31, 2013.</em>" /></td>
+</c:when>
+<c:when test="${fn:trim(fieldDisplayText) == 'Computational Description' && !fn:contains(field.value,'; Has ')}" >
+<td style="vertical-align: top"><c:out escapeXml="${field.escapeXml}" value="${fn:replace(field.value, 'TAIR:', 'AGI:')} <em><strong>Source:</strong> TAIR - August 31, 2013.</em>" /></td>
+</c:when>
+<c:when test="${fn:trim(fieldDisplayText) == 'Curator Summary' }" >
+<td style="vertical-align: top"><c:out escapeXml="${field.escapeXml}" value="${fn:replace(field.value, 'TAIR:', 'AGI:')} <em><strong>Source:</strong> TAIR - August 31, 2013.</em>" /></td>
+</c:when>
+<c:otherwise>
+  <td style="vertical-align: top"><c:out escapeXml="${field.escapeXml}" value="${field.value}" /></td>
+</c:otherwise>
+</c:choose>
+
+
                 <c:set var="tableCount" value="${tableCount+1}" scope="page" />
               </c:if>
             </c:otherwise>
@@ -271,13 +288,13 @@
       <tiles:put name="placement" value="summary" />
     <tiles:put name="reportObject" beanName="object" />
      </tiles:insert>
-  
+
    <tiles:insert name="templateList.tile">
     <tiles:put name="scope" value="global" />
     <tiles:put name="placement" value="im:aspect:summary" />
     <tiles:put name="reportObject" beanName="object" />
   </tiles:insert>
-  
+
   </div>
 
   <c:forEach items="${categories}" var="aspect" varStatus="status">
