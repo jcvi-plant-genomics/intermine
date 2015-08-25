@@ -78,11 +78,11 @@ public class IntronUtil
         this.os = osw.getObjectStore();
         this.model = os.getModel();
         dataSource = (DataSource) DynamicUtil.createObject(Collections.singleton(DataSource.class));
-        dataSource.setName("ThaleMine");
+        dataSource.setName("MedicMine");
         try {
             dataSource = os.getObjectByExample(dataSource, Collections.singleton("name"));
         } catch (ObjectStoreException e) {
-            throw new RuntimeException("unable to fetch ThaleMine DataSource object", e);
+            throw new RuntimeException("unable to fetch MedicMine DataSource object", e);
         }
     }
 
@@ -108,10 +108,10 @@ public class IntronUtil
         throws ObjectStoreException {
 
         dataSet = (DataSet) DynamicUtil.createObject(Collections.singleton(DataSet.class));
-        dataSet.setName("ThaleMine introns");
-        dataSet.setDescription("Introns calculated by ThaleMine");
+        dataSet.setName("MedicMine introns");
+        dataSet.setDescription("Introns calculated by MedicMine");
         dataSet.setVersion("" + new Date()); // current time and date
-        dataSet.setUrl("https://apps.araport.org/thalemine");
+        dataSet.setUrl("http://medicmine.jcvi.org/medicmine");
         dataSet.setDataSource(dataSource);
 
         // Documented as an example of how to use the query API
