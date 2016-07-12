@@ -18,6 +18,11 @@
           <property name="src.data.file" location="../../bio/sources/so/so.obo"/>
       </source>
 
+      <source name="medicago-ortho" type="medicago-ortho">
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/orthologs/panther"/>
+          <property name="panther.organisms" value="3880 3702"/>
+      </source>
+
       <source name="entrez-organism" type="entrez-organism">
           <property name="src.data.file" location="build/organisms.xml"/>
       </source>
