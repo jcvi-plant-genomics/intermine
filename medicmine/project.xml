@@ -18,6 +18,41 @@
           <property name="src.data.file" location="../../bio/sources/so/so.obo"/>
       </source>
 
+      <source name="medicago-chromosome-fasta" type="fasta">
+          <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+          <property name="fasta.dataSourceName" value="JCVI"/>
+          <property name="fasta.dataSetTitle" value="Genome Assembly"/>
+          <property name="fasta.taxonId" value="3880"/>
+          <property name="fasta.includes" value="*v4*fasta"/>
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/fasta"/>
+      </source>
+
+      <source name="medicago-cds-fasta" type="fasta">
+          <property name="fasta.loaderClassName"
+              value="org.intermine.bio.dataconversion.MedicagoCDSFastaLoaderTask"/>
+          <property name="fasta.taxonId" value="3880"/>
+          <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
+          <property name="fasta.classAttribute" value="primaryIdentifier"/>
+          <property name="fasta.includes" value="*GenesCDSSeq*fasta"/>
+          <property name="fasta.dataSetTitle" value="Coding Sequence FASTA"/>
+          <property name="fasta.dataSourceName" value="JCVI"/>
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/fasta/"/>
+      </source>
+
+      <source name="medicago-pep-fasta" type="fasta">
+          <property name="fasta.loaderClassName"
+              value="org.intermine.bio.dataconversion.MedicagoProteinFastaLoaderTask"/>
+          <property name="fasta.taxonId" value="3880"/>
+          <property name="fasta.className" value="org.intermine.model.bio.Protein"/>
+          <property name="fasta.classAttribute" value="primaryIdentifier"/>
+          <property name="fasta.includes" value="*GenesProteinSeq*fasta"/>
+          <property name="fasta.sequenceType" value="protein" />
+          <!--property name="fasta.skipIfProteinLoaded" value="true"/-->
+          <property name="fasta.dataSetTitle" value="Protein Sequence FASTA"/>
+          <property name="fasta.dataSourceName" value="JCVI"/>
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/fasta/"/>
+      </source>
+
       <source name="medicago-ortho" type="medicago-ortho">
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/orthologs/panther"/>
           <property name="panther.organisms" value="3880 3702"/>
