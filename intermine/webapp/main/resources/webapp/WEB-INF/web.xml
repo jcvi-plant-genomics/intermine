@@ -14,10 +14,6 @@
     <listener-class>org.intermine.web.logic.session.SessionListener</listener-class>
   </listener>
 
-  <listener>
-    <listener-class>org.thalemine.web.context.AppContextListener</listener-class>
-  </listener>
-
 <!-- Main webapp mapping -->
 <!-- ================================================================================ -->
   <servlet>
@@ -54,11 +50,6 @@
       <param-value>true</param-value>
     </init-param>
     <load-on-startup>2</load-on-startup>
-<init-param>
-<param-name>crossDomainSessionSecurity</param-name>
-<param-value>false</param-value>
-</init-param>
-
   </servlet>
 
   <servlet-mapping>
@@ -347,8 +338,9 @@ attribute when using this service.
             default="{name}">name</param>
         <body description="Identifiers for objects to add to the list, tab, comma or newline separated.">
           <content type="text/plain">
-            FT, TSF
-            FWA
+            "even skipped"
+            zen, bib
+            hairless
           </content>
         </body>
         <returns>
@@ -627,8 +619,9 @@ attribute when using this service.
                 description="A disambiguating value (such as organism name)">extraValue</param>
           <body description="Identifiers for objects to add to the list, tab, comma or newline separated.">
              <content type="text/plain">
-              FT, TSF
-              FWA
+              "even skipped"
+              zen, bib
+              hairless
              </content>
             </body>
           <returns>
@@ -734,7 +727,7 @@ given, and may be anything the user requires.
 
 To run a template, for example which has the following editable constraints:
 ```
-&lt;constraint path="Gene.symbol" op="=" value="FT" editable="true"/&gt;
+&lt;constraint path="Gene.symbol" op="=" value="eve" editable="true"/&gt;
 &lt;constraint path="Gene.length" op="&amp;gt;" value="1000" editable="true"/&gt;
 ```
 
@@ -744,7 +737,7 @@ Then the user should supply the following parameters to run it with the above va
 |---------------------|------------------|
 | constraint1         | Gene.symbol      |
 | op1                 | eq               |
-| value1              | FT               |
+| value1              | eve              |
 | constraint2         | Gene.length      |
 | op2                 | gt               |
 | value2              | 1000             |
@@ -837,7 +830,7 @@ given, and may be anything the user requires.
 
 To run a template, for example which has the following editable constraints:
 ```
-&lt;constraint path="Gene.symbol" op="=" value="FT" editable="true"/&gt;
+&lt;constraint path="Gene.symbol" op="=" value="eve" editable="true"/&gt;
 &lt;constraint path="Gene.length" op="&amp;gt;" value="1000" editable="true"/&gt;
 ```
 
@@ -847,7 +840,7 @@ Then the user should supply the following parameters to run it with the above va
 |---------------------|------------------|
 | constraint1         | Gene.symbol      |
 | op1                 | eq               |
-| value1              | FT               |
+| value1              | eve              |
 | constraint2         | Gene.length      |
 | op2                 | gt               |
 | value2              | 1000             |
@@ -943,7 +936,7 @@ given, and may be anything the user requires.
 
 To run a template, for example which has the following editable constraints:
 ```
-&lt;constraint path="Gene.symbol" op="=" value="FT" editable="true"/&gt;
+&lt;constraint path="Gene.symbol" op="=" value="eve" editable="true"/&gt;
 &lt;constraint path="Gene.length" op="&amp;gt;" value="1000" editable="true"/&gt;
 ```
 
@@ -953,7 +946,7 @@ Then the user should supply the following parameters to run it with the above va
 |---------------------|------------------|
 | constraint1         | Gene.symbol      |
 | op1                 | eq               |
-| value1              | FT               |
+| value1              | eve              |
 | constraint2         | Gene.length      |
 | op2                 | gt               |
 | value2              | 1000             |
@@ -1055,7 +1048,7 @@ to will also be returned.
              <content type="application/xml">
                 &lt;template name="my-new-template"&gt;
                     &lt;query model="genomic" view="Gene.symbol Gene.proteins.proteinDomains.name"&gt;
-                        &lt;constraint editable="true" path="Gene" op="LOOKUP" value="FT"/&gt;
+                        &lt;constraint editable="true" path="Gene" op="LOOKUP" value="eve"/&gt;
                     &lt;/query&gt;
                 &lt;/template&gt;
              </content>
@@ -1110,7 +1103,7 @@ to will also be returned.
     <servlet-name>ws-version</servlet-name>
     <url-pattern>/service/version/*</url-pattern>
     <metadata>
-        <name>Web-Service Version</name>
+        <name>Version</name>
         <method type="GET" authenticationRequired="false">
            <summary>Get the Web-Service Version.</summary>
            <description>
@@ -1128,6 +1121,18 @@ to will also be returned.
                Get the release version of the data-warehouse. This is a string that is changed
                each time data is added or removed from the server. Thus this number is meant
                to reflect the contents rather than the interface of this set of services.
+           </description>
+           <returns>
+             <format>text</format>
+             <format key="version">json</format>
+           </returns>
+       </method>
+       <method type="GET" authenticationRequired="false" slug="/intermine">
+           <summary>Get the InterMine Release Version.</summary>
+           <description>
+               Get the InterMine version number. This number represents the version of InterMine
+               code currently running. See https://github.com/intermine/intermine/releases for
+               full details on release dates and versions.
            </description>
            <returns>
              <format>text</format>
@@ -1429,10 +1434,13 @@ to will also be returned.
                 domain ranked by p-value (low to high).
             </description>
             <param type="String"
-                required="true"
-                description="The name of the list to investigate"
+                required="false"
+                description="The name of the list to investigate, optional unless identifiers is NULL."
                 options="/lists|lists{status=CURRENT}"
                 default="{name}">list</param>
+            <param type="String"
+                required="false"
+                description="Comma-separated list of InterMine object IDs, optional unless list name is NULL.">ids</param>
             <param type="String"
                 required="true"
                 description="The name of the enrichment widget to display"
@@ -1576,7 +1584,7 @@ to will also be returned.
                 options="/lists|lists{status=CURRENT}"
                 default="{name}"
                 required="false" description="A list to search within.">list</param>
-            <param type="String[]" required="false" description="A facet parameter, eg facet_Organism=A.thaliana">facet_?</param>
+            <param type="String[]" required="false" description="A facet parameter, eg facet_Organism=D.melanogaster">facet_?</param>
             <returns>
               <format key="results">json</format>
             </returns>
@@ -1764,11 +1772,11 @@ following [json-schema](http://json-schema.org/) schema:
             description="A representation of the job. This must include a list of identifiers to resolve, and the type of object these ids are meant to resolve to">
               <content type="application/json" schema="/schema/job.schema">
                 {
-                  "identifiers": ["FT", "TSF", "FWA"],
+                  "identifiers": ["eve", "zen", "bib"],
                   "type": "Gene",
                   "caseSensitive": true,
                   "wildCards": true,
-                  "extra": "A. thaliana"
+                  "extra": "D. melanogaster"
                 }
               </content>
            </body>
@@ -2087,12 +2095,12 @@ fetch an indexed sub-sequence of it.
 
 This service expects a query with a single output column that resolves
 to a sub-sequenceable object. For example to get a sub-sequence
-of the genomic sequence of the Arabidopsis chromosome 1 in a genomic mine, the following
+of the genomic sequence of the fly X chromosome in a genomic mine, the following
 query could be used:
 
 ```
 &lt;query model="genomic" view="Chromosome.sequence.residues"&gt;
-    &lt;constraint path="Chromosome" op="LOOKUP" value="Chr1" extraValue="A. thaliana"/&gt;
+    &lt;constraint path="Chromosome" op="LOOKUP" value="X" extraValue="D. melanogaster"/&gt;
 &lt;/query&gt;
 ```
             </description>
@@ -2101,7 +2109,7 @@ query could be used:
             <param type="XML"
                 default="
 &lt;query model=&quot;genomic&quot; view=&quot;Chromosome.sequence.residues&quot;&gt;
-    &lt;constraint path=&quot;Chromosome&quot; op=&quot;LOOKUP&quot; value=&quot;Chr1&quot; extraValue=&quot;A. thaliana&quot;/&gt;
+    &lt;constraint path=&quot;Chromosome&quot; op=&quot;LOOKUP&quot; value=&quot;X&quot; extraValue=&quot;D. melanogaster&quot;/&gt;
 &lt;/query&gt;"
                 required="true" description="The xml of the query to run.">query</param>
             <returns>
@@ -2333,7 +2341,7 @@ query could be used:
             <param
                 required="true"
                 type="String"
-                default="FT"
+                default="eve"
                 description="The search prefix string to look for">startswith</param>
             <param
                 required="true"
@@ -2357,7 +2365,7 @@ query could be used:
             <param
                 required="true"
                 type="String"
-                default="FT"
+                default="eve"
                 description="The name of the item.">equals</param>
             <param
                 required="true"
@@ -2697,7 +2705,7 @@ The different token types are:
             <body description="The queries to upload. If using body content.">
              <content type="application/xml">
                 &lt;query model="genomic" view="Gene.symbol Gene.proteins.proteinDomains.name"&gt;
-                    &lt;constraint path="Gene" op="LOOKUP" value="FT"/&gt;
+                    &lt;constraint path="Gene" op="LOOKUP" value="eve"/&gt;
                 &lt;/query&gt;
              </content>
              <content type="none"/>
@@ -2723,7 +2731,7 @@ The different token types are:
             <body description="The queries to upload. If using body content.">
              <content type="application/xml">
                 &lt;query model="genomic" view="Gene.symbol Gene.proteins.proteinDomains.name"&gt;
-                    &lt;constraint path="Gene" op="LOOKUP" value="FT"/&gt;
+                    &lt;constraint path="Gene" op="LOOKUP" value="eve"/&gt;
                 &lt;/query&gt;
              </content>
              <content type="none"/>
@@ -3027,6 +3035,7 @@ The different token types are:
    </servlet-mapping>
 
 
+
   <!-- MUST BE LISTED LAST OF ALL WEBSERVICES AS IT IS THE MOST GENERAL -->
   <servlet-mapping>
     <servlet-name>ws-service-listing</servlet-name>
@@ -3164,18 +3173,6 @@ The different token types are:
 
   </filter-mapping>
 
-  <!-- Initializing Filter -->
-  <filter>
-    <filter-name>contextInitializer</filter-name>
-    <filter-class>org.thalemine.web.context.ContextLoaderInitializer</filter-class>
-  </filter>
-
-  <filter-mapping>
-    <filter-name>contextInitializer</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  <!-- end Initializing Filter -->
-
   <error-page>
     <error-code>500</error-code>
     <location>/static/flymine-offline/</location>
@@ -3199,14 +3196,5 @@ The different token types are:
       <trim-directive-whitespaces>true</trim-directive-whitespaces>
     </jsp-property-group>
   </jsp-config>
-
-<servlet>
-  <servlet-name>ws-gff3-query</servlet-name>
-  <servlet-class>org.intermine.bio.webservice.GFF3QueryServlet</servlet-class>
-  <init-param>
-     <param-name>debug</param-name>
-     <param-value>true</param-value>
-  </init-param>
-</servlet>
 
 </web-app>
