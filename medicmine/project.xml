@@ -53,6 +53,10 @@
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/fasta/"/>
       </source>
 
+      <source name="medicago-expression" type="medicago-expression">
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/expression"/>
+      </source>
+
       <source name="medicago-ortho" type="medicago-ortho">
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/orthologs/panther"/>
           <property name="panther.organisms" value="3880 3702"/>
