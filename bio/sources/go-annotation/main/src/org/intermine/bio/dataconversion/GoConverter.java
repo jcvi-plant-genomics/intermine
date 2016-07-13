@@ -448,7 +448,7 @@ public class GoConverter extends BioFileConverter
                 }
             }
 
-            if (rslv != null && rslv.hasTaxon(taxonId) && !"3702".equals(taxonId)) {
+            if (rslv != null && rslv.hasTaxon(taxonId)) {
                 if ("10116".equals(taxonId)) { // RGD doesn't have prefix in its annotation data
                     accession = "RGD:" + accession;
                 }
@@ -459,8 +459,9 @@ public class GoConverter extends BioFileConverter
                             + "ignoring gene: " + accession + " count: " + resCount + " ID: "
                             + rslv.resolveId(taxonId, accession));
                     return null;
+                } else if(!"3702".equals(taxonId) && !"3880".equals(taxonId)) {
+                    accession = rslv.resolveId(taxonId, accession).iterator().next();
                 }
-                accession = rslv.resolveId(taxonId, accession).iterator().next();
             }
         } else if ("protein".equalsIgnoreCase(type)) {
             // TODO use values in config
