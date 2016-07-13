@@ -14,7 +14,6 @@
     <c:when test="${reportObject.object.interactions.size() < 500}">
 
       <script>
-
         var paths = {
           js: {},
           css: {}
