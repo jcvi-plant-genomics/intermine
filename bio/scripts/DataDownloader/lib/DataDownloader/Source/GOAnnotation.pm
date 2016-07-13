@@ -38,10 +38,10 @@ use constant {
     SOURCE_LINK => "http://www.geneontology.org",
     SOURCE_DIR => "go-annotation",
     METHOD => 'FTP',
-    
+
 };
-my %GOA_TAXA = (flybase => 'fb', wormbase => 'wb', mgi => 'mgi', human => 'goa_human', zfin => 'zfin', sgd => 'sgd', rgd => 'rgd', thale => 'tair');
-my %UNIPROT_TAXA = ( '7165' => 'agp' );
+my %GOA_TAXA = ();
+my %UNIPROT_TAXA = ( '3880' => 'medtr' );
 sub field2_of { return [ split( /\t/, shift ) ]->[1] || '' }
 my $order = sub { field2_of($a) cmp field2_of($b) };
 
@@ -53,7 +53,7 @@ my $uniprot_cleaner = sub {
     $self->debug("Splitting uniprot GOA file $file");
     while (<$fh>) {
         for my $taxon_id ( keys %UNIPROT_TAXA ) {
-            push @{ $lines_for{$taxon_id} }, $_ 
+            push @{ $lines_for{$taxon_id} }, $_
                 if (/\ttaxon\:$taxon_id\t/);
         }
     }
