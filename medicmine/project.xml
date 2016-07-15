@@ -95,6 +95,11 @@
           <property name="ontologyPrefix" value="GO"/>
       </source>
 
+      <source name="kegg-pathway" type="kegg-pathway">
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/kegg/current"/>
+          <property name="kegg.organisms" value="3880"/>
+      </source>
+
       <source name="pubmed-gene" type="pubmed-gene" >
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/pubmed/current"/>
           <property name="pubmed.organisms" value="3880"/>
