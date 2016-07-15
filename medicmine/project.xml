@@ -48,6 +48,7 @@
           <property name="fasta.includes" value="*GenesProteinSeq*fasta"/>
           <property name="fasta.sequenceType" value="protein" />
           <!--property name="fasta.skipIfProteinLoaded" value="true"/-->
+          <property name="fasta.trimProteinStopCodon" value="true"/>
           <property name="fasta.dataSetTitle" value="Protein Sequence FASTA"/>
           <property name="fasta.dataSourceName" value="JCVI"/>
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/fasta/"/>
