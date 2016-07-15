@@ -197,6 +197,16 @@
     </fields>
   </class>
 
+  <class className="org.intermine.model.bio.Generif" label="GeneRIF (Gene Reference into Function)" >
+    <fields>
+      <fieldconfig fieldExpr="annotation" />
+      <fieldconfig fieldExpr="timeStamp" label="last updated" showInSummary="false" showInInlineCollection="false" />
+      <fieldconfig fieldExpr="organism.shortName" label="Organism" showInInlineCollection="false" />
+      <fieldconfig fieldExpr="gene.symbol" label="Gene" showInInlineCollection="false" />
+      <fieldconfig fieldExpr="publication.pubMedId" label="PubMed Id" />
+    </fields>
+  </class>
+
 <!-- exporters -->
   <tableExportConfig id="sequence" className="org.intermine.bio.web.export.SequenceHttpExporter"/>
   <tableExportConfig id="gff3" className="org.intermine.bio.web.export.GFF3HttpExporter"/>
