@@ -6,6 +6,7 @@ default_sources:
   - "InterPro"
   - "InterProGO"
   - "NCBIGene"
+  - "NCBIGeneRIF"
   - "PubMed"
   - "UniProt"
 
