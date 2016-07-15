@@ -65,7 +65,6 @@
       <source name="uniprot" type="uniprot">
           <property name="uniprot.organisms" value="3880"/>
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/uniprot/current"/>
-          <property name="loadtrembl" value="true"/>
       </source>
 
       <source name="uniprot-fasta" type="fasta">
@@ -84,6 +83,21 @@
       <source name="uniprot-keywords" type="uniprot-keywords">
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/uniprot/current"/>
           <property name="src.data.dir.includes" value="keywlist.xml"/>
+      </source>
+
+      <source name="interpro" type="interpro">
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/interpro/current"/>
+          <property name="src.data.dir.includes" value="interpro.xml"/>
+      </source>
+
+      <source name="protein2ipr" type="protein2ipr">
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/interpro/current"/>
+          <property name="src.data.dir.includes" value="protein2ipr.dat"/>
+          <property name="protein2ipr.organisms" value="3880"/>
+      </source>
+
+      <source name="interpro-go" type="interpro-go">
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/interpro/ontology/current"/>
       </source>
 
       <source name="go" type="go">
