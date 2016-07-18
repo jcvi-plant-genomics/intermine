@@ -62,7 +62,7 @@ public class UniprotPostProcess extends PostProcessor
     public void postProcess() throws ObjectStoreException {
         LOG.info("Uniprot Postprocessor has started.");
         try {
-            processGenesProteinsPublications();
+            //processGenesProteinsPublications();
             processProteinsTranscripts();
         } catch (Exception e) {
             e.printStackTrace();

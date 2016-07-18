@@ -47,17 +47,14 @@
   </class>
 
   <class className="org.intermine.model.bio.Gene">
+    <inlinelist>
+      <table path="synonyms.value" showInHeader="true" lineLength="100" />
+    </inlinelist>
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier"/>
       <fieldconfig fieldExpr="secondaryIdentifier"/>
-      <fieldconfig fieldExpr="symbol"/>
-      <fieldconfig fieldExpr="name"/>
-      <fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp" />
-      <fieldconfig fieldExpr="chromosomeLocation" displayer="/model/chromosomeLocDisplayer.jsp" showInResults="false" />
-      <fieldconfig fieldExpr="chromosome.primaryIdentifier" showInInlineCollection="false" showInSummary="false" />
-      <fieldconfig fieldExpr="chromosomeLocation.start" showInInlineCollection="false" showInSummary="false" />
-      <fieldconfig fieldExpr="chromosomeLocation.end" showInInlineCollection="false" showInSummary="false" />
-      <fieldconfig fieldExpr="organism.shortName" />
+      <fieldconfig fieldExpr="briefDescription"/>
+      <fieldconfig fieldExpr="probesetIdentifier"/>
     </fields>
   </class>
 
@@ -70,16 +67,16 @@
     </fields>
   </class>
 
-
   <class className="org.intermine.model.bio.SequenceFeature">
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier"/>
       <fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp" />
+      <fieldconfig fieldExpr="sequenceOntologyTerm.name" label="Feature Type" showInInlineCollection="false" showInSummary="false"/>
       <fieldconfig fieldExpr="chromosomeLocation" displayer="/model/chromosomeLocDisplayer.jsp" showInResults="false" />
       <fieldconfig fieldExpr="chromosome.primaryIdentifier" showInInlineCollection="false" showInSummary="false" />
       <fieldconfig fieldExpr="chromosomeLocation.start" showInInlineCollection="false" showInSummary="false" />
       <fieldconfig fieldExpr="chromosomeLocation.end" showInInlineCollection="false" showInSummary="false" />
-      <fieldconfig fieldExpr="organism.name"/>
+      <fieldconfig fieldExpr="organism.name" showInInlineCollection="false" label="Organism"/>
     </fields>
   </class>
 
@@ -129,15 +126,27 @@
     </fields>
   </class>
 
+  <class className="org.intermine.model.bio.Pathway">
+      <fields>
+          <fieldconfig fieldExpr="identifier"/>
+          <fieldconfig fieldExpr="name"/>
+      </fields>
+      <inlinelist>
+          <table path="dataSets.name" showInHeader="true" />
+      </inlinelist>
+  </class>
+
   <class className="org.intermine.model.bio.Protein">
     <inlinelist>
-      <table path="synonyms.value" showLinksToObjects="true" />
+      <table path="synonyms.value" showInHeader="true" lineLength="100" />
+    </inlinelist>
+    <inlinelist>
+     <table path="keywords.name" showLinksToObjects="true" showInHeader="true" />
     </inlinelist>
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier"/>
-      <fieldconfig fieldExpr="primaryAccession"/>
-      <fieldconfig fieldExpr="organism.name"/>
       <fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp" />
+      <fieldconfig fieldExpr="molecularWeight"/>
     </fields>
   </class>
 
@@ -217,7 +226,7 @@
    <reportdisplayer javaClass="org.intermine.bio.web.displayer.GeneOntologyDisplayer"
                      jspName="model/geneOntologyDisplayer.jsp"
                      replacesFields="goAnnotation,ontologyAnnotations"
-                     placement="Genomics"
+                     placement="Function"
                      types="Gene"/>
 
     <reportdisplayer javaClass="org.intermine.bio.web.displayer.GeneStructureDisplayer"
@@ -230,7 +239,7 @@
                      jspName="model/jbrowseDisplayer.jsp"
                      replacesFields=""
                      placement="Genomics"
-                     types="Gene,Exon,Intron,MRNA,MiRNA,NcRNA,RRNA,SnRNA,SnoRNA,TRNA,Pseudogene,PseudogenicTranscript,TransposableElementGene"/>
+                     types="Gene,Exon,Intron,MRNA,TRNA,TransposableElementGene"/>
 
     <reportdisplayer javaClass="org.intermine.bio.web.displayer.OverlappingFeaturesDisplayer"
                      jspName="model/overlappingFeaturesDisplayer.jsp"
@@ -244,11 +253,17 @@
                      placement="summary"
                      types="SequenceFeature"/>
 
+    <reportdisplayer javaClass="org.medicmine.web.displayer.ProteinDisplayer"
+                     jspName="model/proteinDisplayer.jsp"
+                     replacesFields="Protein"
+                     placement="Proteins"
+                     types="Gene"/>
+
     <reportdisplayer javaClass="org.intermine.bio.web.displayer.UniProtCommentsDisplayer"
                      jspName="model/uniProtCommentsDisplayer.jsp"
                      replacesFields=""
                      placement="Proteins"
-                     types="Gene,Protein"/>
+                     types="Protein"/>
 
     <reportdisplayer javaClass="org.intermine.bio.web.displayer.HomologueDisplayer"
                      jspName="model/homologueDisplayer.jsp"
@@ -358,6 +373,51 @@
                                  typeClass="Protein"
                                  views="primaryIdentifier, primaryAccession, organism.name,
                                        keywords.name, keywords.description"/>
+
+      <enrichmentwidgetdisplayer id="prot_dom_enrichment_for_gene"
+                                 title="Protein Domain Enrichment"
+                                 description="Protein Domains enriched for items in this list."
+                                 label="Protein Domain"
+                                 startClass="Gene"
+                                 startClassDisplay="primaryIdentifier"
+                                 enrich="proteins.proteinDomainRegions.proteinDomain.name"
+                                 enrichIdentifier="proteins.proteinDomainRegions.proteinDomain.primaryIdentifier"
+                                 constraints="organism.name=[list]"
+                                 typeClass="Gene"
+                                 views="secondaryIdentifier,symbol,primaryIdentifier,organism.name,
+                                       proteins.proteinDomainRegions.proteinDomain.primaryIdentifier,proteins.proteinDomainRegions.proteinDomain.name"
+                                 externalLink="http://www.ebi.ac.uk/interpro/IEntry?ac="/>
+
+      <enrichmentwidgetdisplayer id="prot_dom_enrichment_for_protein"
+                                 title="Protein Domain Enrichment"
+                                 description="Protein Domains enriched for items in this list."
+                                 label="Protein Domain"
+                                 startClass="Protein"
+                                 startClassDisplay="primaryIdentifier"
+                                 enrich="proteinDomainRegions.proteinDomain.name"
+                                 enrichIdentifier="proteinDomainRegions.proteinDomain.primaryIdentifier"
+                                 constraints="organism.name=[list]"
+                                 typeClass="Protein"
+                                 views="primaryIdentifier,organism.name,proteinDomainRegions.proteinDomain.primaryIdentifier,
+                                       proteinDomainRegions.proteinDomain.name"
+                                 externalLink="http://www.ebi.ac.uk/interpro/entry/"/>
+
+
+      <enrichmentwidgetdisplayer id="pathway_enrichment"
+                                 title="Pathways Enrichment"
+                                 description="Pathways enriched for genes in this list - data from KEGG"
+                                 label="Pathways"
+                                 filterLabel="DataSet"
+                                 filters="KEGG pathways data set"
+                                 startClass="Gene"
+                                 startClassDisplay="primaryIdentifier"
+                                 enrich="pathways.name"
+                                 enrichIdentifier="pathways.identifier"
+                                 constraints="pathways.dataSets.name=[DataSet],organism.taxonId=[list], primaryIdentifier != null"
+                                 typeClass="Gene"
+                                 views="secondaryIdentifier, symbol, organism.name, pathways.identifier, pathways.name, pathways.dataSets.name"
+                                 externalLink="http://www.genome.jp/kegg-bin/show_pathway?org_name=ath&amp;mapno="
+                                 />
 
 </widgets>
 </webconfig>

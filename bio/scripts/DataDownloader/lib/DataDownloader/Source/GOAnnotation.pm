@@ -101,7 +101,7 @@ sub BUILD {
             SUBTITLE   => "uniprot",
             HOST       => "ftp.ebi.ac.uk",
             REMOTE_DIR => "pub/databases/GO/goa/UNIPROT",
-            FILE       => "gene_association.goa_uniprot.gz",
+            FILE       => "goa_uniprot_all.gaf.gz",
             SUB_DIR    => ["uniprot"],
             CLEANER    => $uniprot_cleaner,
           };
