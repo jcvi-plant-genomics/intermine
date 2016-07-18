@@ -265,6 +265,12 @@
                      placement="Proteins"
                      types="Protein"/>
 
+    <!--reportdisplayer javaClass="org.medicmine.web.displayer.ProteinDomainDisplayer"
+                     jspName="model/proteinDomainDisplayer.jsp"
+                     replacesFields="proteinDomainRegions"
+                     placement="Proteins"
+                     types="Protein"/-->
+
     <reportdisplayer javaClass="org.intermine.bio.web.displayer.HomologueDisplayer"
                      jspName="model/homologueDisplayer.jsp"
                      replacesFields="homologues"
