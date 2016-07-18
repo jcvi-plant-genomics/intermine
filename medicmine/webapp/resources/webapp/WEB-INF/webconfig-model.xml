@@ -54,7 +54,6 @@
       <fieldconfig fieldExpr="primaryIdentifier"/>
       <fieldconfig fieldExpr="secondaryIdentifier"/>
       <fieldconfig fieldExpr="briefDescription"/>
-      <fieldconfig fieldExpr="probesetIdentifier"/>
     </fields>
   </class>
 
@@ -280,6 +279,12 @@
 
     <reportdisplayer javaClass="org.medicmine.web.displayer.PhytomineOrthologDisplayer"
                      jspName="model/phytomineOrthologDisplayer.jsp"
+                     replacesFields=""
+                     placement="Homology"
+                     types="Gene"/>
+
+    <reportdisplayer javaClass="org.medicmine.web.displayer.LisGeneFamilyDisplayer"
+                     jspName="model/lisGeneFamilyDisplayer.jsp"
                      replacesFields=""
                      placement="Homology"
                      types="Gene"/>
