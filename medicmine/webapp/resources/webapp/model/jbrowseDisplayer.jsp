@@ -20,8 +20,9 @@
     <c:set var="tracks" value="Root%20(Control)%20RNAseq%20Coverage%2Cgene_models%2CTE_gene_models"/>
     <c:set var="start" value="${reportObject.object.chromosomeLocation.start - offset}"/>
     <c:set var="end" value="${reportObject.object.chromosomeLocation.end + offset}"/>
+    <c:set var="extraParams" value="&nav=0&overview=0&tracklist=0"/>
 
-    <c:set var="jbLink" value="${baseUrl}?data=${datasource}&loc=${chr}:${start}..${end}&tracks=${tracks}"/>
+    <c:set var="jbLink" value="${baseUrl}?data=${datasource}&loc=${chr}:${start}..${end}&tracks=${tracks}${extraParams}"/>
 
     <p>Click and drag the browser to move the view.  Drag and drop tracks from left menu into the main
 	   panel to see the data. Clicking on individual features to open a report page for that feature.
