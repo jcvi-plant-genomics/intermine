@@ -40,13 +40,14 @@
    var webapp_root_url = "${WEB_PROPERTIES['legumemine.url']}";
 
    var legumemine = new imjs.Service({root: webapp_root_url});
-   var imjsquery  = { "constraintLogic": "A and B", "from": "Gene", "select": [ "geneFamily.primaryIdentifier", "geneFamily.description", "geneFamily.genes.primaryIdentifier" ],
+   var imjsquery  = {"from": "Gene", "select": [ "geneFamily.primaryIdentifier", "geneFamily.description", "geneFamily.genes.primaryIdentifier" ],
        "orderBy": [ { "path": "geneFamily.primaryIdentifier", "direction": "ASC" } ],
        "joins": [ "geneFamily.genes" ],
        "where": [
            { "path": "primaryIdentifier", "op": "=", "value": geneId, "code": "A" },
-           { "path": "organism.shortName", "op": "=", "value": "M. truncatula", "code": "B" }
-       ]
+           { "path": "organism.shortName", "op": "=", "value": orgName, "code": "B" }
+       ],
+       "constraintLogic": "A and B"
    };
 
    var options = {
