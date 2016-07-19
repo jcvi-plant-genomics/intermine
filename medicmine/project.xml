@@ -27,6 +27,15 @@
           <property name="panther.organisms" value="3880 3702"/>
       </source>
 
+      <source name="go" type="go">
+          <property name="src.data.file" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/go-annotation/current/gene_ontology.obo"/>
+      </source>
+
+      <source name="go-annotation" type="go-annotation">
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/go-annotation/current/uniprot"/>
+          <property name="ontologyPrefix" value="GO"/>
+      </source>
+
       <source name="uniprot" type="uniprot">
           <property name="uniprot.organisms" value="3880"/>
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/uniprot/current"/>
@@ -99,15 +108,6 @@
 
       <source name="interpro-go" type="interpro-go">
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/interpro/ontology/current"/>
-      </source>
-
-      <source name="go" type="go">
-          <property name="src.data.file" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/go-annotation/current/gene_ontology.obo"/>
-      </source>
-
-      <source name="go-annotation" type="go-annotation">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/go-annotation/current/uniprot"/>
-          <property name="ontologyPrefix" value="GO"/>
       </source>
 
       <source name="kegg-pathway" type="kegg-pathway">
