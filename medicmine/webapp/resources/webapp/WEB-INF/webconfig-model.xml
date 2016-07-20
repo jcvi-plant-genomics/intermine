@@ -34,7 +34,9 @@
   <class className="org.intermine.model.bio.DataSet">
     <fields>
       <fieldconfig fieldExpr="name"/>
-      <fieldconfig fieldExpr="url" doNotTruncate="true"/>
+      <fieldconfig fieldExpr="description"/>
+      <fieldconfig fieldExpr="url" doNotTruncate="true" showInInlineCollection="false" />
+      <fieldconfig fieldExpr="version"/>
     </fields>
   </class>
 
