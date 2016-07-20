@@ -50,14 +50,14 @@
       <reference name="dataSource" ref_id="0_2" />
       <attribute name="name" value="RNA-seq expression" />
       <attribute name="description" value="Measure of gene expression levels (FPKM) quantified by Cufflinks" />
-      <attribute name="url" value="" />
+      <attribute name="url" value="http://www.medicagogenome.org" />
    </item>
    <item id="0_9" class="DataSet" implements="">
       <attribute name="version" value="Mt4.0v2" />
       <reference name="dataSource" ref_id="0_2" />
       <attribute name="name" value="Medicago orthologs" />
       <attribute name="description" value="Medicago-Arabidopsis orthologs computed by Reciprocal Best Blast Hit (RBBH) analysis" />
-      <attribute name="url" value="" />
+      <attribute name="url" value="http://www.medicagogenome.org" />
    </item>
    <item id="0_10" class="Publication" implements="">
       <attribute name="pubMedId" value="25428369" />

@@ -3,8 +3,8 @@ DataSet	Genome Assembly	Medicago Genome assembly	http://medicago.jcvi.org/MTGD/?
 DataSet	Genome Annotation	Medicago protein-coding, non-coding and transposable element genes	http://medicago.jcvi.org/MTGD/?q=genomeDetail&block=feature_counts	DataSource:MTGD,Publication:24767513	Mt4.0v2
 DataSet	Coding Sequence FASTA	Medicago coding sequences	http://medicago.jcvi.org/MTGD/?q=downloads	DataSource:MTGD,Publication:24767513	Mt4.0v2
 DataSet	Protein Sequence FASTA	Medicago protein sequences	http://medicago.jcvi.org/MTGD/?q=downloads	DataSource:MTGD,Publication:24767513	Mt4.0v2
-DataSet	RNA-seq expression	Measure of gene expression levels (FPKM) quantified by Cufflinks		DataSource:MTGD	Mt4.0v2
-DataSet	Medicago orthologs	Medicago-Arabidopsis orthologs computed by Reciprocal Best Blast Hit (RBBH) analysis		DataSource:MTGD	Mt4.0v2
+DataSet	RNA-seq expression	Measure of gene expression levels (FPKM) quantified by Cufflinks	http://www.medicagogenome.org	DataSource:MTGD	Mt4.0v2
+DataSet	Medicago orthologs	Medicago-Arabidopsis orthologs computed by Reciprocal Best Blast Hit (RBBH) analysis	http://www.medicagogenome.org	DataSource:MTGD	Mt4.0v2
 DataSource	GO	Gene Ontology Consortium	http://geneontology.org	Publication:25428369
 DataSet	GO Annotation from CACAO	GO annotations assigned by the Community Assessment of Community Annotation with Ontologies (CACAO)	http://www.geneontology.org	DataSource:GO,Publication:25428369	7/15/2016
 DataSet	GO Annotation from EnsemblPlants	GO annotations assigned by the EnsemblPlants	http://www.geneontology.org	DataSource:GO,Publication:25428369	7/15/2016
