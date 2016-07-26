@@ -47,8 +47,11 @@
           "where": [ { "path": "name", "op": "!=", "value": "MTGD", "code": "A" } ]
         };
 
+        imtables.configure('TableCell.AddDataClasses', false);
         imtables.configure('TableCell.IndicateOffHostLinks', false);
         imtables.configure('Subtables.Initially.expanded', true);
+        imtables.configure('TableHeader.FullPathPopoverEnabled', false);
+        imtables.configure('ItemDetails.ShowReferenceCounts', true);
 
         imtables.loadTable(
           refdata_selector, // Can also be an element, or a jQuery object.
