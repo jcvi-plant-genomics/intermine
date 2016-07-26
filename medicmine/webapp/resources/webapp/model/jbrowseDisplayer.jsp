@@ -17,7 +17,7 @@
     <c:set var="chr" value="${reportObject.object.chromosomeLocation.locatedOn.primaryIdentifier}"/>
     <c:set var="padding" value="${10}"/>
     <c:set var="offset" value="${fn:substringBefore((reportObject.object.length * 0.1), '.')}"/>
-    <c:set var="tracks" value="Root%20(Control)%20RNAseq%20Coverage%2Cgene_models%2CTE_gene_models"/>
+    <c:set var="tracks" value="gene_models,TE_gene_models"/>
     <c:set var="start" value="${reportObject.object.chromosomeLocation.start - offset}"/>
     <c:set var="end" value="${reportObject.object.chromosomeLocation.end + offset}"/>
     <c:set var="extraParams" value="&nav=0&overview=0&tracklist=0"/>

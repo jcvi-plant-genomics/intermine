@@ -19,26 +19,51 @@
     <td>
       <div class="body">
         <p>
-          <a href="/malariamine">MalariaMine</a> contains <i>Plasmodium falciparum 3D7</i> genome
+          <a href="/medicmine">MedicMine</a> contains <i>Medicago truncatula</i> genome
           data from:
         </p>
         <ul>
           <li>
             <a href="http://www.genedb.org/">
-              Fasta sequences for <i>P. falciparum 3D7</i></a>
+              Fasta sequences for <i>M. truncatula</i></a>
           </li>
           <li>
             <a href="http://www.genedb.org/">
-              GFF3 for <i>P. falciparum 3D7</i> genome features</a>
+              GFF3 for <i>M. truncatula</i> genome features</a>
           </li>
         </ul>
+        <!-- The Element we will target -->
+        <div id="ref-genome-datasets-elem"></div>
+        <!-- The imtables source -->
+        <script type="text/javascript">
+            var selector = '#ref-genome-datasets-elem';
+            var service  = new imjs.Service({ root: "${WEB_PROPERTIES['webapp.baseurl']}/${WEB_PROPERTIES['webapp.path']}" });
+
+            var query    = {
+              "from": "DataSource",
+              "select": [ "name", "dataSets.name", "dataSets.description", "dataSets.version" ],
+              "orderBy": [ { "path": "dataSets.version", "direction": "ASC" } ],
+              "where": [ { "path": "name", "op": "=", "value": "MTGD", "code": "A" } ]
+            };
+
+            imtables.configure('DefaultPageSize', 10);
+            imtables.configure('TableCell.IndicateOffHostLinks', false);
+            imtables.loadTable(
+              selector, // Can also be an element, or a jQuery object.
+              {"start":0,"size":25}, // May be null
+              {service: service, query: query} // May be an imjs.Query
+            ).then(
+              function (table) { console.log('Table loaded', table); },
+              function (error) { console.error('Could not load table', error); }
+            );
+        </script>
       </div>
     </td>
     <td width="40%" valign="top">
       <div class="body">
         <ul>
           <li>
-            <im:querylink text="All <i>P. falciparum 3D7</i> genes identifiers, chromosome positions and chromosome identifiers" skipBuilder="true">
+            <im:querylink text="All <i>M. truncatula</i> genes identifiers, chromosome positions and chromosome identifiers" skipBuilder="true">
 <query name="" model="genomic" view="Gene.primaryIdentifier Gene.secondaryIdentifier Gene.organism.shortName Gene.chromosome.primaryIdentifier Gene.chromosomeLocation.start Gene.chromosomeLocation.end" sortOrder="Gene.primaryIdentifier asc">
 </query>
             </im:querylink>
