@@ -293,7 +293,7 @@
                      jspName="model/homologueDisplayer.jsp"
                      replacesFields="homologues"
                      placement="Homology"
-                     parameters="{'dataSets': ['Custom JCVI Reciprocal BLASTP Analysis']}"
+                     parameters="{'dataSets': ['Medicago orthologs']}"
                      types="Gene"/>
 
     <reportdisplayer javaClass="org.medicmine.web.displayer.PhytomineOrthologDisplayer"

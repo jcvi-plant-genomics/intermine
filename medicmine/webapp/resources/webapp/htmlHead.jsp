@@ -28,7 +28,7 @@ if(new java.io.File(application.getRealPath("/js")+"/"+pageName+".js").exists())
 <!-- page: ${pageName} -->
 
 <c:if test="${pageName != 'begin'}">
-  <c:if test="${pageName == 'results' || pageName == 'bagDetails' || pageName == 'report' || pageName == 'aspect'}">
+  <c:if test="${pageName == 'results' || pageName == 'bagDetails' || pageName == 'report' || pageName == 'dataCategories'}">
     <im:headResources section="results"/>
   </c:if>
 
@@ -49,7 +49,7 @@ if(new java.io.File(application.getRealPath("/js")+"/"+pageName+".js").exists())
   </script>
 
   <%-- this (crap, utter crap) has to live after jQuery.  do not move --%>
-  <c:if test="${pageName != 'report' && pageName != 'mymine' && pageName != 'bagDetails' && pageName != 'results' && pageName != 'bagUploadConfirm' && pageName != 'aspect'}">
+  <c:if test="${pageName != 'report' && pageName != 'mymine' && pageName != 'bagDetails' && pageName != 'results' && pageName != 'bagUploadConfirm' && pageName != 'dataCategories'}">
    <script type="text/javascript" src="<html:rewrite page='/js/prototype.js'/>"></script>
   </c:if>
 </c:if>

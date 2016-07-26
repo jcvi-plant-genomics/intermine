@@ -32,31 +32,6 @@
               GFF3 for <i>M. truncatula</i> genome features</a>
           </li>
         </ul>
-        <!-- The Element we will target -->
-        <div id="ref-genome-datasets-elem"></div>
-        <!-- The imtables source -->
-        <script type="text/javascript">
-            var selector = '#ref-genome-datasets-elem';
-            var service  = new imjs.Service({ root: "${WEB_PROPERTIES['webapp.baseurl']}/${WEB_PROPERTIES['webapp.path']}" });
-
-            var query    = {
-              "from": "DataSource",
-              "select": [ "name", "dataSets.name", "dataSets.description", "dataSets.version" ],
-              "orderBy": [ { "path": "dataSets.version", "direction": "ASC" } ],
-              "where": [ { "path": "name", "op": "=", "value": "MTGD", "code": "A" } ]
-            };
-
-            imtables.configure('DefaultPageSize', 10);
-            imtables.configure('TableCell.IndicateOffHostLinks', false);
-            imtables.loadTable(
-              selector, // Can also be an element, or a jQuery object.
-              {"start":0,"size":25}, // May be null
-              {service: service, query: query} // May be an imjs.Query
-            ).then(
-              function (table) { console.log('Table loaded', table); },
-              function (error) { console.error('Could not load table', error); }
-            );
-        </script>
       </div>
     </td>
     <td width="40%" valign="top">
