@@ -201,6 +201,20 @@
     </fields>
   </class>
 
+  <class className="org.intermine.model.bio.RnaseqExperiment" label="RNAseq Experiment">
+      <fields>
+          <fieldconfig fieldExpr="SRAaccession" label="SRA accession"/>
+      </fields>
+  </class>
+
+  <class className="org.intermine.model.bio.RnaseqExpression" label="RNAseq Expression">
+      <fields>
+          <fieldconfig fieldExpr="expressionLevel" />
+          <fieldconfig fieldExpr="unit" />
+          <fieldconfig fieldExpr="experiment.SRAaccession" label="Experiment" showInInlineCollection="true" showInSummary="false" />
+      </fields>
+  </class>
+
   <class className="org.intermine.model.bio.Homologue">
     <fields>
       <fieldconfig fieldExpr="gene.primaryIdentifier" showInResults="false" showInInlineCollection="false" />
@@ -294,17 +308,17 @@
                      placement="Homology"
                      types="Gene"/>
 
-    <reportdisplayer javaClass="org.medicmine.web.displayer.MedicagoExpressionDisplayer"
-                     jspName="model/medicagoExpressionDisplayer.jsp"
-                     replacesFields=""
-                     placement="Expression"
-                     types="MRNA"/>
-
     <reportdisplayer javaClass="org.medicmine.web.displayer.BarEfpBrowserDisplayer"
                      jspName="model/barEfpBrowserDisplayer.jsp"
                      replacesFields=""
                      placement="Expression"
                      types="Gene,MRNA"/>
+
+    <!--reportdisplayer javaClass="org.medicmine.web.displayer.RnaseqExpressionDisplayer"
+                     jspName="model/rnaseqExpressionDisplayer.jsp"
+                     replacesFields=""
+                     placement="Expression"
+                     types="Gene,MRNA"/-->
   </reportdisplayers>
 
 <!-- widgets -->

@@ -18,8 +18,12 @@
           <property name="src.data.file" location="../../bio/sources/so/so.obo"/>
       </source>
 
-      <source name="medicago-expression" type="medicago-expression">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/expression"/>
+      <source name="rnaseq-expression" type="rnaseq-expression">
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/rnaseq-expression"/>
+          <property name="src.data.dir.includes" value="*.tsv"/>
+          <property name="rnaseq.organisms" value="3880"/>
+          <property name="dataSourceName" value="RNASeq"/>
+          <property name="dataSetName" value="RNASeq data set"/>
       </source>
 
       <source name="medicago-ortho" type="medicago-ortho">
