@@ -273,4 +273,11 @@
       <attribute name="url" value="http://intermine.legumefederation.org/legumemine/" />
       <reference name="publication" ref_id="0_41" />
    </item>
+   <item id="0_43" class="DataSet" implements="">
+      <attribute name="version" value="10/2011" />
+      <reference name="dataSource" ref_id="0_28" />
+      <attribute name="name" value="SRA" />
+      <attribute name="description" value="NCBI Sequence Read Archive (SRA) stores raw sequencing data; Published Medicago truncatula RNA-seq datasets retrieved from NCBI SRA" />
+      <attribute name="url" value="http://www.ncbi.nlm.nih.gov/sra/?term=SRP008485" />
+   </item>
 </items>
