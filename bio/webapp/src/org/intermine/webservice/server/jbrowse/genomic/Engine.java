@@ -519,6 +519,12 @@ public class Engine extends CommandRunner
         if (camelName.contentEquals("LncRNA")) {
             return "lncRNA";
         }
+        if (camelName.contentEquals("AntisenseLncRNA")) {
+            return "antisense_lncRNA";
+        }
+        if (camelName.contentEquals("MiRNAPrimaryTranscript")) {
+            return "miRNA_primary_transcript";
+        }
 
         StringBuffer so = new StringBuffer();
         int i = 0;
