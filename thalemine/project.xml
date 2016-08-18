@@ -102,18 +102,28 @@
             <property name="gff3.dataSourceName" value="Araport"/>
             <property name="gff3.seqClsName" value="Chromosome"/>
             <property name="gff3.dataSetTitle" value="Genome Annotation"/>
+            <property name="src.data.dir.includes" value="*GFF3*"/>
             <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/genome/gff/" />
         </source>
 
+        <source name="salk-tdnaseq-gff" type="salk-tdnaseq-gff">
+            <property name="gff3.taxonId" value="3702"/>
+            <property name="gff3.seqClsName" value="Chromosome"/>
+            <property name="gff3.dataSourceName" value="SIGnAL"/>
+            <property name="gff3.dataSetTitle" value="TDNA-Seq Insertions data set"/>
+            <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/salk-tdnaseq/current" />
+        </source>
+
+
         <source name="rnaseq-expression" type="rnaseq-expression" dump="true">
             <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/rnaseq_expression/current"/>
-	    <property name="src.data.dir.includes" value="*RNAseq-expression*"/>
+            <property name="src.data.dir.includes" value="*RNAseq-expression*"/>
             <property name="rnaseq.organisms" value="3702"/>
             <property name="dataSourceName" value="RNASeq"/>
             <property name="dataSetName" value="RNASeq data set"/>
         </source>
 
-        <!-- new for release 1.10 
+        <!-- new for release 1.10
         <source name="ensembl-snp" type="ensembl-snp" >
             <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/variation/current" />
             <property name="ensembl-snp.includes" value="arabidopsis_thaliana.incl_consequences.gvf" />
@@ -132,7 +142,7 @@
         </source>
 
         <source name="go-annotation" type="go-annotation">
-            <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/go_annotation/" />
+            <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/go_annotation/current/" />
             <property name="dataSourceName" value="GO Annotation from TAIR"/>
             <property name="ontologyPrefix" value="GO"/>
         </source>
@@ -149,7 +159,7 @@
 
         <source name="uniprot" type="uniprot">
             <property name="uniprot.organisms" value="3702"/>
-            <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/uniprot/uniprot/current"/>
+            <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/uniprot/current"/>
         </source>
 
         <source name="uniprot-fasta" type="fasta">
@@ -158,7 +168,7 @@
             <property name="fasta.classAttribute" value="primaryAccession"/>
             <property name="fasta.dataSetTitle" value="UniProt FASTA dataset"/>
             <property name="fasta.dataSourceName" value="UniProt"/>
-            <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/uniprot/uniprot/current"/>
+            <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/uniprot/current"/>
             <property name="fasta.includes" value="uniprot_sprot_varsplic.fasta"/>
             <property name="fasta.sequenceType" value="protein" />
             <property name="fasta.loaderClassName"
@@ -166,7 +176,7 @@
         </source>
 
         <source name="uniprot-keywords" type="uniprot-keywords">
-            <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/uniprot/uniprot/current"/>
+            <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/uniprot/current"/>
             <property name="src.data.dir.includes" value="keywlist.xml"/>
         </source>
 
