@@ -206,7 +206,7 @@
             <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/genome/fasta/"/>
         </source>
 
-        <source name="panther" type="panther">
+        <source name="panther" type="panther" dump="true">
             <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/orthologs/panther"/>
             <property name="panther.organisms" value="3702 4932 9606"/>
         </source>
