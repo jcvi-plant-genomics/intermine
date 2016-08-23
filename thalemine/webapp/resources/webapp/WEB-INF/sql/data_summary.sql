@@ -1662,7 +1662,7 @@ ds.id datasource_id,
   on ds.id = d.datasourceid
   join datasourcepublications dp
   on dp.datasource = ds.id
-  left join publication p
+  left join publication_source p
   on p.id = dp.publications
 )
 ,
