@@ -76,6 +76,12 @@ public class GeneOntologyDisplayer extends ReportDisplayer
         EVIDENCE_CODES.put("ISA", "Inferred from Sequence Alignment");
         EVIDENCE_CODES.put("ISM", "Inferred from Sequence Model");
         EVIDENCE_CODES.put("IGC", "Inferred from Genomic Context");
+
+        EVIDENCE_CODES.put("IBA", "Inferred from Biological aspect of Ancestor");
+        EVIDENCE_CODES.put("IBD", "Inferred from Biological aspect of Descendent");
+        EVIDENCE_CODES.put("IKR", "Inferred from Key Residues");
+        EVIDENCE_CODES.put("IRD", "Inferred from Rapid Divergence");
+
         EVIDENCE_CODES.put("RCA", "Inferred from Reviewed Computational Analysis");
         EVIDENCE_CODES.put("TAS", "Traceable Author Statement");
         EVIDENCE_CODES.put("NAS", "Non-traceable Author Statement");
