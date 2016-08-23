@@ -370,6 +370,12 @@ public class Config extends JSONService
         ret.put("autocomplete", "all");
         ret.put("region_feature_densities", true);
 
+        // configuration to infer CDS parts from exon coordinates
+        String inferCdsParts = webProperties.getProperty("jbrowse.featureTrack.config.inferCdsParts");
+        if ("true".equals(inferCdsParts)) {
+            ret.put("inferCdsParts", true);
+        }
+
         if (trackProperties != null) {
             for (Entry<String, String> entry : trackProperties.entrySet()) {
                 String key = entry.getKey();
