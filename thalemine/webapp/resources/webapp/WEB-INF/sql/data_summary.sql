@@ -59,6 +59,8 @@ SELECT
 		then 'Phenotypes'
 		when (dt.name = 'RNA-seq expression')
 		then 'Expression'
+        when (ds.name = 'SIGnAL')
+        then 'TDNA-seq'
 		else ds.name
 
 	 end as category_name
@@ -108,13 +110,15 @@ select
 			then 14
 		when (category_name = 'Mutant Alleles')
 			then 15
+        when (category_name = 'TDNA-Seq')
+            then 16
 		else
 			999
 	end as sort_order
 from
 datacategory dc
 where dataset_name not in  ('RNA-seq expression', 'SRA', 'TAIR Polymorphism', 'TAIR Phenotypes', 'TAIR Germplasm', 'TAIR Ecotypes', 'Genome Annotation', 'ATTED-II Co-expression', 'Phytozome Orthologs', 'Gene Summary', 'IntAct', 'BioGRID', 'PO Annotation from TAIR','Panther data set', 'BAR Annotations Lookup', 'Coding Sequence FASTA', 'Protein Sequence FASTA', 'UniProt FASTA dataset', 'UniProt keywords data set')
-and dc.datasource_name not in ('BAR', 'InterPro', 'GO', 'IntAct', 'BioGRID')
+and dc.datasource_name not in ('BAR', 'InterPro', 'GO', 'IntAct', 'BioGRID', 'SIGnAL')
 )
 ,
 publication_source as (
@@ -1526,6 +1530,29 @@ where o.taxonid = 3702 and ds.name = 'GO'
 
 ),
 
+salk_tdnaseq_summary_helper as (
+SELECT
+(select d.id from dataset d join datasource ds on ds.id = d.datasourceid where ds.name = 'SIGnAL' limit 1)  as dataset_id,
+cast('38772' as text) as gene_count,
+cast(count(*) as text) feature_count
+from
+transposableelementinsertionsite tdnaseq
+join organism o
+on o.id = tdnaseq.organismid
+join
+bioentitiesdatasets bds
+on bds.bioentities = tdnaseq.id
+join
+dataset d
+on d.id = bds.datasets
+join
+datasource ds
+ON
+ds.id = d.datasourceid
+where o.taxonid = 3702 and ds.name = 'SIGnAL'
+
+),
+
 allele_agg_source as (
 select
 count(distinct ge.primaryidentifier) as gene_count,
@@ -1604,6 +1631,39 @@ on ds.id = d.datasourceid
 left join
 	publication_source p
 	on p.id = d.publicationid
+)
+,
+salk_tdnaseq_summary as (
+SELECT
+distinct
+cast('summary' as text) as row_type,
+0 as parent_dataset_id,
+cast('TDNA-Seq' as text) as category_name,
+16 as sort_order,
+ds.id datasource_id,
+  ds.name datasource_name,
+  ds.url datasource_url,
+  ds.description as datasource_description,
+  d.description dataset_description,
+  (select d.id from dataset d join datasource ds on ds.id = d.datasourceid where ds.name = 'SIGnAL' limit 1)  as dataset_id,
+  ds.name dataset_name,
+  d.url dataset_url,
+  p.pubmed_id,
+  p.author_list as authors,
+  p.year,
+  d.version dataset_version,
+  th.gene_count,
+  th.feature_count
+  from
+  salk_tdnaseq_summary_helper th
+  join dataset d
+  on d.id = th.dataset_id
+  join datasource ds
+  on ds.id = d.datasourceid
+  join datasourcepublications dp
+  on dp.datasource = ds.id
+  left join publication p
+  on p.id = dp.publications
 )
 ,
 data_summary_source_units as (
@@ -1917,6 +1977,28 @@ authors,
 year,
 gene_count,
 feature_count
+from
+salk_tdnaseq_summary
+UNION
+select
+row_type,
+parent_dataset_id,
+category_name,
+sort_order,
+datasource_id,
+datasource_name,
+datasource_url,
+datasource_description,
+dataset_description,
+dataset_id,
+dataset_name,
+dataset_url,
+dataset_version,
+pubmed_id,
+authors,
+year,
+gene_count,
+feature_count
 from rnaseq_summary_source
 )
 
@@ -1999,6 +2081,8 @@ case
 		then 'phenotypes'
 	when (category_name = 'Mutant Alleles')
 		then 'alleles'
+    when (category_name = 'TDNA-Seq')
+        then 'insertions'
 	else
 		NULL
 end as units
