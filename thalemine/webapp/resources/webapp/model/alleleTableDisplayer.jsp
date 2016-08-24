@@ -20,9 +20,8 @@
 <c:set var="name" value="${object.primaryIdentifier}"/>
 
 <div id="allele-table-container" class="collection-table imtables-dashboard container-fluid imtables">
-<link rel="stylesheet" type="text/css" href="${WEB_PROPERTIES['head.cdn.location']}/js/intermine/im-tables/latest/imtables.css">
  <div id="allele-container">
- 
+
  </div>
 
 <script type="text/javascript">
@@ -68,7 +67,7 @@ imtables.configure('Tables.CacheFactor', 5);
 
 imtables.loadDash(
   selector,
-  {"start":0,"size":5},  
+  {"start":0,"size":5},
   {service: service, query: query}
 ).then(
   function (table) { console.log('Affected Alleles Table loaded', table); },

@@ -647,6 +647,12 @@
                      placement="Genomics"
                      types="SequenceFeature"/>
 
+    <reportdisplayer javaClass="org.thalemine.web.displayer.TdnaseqInsertionsDisplayer"
+                     jspName="model/tdnaseqInsertionsDisplayer.jsp"
+                     replacesFields=""
+                     placement="Genomics"
+                     types="Gene,Transcript"/>
+
 <!-- PROTEINS -->
     <reportdisplayer javaClass="org.thalemine.web.displayer.ProteinDisplayer"
                      jspName="model/proteinDisplayer.jsp"
