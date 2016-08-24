@@ -371,9 +371,19 @@ public class Config extends JSONService
         ret.put("region_feature_densities", true);
 
         // configuration to infer CDS parts from exon coordinates
-        String inferCdsParts = webProperties.getProperty("jbrowse.featureTrack.config.inferCdsParts");
-        if ("true".equals(inferCdsParts)) {
+        String inferCds = webProperties.getProperty("jbrowse.featureTrack.config.inferCdsParts");
+        if ("true".equals(inferCds)) {
             ret.put("inferCdsParts", true);
+        }
+
+        // explicit configuration of transcriptType, glyph and subParts for
+        // transcript/RNA (but not mRNA) type data tracks
+        String transcriptType = getSOType(feature.getUnqualifiedName());
+        if (!"mRNA".equals(transcriptType) &&
+                (transcriptType.contains("transcript") || transcriptType.endsWith("RNA"))) {
+            ret.put("transcriptType", transcriptType);
+            ret.put("glyph", "JBrowse/View/FeatureGlyph/ProcessedTranscript");
+            ret.put("subParts", "exon");
         }
 
         if (trackProperties != null) {
@@ -415,6 +425,61 @@ public class Config extends JSONService
         }
 
         return ret;
+    }
+
+    /**
+     * @param camelName
+     * @return feature.type, SO style
+     */
+    private String getSOType(String camelName) {
+        if (camelName.contentEquals("MiRNA")) {
+            return "miRNA";
+        }
+        if (camelName.contentEquals("SnRNA")) {
+            return "snRNA";
+        }
+        if (camelName.contentEquals("SnoRNA")) {
+            return "snoRNA";
+        }
+        if (camelName.contentEquals("NcRNA")) {
+            return "ncRNA";
+        }
+        if (camelName.contentEquals("LncRNA")) {
+            return "lncRNA";
+        }
+        if (camelName.contentEquals("AntisenseLncRNA")) {
+            return "antisense_lncRNA";
+        }
+        if (camelName.contentEquals("MiRNAPrimaryTranscript")) {
+            return "miRNA_primary_transcript";
+        }
+
+        StringBuffer so = new StringBuffer();
+        int i = 0;
+        for (String w : camelName.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")) {
+            if (i > 0) {
+                so.append("_");
+            }
+            so.append(w);
+            i++;
+        }
+
+        if (so.toString().contentEquals("CDS")) {
+            return so.toString();
+        }
+
+        String sosmall = so.toString().toLowerCase();
+        if (sosmall.contains("rna")) {
+            return sosmall.replace("rna", "RNA");
+        }
+        if (sosmall.contains("orf")) {
+            return sosmall.replace("orf", "ORF");
+        }
+        if (sosmall.contains("utr")) {
+            return sosmall.replace("utr", "UTR");
+        }
+        // default
+        return sosmall;
     }
 
     /**
