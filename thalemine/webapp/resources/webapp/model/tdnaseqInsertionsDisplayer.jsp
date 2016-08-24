@@ -34,17 +34,16 @@
             "overlappingFeatures.polymorphismSite",
             "overlappingFeatures.chromosome.primaryIdentifier",
             "overlappingFeatures.chromosomeLocation.start",
-            "overlappingFeatures.chromosomeLocation.end",
-            "overlappingFeatures.sequenceOntologyTerm.name"
+            "overlappingFeatures.chromosomeLocation.end"
         ],
         "orderBy": [ { "path": "overlappingFeatures.symbol", "direction": "ASC" } ],
         "where": [ { "path": "primaryIdentifier", "op": "=", "value": featureId, "code": "A" },
             { "path": "overlappingFeatures", "type": "TransposableElementInsertionSite" } ]
     };
 
-    imtables.loadTable(
+    imtables.loadDash(
         selector, // Can also be an element, or a jQuery object.
-        {"start":0,"size":10}, // May be null
+        {"start":0,"size":5}, // May be null
         {service: service, query: query} // May be an imjs.Query
     ).then(
         function (table) { console.log('Table loaded', table); },
