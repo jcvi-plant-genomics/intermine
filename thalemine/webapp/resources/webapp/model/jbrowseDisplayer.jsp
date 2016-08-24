@@ -26,7 +26,7 @@
 
     <c:set var="tracks" value="${WEB_PROPERTIES['project.title']}-${taxon}-${reportObject.type}"/>
     <c:set var="dataURL" value="${WEB_PROPERTIES['webapp.baseurl']}/${WEB_PROPERTIES['webapp.path']}/service/jbrowse/config/${taxon}"/>
-    <c:set var="dataSource" value="arabidopsis"/>
+    <c:set var="dataSource" value="${WEB_PROPERTIES['jbrowse.database.source']}"/>
 
     <c:set var="jbLink" value="${jbrowseURL}?data=${dataURL}&loc=${chr}:${start}..${end}&tracks=${tracks}&tracklist=0&nav=0&overview=0"/>
     <c:set var="jbLinkFullScreen" value="${jbrowseURL}?data=${dataSource}&loc=${chr}:${start}..${end}"/>
