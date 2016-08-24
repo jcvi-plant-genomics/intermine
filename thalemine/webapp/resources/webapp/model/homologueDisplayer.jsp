@@ -14,6 +14,12 @@
 
 <c:choose>
 <c:when test="${homologues != null && !empty homologues}">
+<c:set var="hmine" value="http://www.humanmine.org/humanmine/portal.do?externalids=" />
+<c:set var="ymine" value="http://yeastmine.yeastgenome.org/yeastmine/portal.do?externalids=" />
+<c:set var="endurl" value="&class=Gene&origin=ThaleMine" />
+
+
+<!-- 'horizontal' table
 <table class="tiny-font">
   <thead>
   <tr>
@@ -33,7 +39,6 @@
         <c:otherwise>
           <td class="one-line">
             <c:forEach items="${genes}" var="resultElement">
-            <!-- only links to ath (aip request, MINE-918) -->
             <c:choose>
              <c:when test="${entry.key eq 'A. thaliana'}">
               <a href="report.do?id=${resultElement.id}">${resultElement.field}</a>
@@ -50,6 +55,45 @@
     </tr>
   </tbody>
 </table>
+-->
+
+<table class="tiny-font">
+  <tbody>
+    <c:forEach items="${homologues}" var="entry">
+<tr><th><c:out value="${entry.key}"/></th>
+      <c:set var="genes" value="${entry.value}"/>
+      <c:choose>
+        <c:when test="${empty genes}">
+          <td></td>
+        </c:when>
+        <c:otherwise>
+          <td>
+            <c:forEach items="${genes}" var="resultElement">
+            <!-- only links to ath (aip request, MINE-918) -->
+            <c:choose>
+             <c:when test="${entry.key eq 'A. thaliana'}">
+              <a href="report.do?id=${resultElement.id}">${resultElement.field}</a>
+             </c:when>
+             <c:when test="${entry.key eq 'H. sapiens'}">
+              <a href="${hmine}${resultElement.field}${endurl}">${resultElement.field}</a>
+             </c:when>
+             <c:when test="${entry.key eq 'S. cerevisiae'}">
+              <a href="${ymine}${resultElement.field}${endurl}">${resultElement.field}</a>
+             </c:when>
+             <c:otherwise>
+              ${resultElement.field}
+             </c:otherwise>
+            </c:choose>
+            </c:forEach>
+          </td>
+        </c:otherwise>
+      </c:choose>
+      </tr>
+    </c:forEach>
+
+  </tbody>
+</table>
+
 </c:when>
 
 <c:when test="${homologues != null && empty homologues}">
