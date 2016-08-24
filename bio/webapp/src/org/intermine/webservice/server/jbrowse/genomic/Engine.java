@@ -535,7 +535,7 @@ public class Engine extends CommandRunner
             so.append(w);
             i++;
         }
-        LOG.info("SOwhat " + camelName + " -> " + so.toString());
+        LOG.debug("SOwhat " + camelName + " -> " + so.toString());
 
         if (so.toString().contentEquals("CDS")) {
             return so.toString();
