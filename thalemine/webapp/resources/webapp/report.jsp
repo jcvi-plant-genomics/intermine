@@ -578,7 +578,8 @@ var type="${TYPE}";   // the root for the ws query
 
   <c:set var="getFriendly" value="yes"></c:set>
     <c:if test="${object.type == 'Stock' || object.type == 'Allele' ||
-                  object.type == 'Phenotype' || object.type == 'Genotype'}">
+                  object.type == 'Phenotype' || object.type == 'Genotype' ||
+                  object.type == 'Protein' || object.type == 'TransposableElementInsertionSite'}">
      <c:set var="getFriendly" value="no"></c:set>
     </c:if>
   <c:set var="object_bk" value="${object}"/>
