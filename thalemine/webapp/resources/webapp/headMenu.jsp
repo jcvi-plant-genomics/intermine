@@ -44,7 +44,14 @@
             </td>
             <td>
                 <p><c:out value="${WEB_PROPERTIES['project.subTitle']}" escapeXml="false"/></p><br/>
-                <div id="version"><strong><c:out value="${WEB_PROPERTIES['project.releaseVersion']}" escapeXml="false"/></strong></div>
+                <div id="version"><strong>
+                        <c:choose><c:when test="${!empty WEB_PROPERTIES['project.releaseNotice']}">
+                            <c:out value="${WEB_PROPERTIES['project.releaseNotice']}" escapeXml="false"/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:out value="${WEB_PROPERTIES['project.releaseVersion']}" escapeXml="false"/>
+                        </c:otherwise></c:choose>
+                </strong></div>
             </td>
         </tr>
     </table>
