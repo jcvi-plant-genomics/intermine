@@ -576,13 +576,10 @@ var type="${TYPE}";   // the root for the ws query
     </tiles:insert>
   </div>
 
-  <c:set var="getFriendly" value="yes"></c:set>
-    <c:if test="${object.type == 'Stock' || object.type == 'Allele' ||
-                  object.type == 'Phenotype' || object.type == 'Genotype' ||
-                  object.type == 'Transcript' || object.type == 'Protein' ||
-                  object.type == 'TransposableElementInsertionSite'}">
-     <c:set var="getFriendly" value="no"></c:set>
-    </c:if>
+  <c:set var="getFriendly" value="no"></c:set>
+  <c:if test="${fn:endsWith(fn:toLowerCase(object.type), 'gene')}">
+     <c:set var="getFriendly" value="yes"></c:set>
+  </c:if>
   <c:set var="object_bk" value="${object}"/>
   <c:set var="object" value="${reportObject.object}" scope="request"/>
   <div id="external-links">
