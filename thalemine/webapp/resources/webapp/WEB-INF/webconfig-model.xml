@@ -573,6 +573,15 @@
     </fields>
 </class>
 
+<class className="org.intermine.model.bio.TransposableElementInsertionSite">
+    <fields>
+        <fieldconfig fieldExpr="primaryIdentifier" showInSummary="false" showInResults="false" />
+        <fieldconfig fieldExpr="symbol" label="Polymorphism" />
+        <fieldconfig fieldExpr="polymorphismSite" />
+        <fieldconfig fieldExpr="chromosomeLocation" displayer="/model/chromosomeLocDisplayer.jsp" />
+    </fields>
+</class>
+
 <!-- exporters -->
   <tableExportConfig id="sequence" className="org.intermine.bio.web.export.SequenceHttpExporter"/>
   <tableExportConfig id="gff3" className="org.intermine.bio.web.export.GFF3HttpExporter"/>
@@ -637,6 +646,12 @@
                      replacesFields="overlappingFeatures"
                      placement="Genomics"
                      types="SequenceFeature"/>
+
+    <reportdisplayer javaClass="org.thalemine.web.displayer.TdnaseqInsertionsDisplayer"
+                     jspName="model/tdnaseqInsertionsDisplayer.jsp"
+                     replacesFields=""
+                     placement="Genomics"
+                     types="Gene,Transcript"/>
 
 <!-- PROTEINS -->
     <reportdisplayer javaClass="org.thalemine.web.displayer.ProteinDisplayer"

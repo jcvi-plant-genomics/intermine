@@ -10,206 +10,177 @@ import org.intermine.bio.dataconversion.BioStoreHook;
 import org.intermine.bio.dataconversion.ChadoDBConverter;
 import org.intermine.bio.dataconversion.DataSourceProcessor;
 import org.intermine.bio.dataflow.config.ApplicationContext;
+import org.intermine.bio.domain.source.SourceStrain;
 import org.intermine.bio.item.ItemProcessor;
 import org.intermine.bio.item.util.ItemHolder;
 import org.intermine.objectstore.ObjectStoreException;
 import org.intermine.xml.full.Item;
-import org.intermine.bio.domain.source.*;
 
-public class StrainItemProcessor extends DataSourceProcessor implements ItemProcessor<SourceStrain, Item> {
+public class StrainItemProcessor extends DataSourceProcessor
+    implements ItemProcessor<SourceStrain, Item>
+{
 
-	protected static final Logger log = Logger.getLogger(StrainItemProcessor.class);
+    protected static final Logger LOG = Logger.getLogger(StrainItemProcessor.class);
+    private String targetClassName;
+    private static final String ITEM_CLASSNAME = "Strain";
+    private static final String STRAIN_TYPE_CLASS_NAME = "organism_type";
+    private static final String DATASET_NAME = "TAIR Ecotypes";
 
-	private String targetClassName;
+    public StrainItemProcessor(ChadoDBConverter chadoDBConverter) {
+        super(chadoDBConverter);
+    }
 
-	private static final String ITEM_CLASSNAME = "Strain";
-	private static final String STRAIN_TYPE_CLASS_NAME = "organism_type";
-	private static final String DATASET_NAME = "TAIR Ecotypes";
+    @Override
+    public Item process(SourceStrain item) throws Exception {
+        return createTargetItem(item);
+    }
 
-	public StrainItemProcessor(ChadoDBConverter chadoDBConverter) {
-		super(chadoDBConverter);
-	}
+    private Item createTargetItem(SourceStrain source) throws ObjectStoreException {
+        Exception exception = null;
+        Item item = null;
+        try {
+            LOG.debug("Creating Item has started. Source Object:" + source);
+            item = super.getService().createItem(ITEM_CLASSNAME);
+            LOG.debug("Item place holder has been created: " + item);
 
-	@Override
-	public Item process(SourceStrain item) throws Exception {
+            if (StringUtils.isBlank(source.getAccessionAbbreviation())) {
+                Exception e = new Exception("Strain Primary Identifier null, skipping " + source);
+                throw e;
+            }
 
-		return createTargetItem(item);
+            if (StringUtils.isBlank(source.getOrganismType())) {
+                Exception e = new Exception("Strain OrganismType null, skipping " + source);
+                throw e;
+            }
 
-	}
+            item.setAttribute("primaryIdentifier", source.getAccessionAbbreviation());
+            item.setAttribute("secondaryIdentifier", StringUtils.capitalize(
+                    source.getOrganismType()) + " Id:" + source.getOrganismId());
 
-	private Item createTargetItem(SourceStrain source) throws ObjectStoreException {
+            if (!StringUtils.isBlank(source.getAccessionOriginalName())){
+                item.setAttribute("name", source.getAccessionOriginalName());
+            } else {
+                item.setAttribute("name", source.getAccessionAbbreviation());
+            }
 
-		Exception exception = null;
+            item.setAttribute("abbreviationName", source.getAccessionAbbreviation());
 
-		Item item = null;
+            if (!StringUtils.isBlank(source.getAccessionNumber())){
+                item.setAttribute("accessionNumber", source.getAccessionNumber());
+            }
 
-		try {
-			log.info("Creating Item has started. Source Object:" + source);
+            if (!StringUtils.isBlank(source.getHabitat())){
+                item.setAttribute("habitat", source.getHabitat());
+            }
 
-			item = super.getService().createItem(ITEM_CLASSNAME);
+            if (!StringUtils.isBlank(source.getGeoLocation())){
+                item.setAttribute("geoLocation", source.getGeoLocation());
+            }
 
-			log.info("Item place holder has been created: " + item);
-			
-			if (StringUtils.isBlank(source.getAccessionAbbreviation())) {
-				Exception e = new Exception("Strain Accession Primary Identifier cannot be null! Skipping Source Record:" + source);
-				throw e;
-			}
+            String strStrainType = source.getOrganismType();
+            Item strainType =
+                    CVService.getCVTermItem(STRAIN_TYPE_CLASS_NAME, source.getOrganismType());
 
-			if (StringUtils.isBlank(source.getOrganismType())) {
-				Exception e = new Exception("Strain Accession OrganismType cannot be null! Skipping Source Record:" + source);
-				throw e;
-			}
-			
-			log.info("Strain Accession: " + source.getAccessionAbbreviation());
-			item.setAttribute("primaryIdentifier", source.getAccessionAbbreviation());
+            if (strainType == null) {
+                strainType =
+                        CVService.getCVTermItem(STRAIN_TYPE_CLASS_NAME, ApplicationContext.UNKNOWN);
+            }
 
-			log.info("Organism Id: " + source.getOrganismId() + " Id:" + source.getOrganismId());
-			
-			item.setAttribute("secondaryIdentifier",
-					StringUtils.capitalize(source.getOrganismType()) + " Id:" + source.getOrganismId());
+            if (strainType != null) {
+                item.setReference("type", strainType);
+            }
 
-			if (!StringUtils.isBlank(source.getAccessionOriginalName())){
-				
-				log.info("Name   " + source.getAccessionOriginalName());
-				item.setAttribute("name", source.getAccessionOriginalName());
-			}else
-			{
-				log.info("Name   " + source.getAccessionAbbreviation());
-				item.setAttribute("name", source.getAccessionAbbreviation());
-     		}
-			
-			log.info("Accession Abbreviation: " + source.getAccessionAbbreviation());
-			item.setAttribute("abbreviationName", source.getAccessionAbbreviation());
-			
-			log.info("Accession Number: " + source.getAccessionNumber());
-			
-			if (!StringUtils.isBlank(source.getAccessionNumber())){
-				
-				log.info("Accession Number: " + source.getAccessionNumber());
-				item.setAttribute("accessionNumber", source.getAccessionNumber());
-			}
-	
-			log.info("Habitat: " + source.getHabitat());
-			
-			if (!StringUtils.isBlank(source.getHabitat())){
-				
-				log.info("Habitat: " + source.getHabitat());
-				item.setAttribute("habitat", source.getHabitat());
-			}
-			
-			
-			if (!StringUtils.isBlank(source.getGeoLocation())){
-				
-				log.info("Geo Location: " + source.getGeoLocation());
-				item.setAttribute("geoLocation", source.getGeoLocation());
-			}
+            LOG.info("Strain " + source.getAccessionAbbreviation() + "-" +
+                    source.getAccessionNumber());
 
-			String strStrainType = source.getOrganismType();
-			log.info("Strain Type: " + strStrainType);
+            LOG.debug("Name   " + source.getAccessionAbbreviation());
+            LOG.debug("Name   " + source.getAccessionOriginalName());
+            LOG.debug("Organism Id: " + source.getOrganismId());
+            LOG.debug("Accession Abbreviation: " + source.getAccessionAbbreviation());
+            LOG.debug("Accession Number: " + source.getAccessionNumber());
+            LOG.debug("Habitat: " + source.getHabitat());
+            LOG.debug("Geo Location: " + source.getGeoLocation());
+            LOG.debug("Referenced Strain Type: " + strainType);
+            LOG.debug("Strain Type: " + strStrainType);
 
-			Item strainType = CVService.getCVTermItem(STRAIN_TYPE_CLASS_NAME, source.getOrganismType());
-			log.info("Referenced Strain Type: " + strainType);
+            Item organismItem = super.getService().getOrganismItem(
+                    super.getService().getOrganism().getTaxonId());
 
-			if (strainType == null) {
-				strainType = CVService.getCVTermItem(STRAIN_TYPE_CLASS_NAME, ApplicationContext.UNKNOWN);
-			}
-			
-			log.info("Referenced Strain Type: " + strainType);
-			
-			if (strainType !=null) {
-				log.info("Setting Strain Type: " + strainType);
-				item.setReference("type", strainType);
-			}
+            if (organismItem != null) {
+                item.setReference("organism", organismItem);
+            }
 
-			Item organismItem = super.getService().getOrganismItem(super.getService().getOrganism().getTaxonId());
+            int itemId = super.getService().store(item);
+            ItemHolder itemHolder = new ItemHolder(item, itemId);
+            if (itemHolder != null) {
+                OrganismService.addStrainItem(source.getAccessionAbbreviation(), itemHolder);
+                if (itemHolder != null) {
+                    setDataSetItem(itemHolder, source);
+                }
+            }
+        } catch (ObjectStoreException e) {
+            exception = e;
+        } catch (Exception e) {
+            exception = e;
+        } finally {
 
-			if (organismItem != null) {
-				item.setReference("organism", organismItem);
-			}
-			
-			int itemId = super.getService().store(item);
-			
-			ItemHolder itemHolder = new ItemHolder(item, itemId);
+            if (exception != null) {
+                LOG.error("Storing item for record:" + source + "Error:" + exception.getMessage());
+            } else {
+                LOG.debug("Target Item has been created. Target Object:" + item);
+            }
+        }
+        return item;
+    }
 
-			if (itemHolder!=null){
-				OrganismService.addStrainItem(source.getAccessionAbbreviation(), itemHolder);
-				
-				if (itemHolder != null) {
+    private void setDataSetItem(ItemHolder item, SourceStrain source) {
 
-					setDataSetItem(itemHolder, source);
+        Exception exception = null;
+        Item dataSetItem = null;
+        Item dataSourceItem = null;
 
-				}
-			}
+        try {
+            dataSetItem = getDataSet();
+            dataSourceItem = DataSourceService.getDataSourceItem("TAIR").getItem();
+
+            if (dataSetItem == null){
+                Exception e = new Exception("DataSet Item Cannot be Null!");
+                throw e;
+            }
+
+            if (dataSourceItem == null){
+                Exception e = new Exception("DataSource Item Cannot be Null!");
+                throw e;
+            }
+
+            BioStoreHook.setDataSets(getModel(), item.getItem(),  dataSetItem.getIdentifier(),
+                    DataSourceService.getDataSourceItem("TAIR").getItem().getIdentifier());
+
+        } catch (Exception e) {
+            exception = e;
+        } finally {
+            if (exception != null) {
+                LOG.error("Error adding " + source + ". Error:" + exception.getMessage());
+            } else {
+                LOG.debug("Ecotype has been successfully added. DataSet: " + dataSetItem + " Item:"
+                        + item.getItem());
+            }
+        }
 
 
-		} catch (ObjectStoreException e) {
-			exception = e;
-		} catch (Exception e) {
-			exception = e;
-		} finally {
 
-			if (exception != null) {
-				log.error("Error storing item for source record:" + source + "Error:" + exception.getMessage());
-			} else {
-				log.info("Target Item has been created. Target Object:" + item);
+    }
 
-			}
-		}
+    private Item getDataSet() {
+        return DataSetService.getDataSetItem(DATASET_NAME).getItem();
+    }
 
-		return item;
-	}
+    public void setTargetClassName(String name) {
+        this.targetClassName = name;
+    }
 
-	private void setDataSetItem(ItemHolder item, SourceStrain source) {
-
-		Exception exception = null;
-		
-		Item dataSetItem = null;
-		Item dataSourceItem = null;
-		
-		try {
-		
-		dataSetItem = getDataSet();
-		dataSourceItem = DataSourceService.getDataSourceItem("TAIR").getItem();
-		
-		if (dataSetItem == null){
-			Exception e = new Exception("DataSet Item Cannot be Null!");
-			throw e;
-		}
-		
-		if (dataSourceItem == null){
-			Exception e = new Exception("DataSource Item Cannot be Null!");
-			throw e;
-		}
-
-		BioStoreHook.setDataSets(getModel(), item.getItem(),  dataSetItem.getIdentifier(),
-				DataSourceService.getDataSourceItem("TAIR").getItem().getIdentifier());
-		
-		} catch (Exception e){
-			exception = e;
-		}finally{
-			
-			if (exception!=null){
-				log.error("Error adding source record to the dataset. Source" + source + "Error:" + exception.getMessage());
-			}else{
-				log.debug("Ecotype has been successfully added to the dataset. DataSet:" + dataSetItem + " Item:"
-						+ item.getItem());
-			}
-		}
-
-	
-
-	}
-	
-	private Item getDataSet() {
-		return DataSetService.getDataSetItem(DATASET_NAME).getItem();
-	}
-	
-	public void setTargetClassName(String name) {
-		this.targetClassName = name;
-	}
-
-	public String getTargetClassName() {
-		return this.targetClassName;
-	}
+    public String getTargetClassName() {
+        return this.targetClassName;
+    }
 
 }

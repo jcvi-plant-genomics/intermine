@@ -3169,12 +3169,12 @@ The different token types are:
     <filter-name>ReleaseEtags</filter-name>
     <servlet-name>ws-model</servlet-name>
   </filter-mapping>
- <filter-mapping>
+
+  <filter-mapping>
     <filter-name>ReleaseEtags</filter-name>
     <servlet-name>ws-model</servlet-name>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
-
   </filter-mapping>
 
   <error-page>

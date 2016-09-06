@@ -8,6 +8,8 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="im"%>
 <%@ taglib uri="/WEB-INF/imutil.tld" prefix="imutil" %>
 <%@ taglib uri="/WEB-INF/functions.tld" prefix="imf" %>
+<% pageContext.setAttribute("newLineChar", "\n"); %>
+
 
 <!-- report.jsp -->
 <html:xhtml/>
@@ -16,6 +18,13 @@
   <%-- apply white background as report page loads slowly and body bg will show through --%>
   var pageBackgroundColor = jQuery('body').css('background-color');
   jQuery('body').css('background-color', '#FFF');
+
+  <%--  Expose useful properties to the js. The properties themselves are
+        set in the foreach later down the page --%>
+  var imSummaryFields = {
+    type : "${object.type}"
+  };
+
 </script>
 
 <c:choose>
@@ -76,7 +85,13 @@
 
 
       <c:forEach var="field" items="${object.objectSummaryFields}">
-          <c:if test="${field.showInHeader ne false}">
+        <%-- Expose useful props to the js --%>
+        <%-- <script>alert("TEST");</script> --%>
+        <%-- <script> imSummaryFields["${field.name}"] = "${field.value}";</script> --%>
+        <script> imSummaryFields["${field.name}"] = "${fn:replace(field.value, newLineChar, "; ")}";</script>
+
+
+        <c:if test="${field.showInHeader ne false}">
           <c:if test="${tableCount %2 == 0}">
             <c:choose>
               <c:when test="${tableCount == 0}">
@@ -563,7 +578,9 @@ var type="${TYPE}";   // the root for the ws query
 
   <c:set var="getFriendly" value="yes"></c:set>
     <c:if test="${object.type == 'Stock' || object.type == 'Allele' ||
-                  object.type == 'Phenotype' || object.type == 'Genotype'}">
+                  object.type == 'Phenotype' || object.type == 'Genotype' ||
+                  object.type == 'Transcript' || object.type == 'Protein' ||
+                  object.type == 'TransposableElementInsertionSite'}">
      <c:set var="getFriendly" value="no"></c:set>
     </c:if>
   <c:set var="object_bk" value="${object}"/>

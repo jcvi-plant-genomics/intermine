@@ -1,7 +1,7 @@
 package org.intermine.bio.dataconversion;
 
 /*
- * Copyright (C) 2002-2015 FlyMine
+ * Copyright (C) 2002-2016 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -43,14 +43,12 @@ public class UniprotEntry
     private boolean isDuplicate = false;
     private Map<String, Set<String>> dbrefs = new HashMap<String, Set<String>>();
     private Map<String, Set<String>> geneNames = new HashMap<String, Set<String>>();
-    private Map<String, Set<String>> mrnaNames = new HashMap<String, Set<String>>();
     private Map<String, String> goTermToEvidenceCode = new HashMap<String, String>();
 
     // map of gene designation (normally the primary name) to dbref (eg. FlyBase, FBgn001)
     // this map is used when there is more than one gene but the dbref is needed to set an
     // identifier
-    private Map<String, Dbref> geneDesignationToDbref = new HashMap<String, Dbref>();
-    private Map<String, Dbref> mrnaDesignationToDbref = new HashMap<String, Dbref>();
+    private Map<String, String> geneDesignationToDbref = new HashMap<String, String>();
 
     // temporary objects that hold attribute value until the item is stored
     // usually on the next line of XML
@@ -128,13 +126,18 @@ public class UniprotEntry
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    private void addToCollection(String collectionName, String value) {
+    public List<String> getCollection(String collectionName) {
         List<String> values = collections.get(collectionName);
         if (values == null) {
             values = new ArrayList();
             collections.put(collectionName, values);
         }
-        values.add(value);
+        return values;
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    private void addToCollection(String collectionName, String value) {
+        getCollection(collectionName).add(value);
     }
 
     /**
@@ -488,7 +491,9 @@ public class UniprotEntry
      */
     public void addCanonicalIsoform(String accession) {
         isIsoform = false;
-        addToCollection("accessions", accession);
+        addToCollection("canonicalIsoformAccessions", accession);
+        collections.get("canonicalIsoformAccessions").addAll(getIsoformSynonyms());
+        collections.remove("isoformSynonyms");
     }
 
     /**
@@ -502,7 +507,12 @@ public class UniprotEntry
      * @param accession of the isoform
      */
     public void addIsoform(String accession) {
+        List<String> synonyms = getIsoformSynonyms();
+        for (String s : synonyms) {
+            accession += ("|" + s);
+        }
         addToCollection("isoforms", accession);
+        collections.remove("isoformSynonyms");
     }
 
     /**
@@ -593,17 +603,9 @@ public class UniprotEntry
     /**
      * @param geneDesignationToDbref map of gene designations to dbref
      */
-    public void setGeneDesignations(Map<String, Dbref> geneDesignationToDbref) {
+    private void setGeneDesignations(Map<String, String> geneDesignationToDbref) {
         this.geneDesignationToDbref = geneDesignationToDbref;
     }
-
-    /**
-     * @param mrnaDesignationToDbref map of mrna designations to dbref
-     */
-    public void setMRNADesignations(Map<String, Dbref> mrnaDesignationToDbref) {
-        this.mrnaDesignationToDbref = mrnaDesignationToDbref;
-    }
-
 
     /**
      * @param domains the domains to set
@@ -733,33 +735,10 @@ public class UniprotEntry
         testForMultipleGenes(type);
     }
 
-    /**
-     * From <mrna>
-     *
-     * @param type type of variable, eg. ORF, primary
-     * @param value value of variable, eg FBgn, CG
-     */
-    public void addMRNAName(String type, String value) {
-        // See #1199 - remove organism prefixes ("AgaP_" or "Dmel_")
-        String mrnaName = value.replaceAll("^[A-Z][a-z][a-z][A-Za-z]_", "");
-        Util.addToSetMap(mrnaNames, type, mrnaName);
-        testForMultipleMRNAs(type);
-    }
-
     // type is ORF, if there are multiple names saved as this type, we have multiple genes
     // assigned to this protein
     private boolean testForMultipleGenes(String type) {
         Set<String> values = geneNames.get(type);
-        if (values.size() > 1) {
-            return true;
-        }
-        return false;
-    }
-
-    // type is ORF, if there are multiple names saved as this type, we have multiple mrna
-    // assigned to this protein
-    private boolean testForMultipleMRNAs(String type) {
-        Set<String> values = mrnaNames.get(type);
         if (values.size() > 1) {
             return true;
         }
@@ -810,34 +789,24 @@ public class UniprotEntry
      * the dbref entries to the correct gene.
      *
      * this is especially important when multiple identifiers are assigned, as in the case of yeast.
-     * @param geneDesignation "gene designation" for this gene.  usually the "primary" name
+     * @param identifier "gene designation" for this gene from the XML.
      */
-    public void addGeneDesignation(String geneDesignation) {
-        if (dbref != null && geneDesignationToDbref.get(geneDesignation) == null) {
-            geneDesignationToDbref.put(geneDesignation, dbref);
-        } else {
-            LOG.debug("Could not set 'gene designation' for dbref:" + dbref);
+    public void addGeneDesignation(String identifier) {
+        if (dbref == null) {
+            LOG.warn("Could not set 'gene designation' for " + identifier + ": NULL dbref.");
+        }
+        if (geneDesignationToDbref.get(identifier) != null
+                && geneDesignationToDbref.get(identifier).contentEquals(dbref.type)) {
+            LOG.warn("Could not set 'gene designation' for dbref " + dbref.value
+                    + " (" + dbref.type + "|" + identifier + " " + primaryAccession + " "
+                    + primaryIdentifier + ")");
+        }
+        if (dbref != null && geneDesignationToDbref.get(identifier) == null) {
+            geneDesignationToDbref.put(identifier, dbref.type);
         }
     }
 
     /**
-     * mrnaDesignation is required in the case of a single protein having multiple mrna identifiers.
-     * the mrnaDesignation (often the "primary" name, but it can be a synonym) is used to match
-     * the dbref entries to the correct mrna.
-     *
-     * this is especially important when multiple identifiers are assigned, as in the case of yeast.
-     * @param mrnaDesignation "mrna designation" for this mrna.  usually the "primary" name
-     */
-    public void addMRNADesignation(String mrnaDesignation) {
-        if (dbref != null && mrnaDesignationToDbref.get(mrnaDesignation) == null) {
-            mrnaDesignationToDbref.put(mrnaDesignation, dbref);
-        } else {
-            LOG.debug("Could not set 'mrna designation' for dbref:" + dbref);
-        }
-    }
-
-    /**
-     *
      *  <dbReference type="Ensembl" key="23" id="FBtr0082909">
      *      <property value="FBgn0010340" type="gene designation"/>
      * </dbReference>
@@ -847,30 +816,12 @@ public class UniprotEntry
      */
     public Set<String> getGeneDesignation(String dbrefName) {
         Set<String> identifiers = new HashSet<String>();
-        for (Map.Entry<String, Dbref> entry : geneDesignationToDbref.entrySet()) {
-            if (entry.getValue().getType().equals(dbrefName)) {
+        for (Map.Entry<String, String> entry : geneDesignationToDbref.entrySet()) {
+            if (entry.getValue().equals(dbrefName)) {
                 identifiers.add(entry.getKey());
             }
         }
         return identifiers;
-    }
-
-    /**
-     *
-     *  <dbReference type="Ensembl" key="23" id="FBtr0082909">
-     *      <property value="FBgn0010340" type="protein sequence ID"/>
-     * </dbReference>
-     *
-     * @param dbrefName name of database, eg Ensembl
-     * @return mrna designation for a certain dbref.type, eg Ensembl
-     */
-    public String getMRNADesignation(String dbrefName) {
-        for (Map.Entry<String, Dbref> entry : mrnaDesignationToDbref.entrySet()) {
-            if (entry.getValue().getType().equals(dbrefName)) {
-                return entry.getKey();
-            }
-        }
-        return null;
     }
 
     /**
@@ -881,24 +832,10 @@ public class UniprotEntry
     }
 
     /**
-     * @return true if entry has mrna names
-     */
-    public Map<String, Set<String>> getMRNANames() {
-        return mrnaNames;
-    }
-
-    /**
      * @param map original map of gene names
      */
     private void setGeneNames(Map<String, Set<String>> map) {
         geneNames = new HashMap<String, Set<String>>(map);
-    }
-
-    /**
-     * @param map original map of mrna names
-     */
-    private void setMRNANames(Map<String, Set<String>> map) {
-        mrnaNames = new HashMap<String, Set<String>>(map);
     }
 
     /**
@@ -968,7 +905,6 @@ public class UniprotEntry
         }
     }
 
-
     /**
      * no:
      *  features
@@ -981,6 +917,8 @@ public class UniprotEntry
      * @return cloned uniprot entry, an isoform of original entry
      */
     public UniprotEntry createIsoformEntry(String accession) {
+        String[] bits = accession.split("\\|");
+        accession = bits[0];
         UniprotEntry entry = new UniprotEntry(accession);
         entry.setIsoform(true);
         entry.setDatasetRefId(datasetRefId);
@@ -990,7 +928,10 @@ public class UniprotEntry
         entry.setFragment(isFragment);
         entry.setUniprotAccession(uniprotAccession);
         entry.setDbrefs(dbrefs);
-        entry.setAccessions(collections.get("accessions"));
+        entry.getCollection("accessions").addAll(getCollection("accessions"));
+        for (int i = 1; i < bits.length; i++) {
+            entry.addAccession (bits[i]);
+        }
         entry.setComments(collections.get("comments"));
 //        entry.setCommentEvidence(commentEvidence);
         entry.setDomains(collections.get("domains"));
@@ -998,9 +939,7 @@ public class UniprotEntry
         entry.setKeywords(collections.get("keywords"));
         entry.setProteinNames(collections.get("proteinNames"));
         entry.setGeneNames(geneNames);
-        entry.setMRNANames(mrnaNames);
         entry.setGeneDesignations(geneDesignationToDbref);
-        entry.setMRNADesignations(mrnaDesignationToDbref);
         entry.setGOTerms(collections.get("goTerms"));
         return entry;
     }

@@ -1,7 +1,7 @@
 package org.intermine.bio.web.displayer;
 
 /*
- * Copyright (C) 2002-2015 FlyMine
+ * Copyright (C) 2002-2016 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -127,7 +127,7 @@ public class HomologueDisplayer extends ReportDisplayer
         if (dataSets != null && !dataSets.isEmpty()) {
             q.addConstraint(Constraints.oneOfValues("Gene.homologues.dataSets.name", dataSets));
         }
-        q.addConstraint(Constraints.neq("Gene.homologues.type", "paralogue"));
+        //q.addConstraint(Constraints.neq("Gene.homologues.type", "paralogue"));
         q.addOrderBy("Gene.homologues.homologue.organism.shortName", OrderDirection.ASC);
         return q;
     }

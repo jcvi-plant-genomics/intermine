@@ -23,7 +23,6 @@
 
   <c:choose>
   <c:when test="${WEB_PROPERTIES['phytomine.homolog.prefix'] != null}">
-<link rel="stylesheet" type="text/css" href="${WEB_PROPERTIES['head.cdn.location']}/js/intermine/im-tables/latest/imtables.css">
  <div id="phytomine-homolog-container">
  <!-- temporarily removed
    <p class="apology">
