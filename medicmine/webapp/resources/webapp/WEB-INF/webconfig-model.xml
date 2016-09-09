@@ -290,13 +290,6 @@
                      placement="Proteins"
                      types="Protein"/-->
 
-    <reportdisplayer javaClass="org.intermine.bio.web.displayer.HomologueDisplayer"
-                     jspName="model/homologueDisplayer.jsp"
-                     replacesFields="homologues"
-                     placement="Homology"
-                     parameters="{'dataSets': ['Phytozome Homologs data set']}"
-                     types="Gene"/>
-
     <reportdisplayer javaClass="org.medicmine.web.displayer.PhytomineOrthologDisplayer"
                      jspName="model/phytomineOrthologDisplayer.jsp"
                      replacesFields=""
