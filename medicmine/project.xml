@@ -26,9 +26,9 @@
           <property name="dataSetName" value="RNASeq data set"/>
       </source>
 
-      <source name="medicago-ortho" type="medicago-ortho">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/orthologs/panther"/>
-          <property name="panther.organisms" value="3880 3702"/>
+      <source name="phytozome-homologs" type="phytozome-homologs">
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/orthologs/phytozome"/>
+          <property name="phytozome.organisms" value="3880 3702"/>
       </source>
 
       <source name="go" type="go">

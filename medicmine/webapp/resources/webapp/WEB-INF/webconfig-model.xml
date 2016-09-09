@@ -294,7 +294,7 @@
                      jspName="model/homologueDisplayer.jsp"
                      replacesFields="homologues"
                      placement="Homology"
-                     parameters="{'dataSets': ['Medicago orthologs']}"
+                     parameters="{'dataSets': ['Phytozome Homologs data set']}"
                      types="Gene"/>
 
     <reportdisplayer javaClass="org.medicmine.web.displayer.PhytomineOrthologDisplayer"
