@@ -25,7 +25,7 @@ DataSet	GeneRIF	Concise phrase describing gene function and publication associat
 DataSource	GenomeNet	Japanese network of database and computational services for genome research	http://www.genome.jp	Publication:9397687
 DataSet	KEGG pathways data set	Wiring diagrams of molecular interactions, reactions, and relations	http://www.kegg.jp/kegg/pathway.html	DataSource:GenomeNet,Publication:24214961	78.2
 DataSource	Phytozome	Plant Comparative Genomics portal	https://phytozome.jgi.doe.gov/	Publication:22110026
-DataSet	Phytozome Orthologs	Gene families representing clade-specific orthology/paralogy relationships via PhytoMine web services	https://phytozome.jgi.doe.gov/phytomine/	DataSource:Phytozome,Publication:22110026	real-time
+DataSet	Phytozome Homologs	Gene families representing clade-specific orthology/paralogy relationships via PhytoMine web services	https://phytozome.jgi.doe.gov/phytomine/	DataSource:Phytozome,Publication:22110026	real-time
 DataSource	LIS	Legume Information System	http://legumeinfo.org/	Publication:26546515
 DataSet	LIS Gene Families	Gene families (built on Phytozome 10.2 Angiosperm-level gene family models) retrieved via LegumeMine web services	http://intermine.legumefederation.org/legumemine/	DataSource:LIS,Publication:26546515 	real-time
 DataSet	SRA	NCBI Sequence Read Archive (SRA) stores raw sequencing data; Published Medicago truncatula RNA-seq datasets retrieved from NCBI SRA	http://www.ncbi.nlm.nih.gov/sra/?term=SRP008485	DataSource:NCBI	10/2011
