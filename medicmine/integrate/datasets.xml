@@ -246,7 +246,7 @@
    <item id="0_38" class="DataSet" implements="">
       <attribute name="version" value="real-time" />
       <reference name="dataSource" ref_id="0_37" />
-      <attribute name="name" value="Phytozome Orthologs" />
+      <attribute name="name" value="Phytozome Homologs" />
       <attribute name="description" value="Gene families representing clade-specific orthology/paralogy relationships via PhytoMine web services" />
       <attribute name="url" value="https://phytozome.jgi.doe.gov/phytomine/" />
       <reference name="publication" ref_id="0_36" />
