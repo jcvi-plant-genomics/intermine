@@ -379,8 +379,9 @@ public class Config extends JSONService
         // explicit configuration of transcriptType, glyph and subParts for
         // transcript/RNA (but not mRNA) type data tracks
         String transcriptType = getSOType(feature.getUnqualifiedName());
-        if (!"mRNA".equals(transcriptType) &&
-                (transcriptType.contains("transcript") || transcriptType.endsWith("RNA"))) {
+        if (!"mRNA".equals(transcriptType)
+                && (transcriptType.contains("transcript")
+                || transcriptType.endsWith("RNA"))) {
             ret.put("transcriptType", transcriptType);
             ret.put("glyph", "JBrowse/View/FeatureGlyph/ProcessedTranscript");
             ret.put("subParts", "exon");
