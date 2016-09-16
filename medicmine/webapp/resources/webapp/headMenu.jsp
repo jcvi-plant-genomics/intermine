@@ -35,10 +35,25 @@
     </div>
   </c:if>
   <div id="header">
-    <a href="${WEB_PROPERTIES['project.siteHome']}" alt="Home" rel="NOFOLLOW"><img id="logo" src="${WEB_PROPERTIES['project.siteLogo']}" width="45px" height="43px" alt="Logo" /></a>
-    <h1><html:link href="${WEB_PROPERTIES['project.sitePrefix']}/"><c:out value="${WEB_PROPERTIES['project.title']}" escapeXml="false"/></html:link></h1>
-    <p id="version"><fmt:message key="header.version"/> <c:out value="${WEB_PROPERTIES['project.releaseVersion']}" escapeXml="false"/></span>
-    <p><c:out value="${WEB_PROPERTIES['project.subTitle']}" escapeXml="false"/></p>
+    <table style="width: 1000px;" border="0">
+        <tr>
+            <td style="width: 200px;">
+                <a href="${WEB_PROPERTIES['project.siteHome']}" alt="Home" rel="NOFOLLOW"><img id="logo" src="${WEB_PROPERTIES['project.siteLogo']}" width="45px" height="43px" alt="Logo" /></a>
+                <h1><html:link href="${WEB_PROPERTIES['project.sitePrefix']}/"><c:out value="${WEB_PROPERTIES['project.title']}" escapeXml="false"/></html:link></h1>
+            </td>
+            <td>
+                <p style="margin: 0;"><c:out value="${WEB_PROPERTIES['project.subTitle']}" escapeXml="false"/></p><br/>
+                <div id="version"><strong>
+                        <c:choose><c:when test="${!empty WEB_PROPERTIES['project.releaseNotice']}">
+                            <c:out value="${WEB_PROPERTIES['project.releaseNotice']}" escapeXml="false"/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:out value="${WEB_PROPERTIES['project.releaseVersion']}" escapeXml="false"/>
+                        </c:otherwise></c:choose>
+                </strong></div>
+            </td>
+        </tr>
+    </table>
   </div>
 
     <!-- Tab Menu -->
