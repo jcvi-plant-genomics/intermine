@@ -647,11 +647,13 @@
                      placement="Genomics"
                      types="SequenceFeature"/>
 
+    <!-- Temporarily disable the TDNA-seq insertions displayer
     <reportdisplayer javaClass="org.thalemine.web.displayer.TdnaseqInsertionsDisplayer"
                      jspName="model/tdnaseqInsertionsDisplayer.jsp"
                      replacesFields=""
                      placement="Genomics"
                      types="Gene,Transcript"/>
+    -->
 
 <!-- PROTEINS -->
     <reportdisplayer javaClass="org.thalemine.web.displayer.ProteinDisplayer"
