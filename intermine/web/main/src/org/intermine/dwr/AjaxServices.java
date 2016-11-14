@@ -51,6 +51,7 @@ import org.intermine.api.bag.BagManager;
 import org.intermine.api.bag.TypeConverter;
 import org.intermine.api.bag.UnknownBagTypeException;
 import org.intermine.api.beans.PartnerLink;
+import org.intermine.api.beans.SyntenyPartnerLink;
 import org.intermine.api.mines.FriendlyMineManager;
 import org.intermine.api.mines.Mine;
 import org.intermine.api.mines.ObjectRequest;
@@ -99,6 +100,7 @@ import org.intermine.web.autocompletion.AutoCompleter;
 import org.intermine.web.context.InterMineContext;
 import org.intermine.web.context.MailAction;
 import org.intermine.web.displayer.InterMineLinkGenerator;
+import org.intermine.web.displayer.InterMineSyntenyLinkGenerator;
 import org.intermine.web.logic.Constants;
 import org.intermine.web.logic.PortalHelper;
 import org.intermine.web.logic.bag.BagConverter;
@@ -731,6 +733,55 @@ public class AjaxServices
                 }
             }
             fmm.cacheLinks(key, results);
+        }
+        LOG.debug("Links: " + results);
+        return results;
+    }
+
+    /**
+     * used on REPORT page
+     *
+     * For a SequenceFeature, generate links to other intermines based on Syntenic Regions
+     *
+     * Returns NULL if no values found.
+     *
+     * @param mineName name of mine to query
+     * @param domains The domains the domains these identifiers are valid for (eg. organisms).
+     * @param chromosomeLocations The chromosome locations used to query for overlapping Syntenic Regions
+     * @return the links to friendly intermines
+     */
+    public static Collection<SyntenyPartnerLink>
+    getFriendlyMineSyntenyLinks(String mineName, String domains, String chromosomeLocations) {
+        if (StringUtils.isEmpty(mineName)
+                || StringUtils.isEmpty(domains)
+                || StringUtils.isEmpty(chromosomeLocations)) {
+            return null;
+        }
+        final HttpSession session = WebContextFactory.get().getSession();
+        final InterMineAPI im = SessionMethods.getInterMineAPI(session);
+        final ServletContext servletContext = WebContextFactory.get().getServletContext();
+        final Properties webProperties = SessionMethods.getWebProperties(servletContext);
+        final FriendlyMineManager fmm = FriendlyMineManager.getInstance(im, webProperties);
+        final String linkGeneratorClass = webProperties.getProperty("friendlymines.linkgenerator");
+
+        final Mine mine = fmm.getMine(mineName);
+        Collection<SyntenyPartnerLink> results = Collections.emptySet();
+        if (mine == null || mine.getReleaseVersion() == null) {
+            LOG.error(mineName + " seems to be dead");
+        } else {
+            // Mine is alive
+            LOG.debug(mine.getName() + " is at " + mine.getReleaseVersion());
+            ObjectRequest req = new ObjectRequest(domains, chromosomeLocations);
+            MultiKey key = new MultiKey(mine.getName(), req);
+            // From cache, or from service.
+            results = fmm.getSyntenyLinks(key);
+            if (results == null) {
+                InterMineSyntenyLinkGenerator linkGen = TypeUtil.createNew(linkGeneratorClass);
+                if (linkGen != null) {
+                    results = linkGen.getLinks(fmm.getLocalMine(), mine, req);
+                }
+            }
+            fmm.cacheSyntenyLinks(key, results);
         }
         LOG.debug("Links: " + results);
         return results;

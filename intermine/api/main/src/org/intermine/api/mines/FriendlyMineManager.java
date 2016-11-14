@@ -23,6 +23,7 @@ import org.apache.commons.collections.keyvalue.MultiKey;
 import org.apache.log4j.Logger;
 import org.intermine.api.InterMineAPI;
 import org.intermine.api.beans.PartnerLink;
+import org.intermine.api.beans.SyntenyPartnerLink;
 import org.intermine.metadata.TypeUtil;
 import org.intermine.util.CacheMap;
 import org.intermine.util.PropertiesUtil;
@@ -43,6 +44,8 @@ public class FriendlyMineManager
     private static final Logger LOG = Logger.getLogger(FriendlyMineManager.class);
     private static final Map<MultiKey, Collection<PartnerLink>> LINK_CACHE
         = new CacheMap<MultiKey, Collection<PartnerLink>>();
+    private static final Map<MultiKey, Collection<SyntenyPartnerLink>> SYNTENY_LINK_CACHE
+        = new CacheMap<MultiKey, Collection<SyntenyPartnerLink>>();
     private static final Map<InterMineAPI, FriendlyMineManager> INSTANCE_MAP
         = new CacheMap<InterMineAPI, FriendlyMineManager>();
 
@@ -127,6 +130,25 @@ public class FriendlyMineManager
      */
     public void cacheLinks(MultiKey key, Collection<PartnerLink> results) {
         LINK_CACHE.put(key, results);
+    }
+
+    /**
+     * @param key
+     *            mine + identifier + organism
+     * @return syntenyBlocks for this key combo
+     */
+    public Collection<SyntenyPartnerLink> getSyntenyLinks(MultiKey key) {
+        return SYNTENY_LINK_CACHE.get(key);
+    }
+
+    /**
+     * @param key
+     *            mine + identifier + organism
+     * @param results
+     *            syntenyBlocks for this key combo
+     */
+    public void cacheSyntenyLinks(MultiKey key, Collection<SyntenyPartnerLink> results) {
+        SYNTENY_LINK_CACHE.put(key, results);
     }
 
     /**
