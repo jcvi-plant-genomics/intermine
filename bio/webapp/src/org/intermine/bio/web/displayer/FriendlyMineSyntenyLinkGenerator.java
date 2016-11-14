@@ -59,7 +59,6 @@ public final class FriendlyMineSyntenyLinkGenerator implements InterMineSyntenyL
     }
 
     private static final Logger LOG = Logger.getLogger(FriendlyMineSyntenyLinkGenerator.class);
-    /*
     private static final Map<String, String> ORGANISM_PREFIX = new HashMap<String, String>();
 
     static {
@@ -69,7 +68,6 @@ public final class FriendlyMineSyntenyLinkGenerator implements InterMineSyntenyL
         ORGANISM_PREFIX.put("P. vulgaris", "phavu");
         ORGANISM_PREFIX.put("G. max", "glyma");
     }
-    */
 
     /**
      * Constructor
@@ -151,9 +149,8 @@ public final class FriendlyMineSyntenyLinkGenerator implements InterMineSyntenyL
             String chromosomeId, start, end;
             chromosomeId = start = end = "";
             if (m.matches()) {
-                //chromosomeId = ORGANISM_PREFIX.get(req.getDomain()) + "." + StringUtils.capitalize(m.group(1));
                 String chrId = m.group(1);
-                chromosomeId = "medtr." + chrId.replace("chr", "Chr0");
+                chromosomeId = ORGANISM_PREFIX.get(req.getDomain()) + "." + chrId.replace("chr", "Chr0");
                 start = m.group(2);
                 end = m.group(3);
             }
