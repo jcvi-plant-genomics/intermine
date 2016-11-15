@@ -275,7 +275,7 @@
     <put name="pageName" value="keywordsearchresults"/>
   </definition>
   <definition name="reportDisplayer.tile" path="/reportDisplayer.jsp" controllerUrl="/initReportDisplayer.do"/>
-  <definition name="otherMinesLink.tile" path="/otherMinesSyntenyLink.jsp" controllerUrl="/initOtherMinesLink.do"/>
+  <definition name="otherMinesLink.tile" path="/otherMinesLink.jsp" controllerUrl="/initOtherMinesLink.do"/>
   <definition name="contactForm" path="/contactForm.jsp" />
   <definition name="users.tile" path="/users.jsp" controllerUrl="/initUsers.do"/>
   <definition name="track.tile" path="/track.jsp" />

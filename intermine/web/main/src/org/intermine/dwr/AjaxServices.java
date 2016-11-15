@@ -762,7 +762,7 @@ public class AjaxServices
         final ServletContext servletContext = WebContextFactory.get().getServletContext();
         final Properties webProperties = SessionMethods.getWebProperties(servletContext);
         final FriendlyMineManager fmm = FriendlyMineManager.getInstance(im, webProperties);
-        final String linkGeneratorClass = webProperties.getProperty("friendlymines.linkgenerator");
+        final String linkGeneratorClass = webProperties.getProperty("friendlymines.syntenylinkgenerator");
 
         final Mine mine = fmm.getMine(mineName);
         Collection<SyntenyPartnerLink> results = Collections.emptySet();

@@ -266,6 +266,12 @@
                      placement="Genomics"
                      types="SequenceFeature"/>
 
+    <reportdisplayer javaClass="org.medicmine.web.displayer.LisSyntenicRegionsDisplayer"
+                     jspName="model/lisSyntenicRegionsDisplayer.jsp"
+                     replacesFields=""
+                     placement="Genomics"
+                     types="Gene,TransposableElementGene,Transcript,MRNA"/>
+
     <reportdisplayer javaClass="org.intermine.bio.web.displayer.SequenceFeatureDisplayer"
                      jspName="model/sequenceFeatureDisplayer.jsp"
                      replacesFields="chromosome,chromosomeLocation,sequence,length,sequenceOntologyTerm,locations,cytoLocation"

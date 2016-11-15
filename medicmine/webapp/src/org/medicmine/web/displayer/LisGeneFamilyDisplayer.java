@@ -18,8 +18,8 @@ import org.intermine.web.logic.config.ReportDisplayerConfig;
 import org.intermine.web.logic.results.ReportObject;
 
 /**
- * Displayer for Phytomine Ortholog
- * @author rns
+ * Displayer for LIS Gene Families
+ * @author Vivek Krishnakumar
  */
 public class LisGeneFamilyDisplayer extends ReportDisplayer
 {

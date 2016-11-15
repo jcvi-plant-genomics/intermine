@@ -6,10 +6,12 @@
 
 <!-- This section is rendered with Ajax to improve responsiveness -->
 <c:if test="${!empty mines && imf:hasValidPath(object, 'organism.shortName', INTERMINE_API)}">
-<c:set var="chromosomeLocation" value="${object.chromosomeLocation.locatedOn.primaryIdentifier}:${object.chromosomeLocation.start}-${object.chromosomeLocation.end}"/>
+<script type="text/javascript" charset="utf-8" src="js/other-mines-links.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/other-mines-synteny-links.js"></script>
+
+<c:set var="chromosomeLocation" value="${object.chromosomeLocation.locatedOn.primaryIdentifier}:${object.chromosomeLocation.start}-${object.chromosomeLocation.end}"/>
 <h3 class="goog"><fmt:message key="othermines.title"/></h3>
-<div id="friendlyMinesBySynteny">
+<div id="friendlyMines">
   <c:forEach items="${mines}" var="mine">
     <div class="mine" id="partner_mine_${mine.name}">
 
@@ -29,10 +31,18 @@
         var mine = {name: '${mine.name}', url: '${mine.url}'};
         var req = {
           origin: '${localMine.name}',
-          domain: '${object.organism.shortName}',
-          chromosomeLocation: '${chromosomeLocation}'
+          domain: '${object.organism.shortName}'
         };
+<c:forEach items="${mine.linkClasses}" var="linkClass">
+    <c:if test="${linkClass == 'homologue' || linkClass == 'phytomineHomolog'}">
+        req.identifiers = '${object.primaryIdentifier}';
+        OtherMines.getLinks('#partner_mine_${mine.name}', mine, req);
+    </c:if>
+    <c:if test="${linkClass == 'syntenyBlock'}">
+        req.chromosomeLocation = '${chromosomeLocation}';
         OtherMinesSynteny.getLinks('#partner_mine_${mine.name}', mine, req);
+    </c:if>
+</c:forEach>
       </script>
 
     </div>

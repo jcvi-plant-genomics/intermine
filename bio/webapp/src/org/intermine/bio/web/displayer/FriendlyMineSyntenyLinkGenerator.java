@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -27,9 +28,11 @@ import org.intermine.api.beans.SyntenyObjectDetails;
 import org.intermine.api.beans.SyntenyPartnerLink;
 import org.intermine.api.mines.Mine;
 import org.intermine.api.mines.ObjectRequest;
+import org.intermine.metadata.ConstraintOp;
 import org.intermine.pathquery.Constraints;
 import org.intermine.pathquery.OrderDirection;
 import org.intermine.pathquery.PathQuery;
+import org.intermine.pathquery.PathConstraintRange;
 import org.intermine.metadata.Util;
 import org.intermine.web.displayer.InterMineSyntenyLinkGenerator;
 import org.intermine.webservice.server.core.Predicate;
@@ -146,14 +149,15 @@ public final class FriendlyMineSyntenyLinkGenerator implements InterMineSyntenyL
             final String regexp = "^(\\S+):([0-9]+)-([0-9]+)$";
             Pattern p = Pattern.compile(regexp);
             Matcher m = p.matcher(chromosomeLocation);
-            String chromosomeId, start, end;
-            chromosomeId = start = end = "";
+            String chrId, chromosomeId, start, end;
+            chrId = chromosomeId = start = end = "";
             if (m.matches()) {
-                String chrId = m.group(1);
+                chrId = m.group(1);
                 chromosomeId = ORGANISM_PREFIX.get(req.getDomain()) + "." + chrId.replace("chr", "Chr0");
                 start = m.group(2);
                 end = m.group(3);
             }
+            String[] regions = { chromosomeId + ":" + start + "-" + end };
 
             PathQuery q = new PathQuery(mine.getModel());
             q.addViews(
@@ -161,14 +165,10 @@ public final class FriendlyMineSyntenyLinkGenerator implements InterMineSyntenyL
                  "SyntenyBlock.targetRegion.primaryIdentifier",
                  "SyntenyBlock.targetRegion.organism.shortName"
             );
-            q.addOrderBy("SyntenyBlock.primaryIdentifier", OrderDirection.ASC);
+            q.addOrderBy("SyntenyBlock.sourceRegion.primaryIdentifier", OrderDirection.ASC);
             q.addConstraint(Constraints.eq("SyntenyBlock.sourceRegion.organism.shortName", req.getDomain()), "A");
-            q.addConstraint(Constraints.eq("SyntenyBlock.sourceRegion.chromosome.primaryIdentifier", chromosomeId), "B");
-            q.addConstraint(Constraints.lessThan("SyntenyBlock.sourceRegion.chromosomeLocation.start", start), "C");
-            q.addConstraint(Constraints.lessThan("SyntenyBlock.sourceRegion.chromosomeLocation.start", end), "D");
-            q.addConstraint(Constraints.greaterThan("SyntenyBlock.sourceRegion.chromosomeLocation.end", start), "E");
-            q.addConstraint(Constraints.greaterThan("SyntenyBlock.sourceRegion.chromosomeLocation.end", end), "F");
-            q.setConstraintLogic("A and B and ((C and E) or (D and F))");
+            q.addConstraint(new PathConstraintRange("SyntenyBlock.sourceRegion.chromosomeLocation", ConstraintOp.OVERLAPS, Arrays.asList(regions)), "B");
+            q.setConstraintLogic("A and B");
 
             return q;
         }
@@ -193,7 +193,7 @@ public final class FriendlyMineSyntenyLinkGenerator implements InterMineSyntenyL
                     continue;
                 }
                 SyntenyObjectDetails details = new SyntenyObjectDetails();
-                details.setType("SyntenyBlock");
+                details.setType("SyntenicRegion");
                 if (row.get(0) != null) {
                     details.setSourceRegion((String) row.get(0));
                 }

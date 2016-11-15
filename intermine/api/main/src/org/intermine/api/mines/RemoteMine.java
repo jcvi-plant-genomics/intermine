@@ -62,6 +62,7 @@ public class RemoteMine implements ConfigurableMine
     private String frontcolor;
     private String description;
     private String release;
+    private Set<String> linkClasses = new HashSet<String>();
     private Model model;
 
     private long lastReleaseUpdate = System.currentTimeMillis() - MAX_UPDATE_INTERVAL;
@@ -91,6 +92,7 @@ public class RemoteMine implements ConfigurableMine
         bgcolor = props.getProperty("bgcolor");
         frontcolor = props.getProperty("frontcolor");
         description = props.getProperty("description");
+        linkClasses.addAll(Arrays.asList(props.getProperty("linkClasses", "homologue").split(",")));
         if (StringUtils.isBlank(name)) {
             throw new ConfigurationException("name is blank");
         }
@@ -194,6 +196,19 @@ public class RemoteMine implements ConfigurableMine
     @Override
     public String getDefaultValue() {
         for (String value : defaultValues) {
+            return value;
+        }
+        return null;
+    }
+
+    @Override
+    public Set<String> getLinkClasses() {
+        return linkClasses;
+    }
+
+    @Override
+    public String getLinkClass() {
+        for (String value : linkClasses) {
             return value;
         }
         return null;
