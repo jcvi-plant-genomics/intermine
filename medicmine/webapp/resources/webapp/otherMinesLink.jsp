@@ -7,7 +7,6 @@
 <!-- This section is rendered with Ajax to improve responsiveness -->
 <c:if test="${!empty mines && imf:hasValidPath(object, 'organism.shortName', INTERMINE_API)}">
 <script type="text/javascript" charset="utf-8" src="js/other-mines-links.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/other-mines-synteny-links.js"></script>
 
 <c:set var="chromosomeLocation" value="${object.chromosomeLocation.locatedOn.primaryIdentifier}:${object.chromosomeLocation.start}-${object.chromosomeLocation.end}"/>
 <h3 class="goog"><fmt:message key="othermines.title"/></h3>
@@ -36,13 +35,12 @@
 <c:forEach items="${mine.linkClasses}" var="linkClass">
     <c:if test="${linkClass == 'homologue' || linkClass == 'phytomineHomolog'}">
         req.identifiers = '${object.primaryIdentifier}';
-        OtherMines.getLinks('#partner_mine_${mine.name}', mine, req);
     </c:if>
     <c:if test="${linkClass == 'syntenyBlock'}">
         req.chromosomeLocation = '${chromosomeLocation}';
-        OtherMinesSynteny.getLinks('#partner_mine_${mine.name}', mine, req);
     </c:if>
 </c:forEach>
+        OtherMines.getLinks('#partner_mine_${mine.name}', mine, req);
       </script>
 
     </div>
