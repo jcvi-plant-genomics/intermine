@@ -71,7 +71,8 @@ public class SyntenyObjectDetails implements Serializable
     @Override
     public String toString() {
         return String.format(
-                "SyntenyObjectDetails(type = %s, targetRegion = %s, sourceRegion = %s)", type, targetRegion, sourceRegion);
+                "SyntenyObjectDetails(type = %s, targetRegion = %s, sourceRegion = %s)",
+                    type, targetRegion, sourceRegion);
     }
 
     @Override

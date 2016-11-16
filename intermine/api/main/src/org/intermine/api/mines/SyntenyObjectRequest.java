@@ -57,7 +57,8 @@ public class SyntenyObjectRequest
 
     @Override
     public String toString() {
-        return String.format("SyntenyObjectRequest(domain = %s, chromosomeLocation = %s)", domain, chromosomeLocation);
+        return String.format("SyntenyObjectRequest(domain = %s, chromosomeLocation = %s)",
+                domain, chromosomeLocation);
     }
 
     @Override

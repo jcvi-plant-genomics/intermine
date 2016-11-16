@@ -747,7 +747,7 @@ public class AjaxServices
      *
      * @param mineName name of mine to query
      * @param domains The domains the domains these identifiers are valid for (eg. organisms).
-     * @param chromosomeLocations The chromosome locations used to query for overlapping Syntenic Regions
+     * @param chromosomeLocations The chromosome locations to query for overlapping syntenicRegions
      * @return the links to friendly intermines
      */
     public static Collection<SyntenyPartnerLink>
@@ -762,7 +762,8 @@ public class AjaxServices
         final ServletContext servletContext = WebContextFactory.get().getServletContext();
         final Properties webProperties = SessionMethods.getWebProperties(servletContext);
         final FriendlyMineManager fmm = FriendlyMineManager.getInstance(im, webProperties);
-        final String linkGeneratorClass = webProperties.getProperty("friendlymines.syntenylinkgenerator");
+        final String linkGeneratorClass =
+            webProperties.getProperty("friendlymines.syntenylinkgenerator");
 
         final Mine mine = fmm.getMine(mineName);
         Collection<SyntenyPartnerLink> results = Collections.emptySet();
