@@ -104,6 +104,8 @@
       </li>
     </ul>
   <ul id="loginbar">
+        <li><a href="http://www.medicagogenome.org/" target="_blank" alt="MTGD - Medicago truncatula Genome Database">MTGD Home</a></li>
+        <li><a href="http://www.legumefederation.org/" alt="LegFed - LegumeFederation.org">LegFed Home</a></li>
         <li><a href="#" onclick="showContactForm();return false;"><fmt:message key="feedback.link"/></a></li>
         <c:if test="${PROFILE.loggedIn}">
             <li>
