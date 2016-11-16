@@ -5,9 +5,10 @@
 <%@ taglib uri="/WEB-INF/functions.tld" prefix="imf" %>
 
 <!-- This section is rendered with Ajax to improve responsiveness -->
-<c:if test="${!empty mines && imf:hasValidPath(object, 'organism.shortName', INTERMINE_API)
-&& !fn:startsWith(object, 'Generif')}">
+<c:if test="${!empty mines && imf:hasValidPath(object, 'organism.shortName', INTERMINE_API)}">
 <script type="text/javascript" charset="utf-8" src="js/other-mines-links.js"></script>
+
+<c:set var="chromosomeLocation" value="${object.chromosomeLocation.locatedOn.primaryIdentifier}:${object.chromosomeLocation.start}-${object.chromosomeLocation.end}"/>
 <h3 class="goog"><fmt:message key="othermines.title"/></h3>
 <div id="friendlyMines">
   <c:forEach items="${mines}" var="mine">
@@ -29,9 +30,16 @@
         var mine = {name: '${mine.name}', url: '${mine.url}'};
         var req = {
           origin: '${localMine.name}',
-          domain: '${object.organism.shortName}',
-          identifiers: '${object.primaryIdentifier}'
+          domain: '${object.organism.shortName}'
         };
+<c:forEach items="${mine.linkClasses}" var="linkClass">
+    <c:if test="${linkClass == 'homologue' || linkClass == 'phytomineHomolog'}">
+        req.identifiers = '${object.primaryIdentifier}';
+    </c:if>
+    <c:if test="${linkClass == 'syntenyBlock'}">
+        req.chromosomeLocation = '${chromosomeLocation}';
+    </c:if>
+</c:forEach>
         OtherMines.getLinks('#partner_mine_${mine.name}', mine, req);
       </script>
 

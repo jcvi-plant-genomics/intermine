@@ -18,7 +18,11 @@ var OtherMines = (function ($, _, AjaxServices) {
     var $loading = $('.loading-indicator', $context).addClass('loading');
     var handlers = {callback: handleResults, errorHandler: handleError};
 
-    AjaxServices.getFriendlyMineLinks(mine.name, request.domain, request.identifiers, handlers);
+    if ("chromosomeLocation" in request) {
+        AjaxServices.getFriendlyMineSyntenyLinks(mine.name, request.domain, request.chromosomeLocation, handlers);
+    } else {
+        AjaxServices.getFriendlyMineLinks(mine.name, request.domain, request.identifiers, handlers);
+    }
 
     function handleResults (results) {
       $loading.removeClass('loading');
@@ -36,7 +40,7 @@ var OtherMines = (function ($, _, AjaxServices) {
     }
 
     function display (results) {
-      // A group is a domain (organism) and the matching identifiers
+      // A group is a domain (organism) and the matching chromosomeLocation
       var $resultsList = $('.results', $context);
       results.forEach(function (group, index) {
         var n = (group.objects && group.objects.length);
@@ -74,8 +78,15 @@ var OtherMines = (function ($, _, AjaxServices) {
   };
 
   var createItemLi = function (group, obj, mine, request) {
+    var displayName, domain_parameter_name;
+    if ("chromosomeLocation" in request) {
+        displayName = obj.targetRegion;
+        OtherMines.DOMAIN_PARAMETER_NAME = "syntenicRegion";
+    } else {
+        displayName = (obj.name || obj.identifier);
+    }
     var params = [
-      {name: 'externalids', value: (obj.identifier || obj.name)},
+      {name: 'externalids', value: displayName},
       {name: 'class', value: obj.type},
       {name: 'origin', value: request.origin}
     ];
@@ -85,7 +96,7 @@ var OtherMines = (function ($, _, AjaxServices) {
       });
     }
     var data = {
-      name: (obj.name || obj.identifier),
+      name: displayName,
       mineLink: mine.url + '/portal.do?' + queryString(params)
     };
     return itemLiTempl(data);
