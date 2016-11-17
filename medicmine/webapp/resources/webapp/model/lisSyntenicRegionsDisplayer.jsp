@@ -37,6 +37,7 @@
  <script type="text/javascript">
 
     var chrId = "${chrId}";
+    var objClass = imSummaryFields.type;
     var orgnShortName = "${orgnShortName}";
     var featStart = "${start}";
     var featEnd = "${end}";
@@ -47,7 +48,8 @@
     var imjsquery  = {
         "from": "SyntenyBlock",
         "select": [
-            "sourceRegion.primaryIdentifier", "targetRegion.primaryIdentifier", "targetRegion.organism.shortName"
+            "sourceRegion.primaryIdentifier", "targetRegion.primaryIdentifier",
+            "medianKs", "targetRegion.organism.shortName"
         ],
         "where": [
             { "path": "sourceRegion.organism.shortName", "op": "=", "value": orgnShortName, "code": "A" },
@@ -67,6 +69,56 @@
         properties: { pageSize: 10 }
     };
 
+    // set up InterMine LinkFormatters to reformat sourceRegion column in data table
+    var formatLink = function(url, text, target, cls){
+        target = target || "_self";
+        text = text || url;
+
+        if (cls == 'extlink') {
+            return '<a class="'+cls+'" href="'+url+'" target="'+target+'">' + text + '</a>';
+        } else {
+            return '<a href="'+url+'" target="'+target+'">' + text + '</a>';
+        }
+    };
+
+    var formatSourceRegionLink = function(id) {
+        var prefixToReplace = "medtr.Chr0";
+        if (id.indexOf(prefixToReplace) == -1) {
+            var extLink = '${WEB_PROPERTIES['legumemine.url']}' + '/portal.do?class=SyntenicRegion' + '&externaids=' + id;
+            return formatLink(extLink, id, "_blank", "extlink");
+        }
+        var chromLocation = id.replace(prefixToReplace, "chr");
+
+        var baseClass = "SequenceFeature";
+        var imqxml = [
+            '<query model="genomic" view="SequenceFeature.primaryIdentifier SequenceFeature.briefDescription" sortOrder="SequenceFeature.primaryIdentifier asc">',
+            '<constraint path="SequenceFeature.chromosomeLocation" op="WITHIN">',
+            '<value>' + chromLocation + '</value>',
+            '</constraint>',
+            '</query>'
+        ].join("\n");
+
+        var sourceRegionLinkElems = [id];
+
+        var re = new RegExp(baseClass, 'g');
+        var qxml = imqxml.replace(re, objClass);
+        var qlink = '/${WEB_PROPERTIES['webapp.path']}' + '/loadQuery.do?query=' +
+        encodeURIComponent(qxml) + '&method=xml';
+        var qlinkText = objClass + 's within SyntenicRegion';
+
+        sourceRegionLinkElems.push(formatLink(qlink, qlinkText, "_blank", undefined));
+        var sourceRegionLink = sourceRegionLinkElems.join(" | ");
+
+        return sourceRegionLink;
+    };
+
+    var sourceRegionLinkFormatter = function(o) {
+        return formatSourceRegionLink(o.get('primaryIdentifier'));
+    }
+
+    imtables.formatting
+                .registerFormatter(sourceRegionLinkFormatter, 'genomic', 'SyntenicRegion', ['primaryIdentifier']);
+
     // note: imtables.loadTable delivers a table without controls (only pagination)
 
     imtables.configure('DefaultPageSize', 10);
@@ -74,17 +126,16 @@
 
     imtables.loadDash('#legumemine-syntenic-regions-container',
         {start : 0, size : 10},
-        {service : options.service,
-            query : options.query}
-        ).then(
-            withTable,
-            FailureNotification.notify
-        );
+        {service : options.service, query : options.query}
+    ).then(
+        withTable,
+        FailureNotification.notify
+    );
 
-        function withTable(table) {
-            table.bus.on('list-action:failure', LIST_EVENTS['list-creation:failure']);
-            table.bus.on('list-action:success', LIST_EVENTS['list-creation:success']);
-        }
+    function withTable(table) {
+        table.bus.on('list-action:failure', LIST_EVENTS['list-creation:failure']);
+        table.bus.on('list-action:success', LIST_EVENTS['list-creation:success']);
+    }
  </script>
 
   </c:when>
