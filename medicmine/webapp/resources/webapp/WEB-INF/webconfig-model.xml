@@ -57,6 +57,10 @@
       <fieldconfig fieldExpr="secondaryIdentifier"/>
       <fieldconfig fieldExpr="briefDescription"/>
     </fields>
+    <bagdisplayers>
+      <!-- attribute links can now be configured for gene list analysis pages -->
+      <displayer src="friendlyMineLinkDisplayer.tile" showOnLeft="false" />
+    </bagdisplayers>
   </class>
 
  <class className="org.intermine.model.bio.Location">
