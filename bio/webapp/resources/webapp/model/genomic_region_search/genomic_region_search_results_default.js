@@ -116,8 +116,8 @@
                   /*window.open(
                       "/" + webapp_path + "/bagDetails.do?bagName=" + bagName,
                       '_blank' // <- This is what makes it open in a new window.
-                      ); // would use but triggers pop up blocker */
-              }, "text");
+                      );*/
+              }, "text"); // would use but triggers pop up blocker
           }
         }, "text");
     }
