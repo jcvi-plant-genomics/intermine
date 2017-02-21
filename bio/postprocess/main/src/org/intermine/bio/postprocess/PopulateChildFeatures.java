@@ -156,7 +156,7 @@ public class PopulateChildFeatures
                 // for testing
                 continue;
             }
-            LOG.info("CHILD CLASS " + childClassName + " (" + childSOTerm.getName() + ") :"
+            LOG.debug("CHILD CLASS " + childClassName + " (" + childSOTerm.getName() + ") :"
                     + childCollectionName);
 
             // is gene in transcript parents collection

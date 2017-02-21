@@ -535,8 +535,7 @@ public class Engine extends CommandRunner
             so.append(w);
             i++;
         }
-        LOG.debug("SOwhat " + camelName + " -> " + so.toString());
-
+        
         if (so.toString().contentEquals("CDS")) {
             return so.toString();
         }
@@ -553,7 +552,10 @@ public class Engine extends CommandRunner
         }
         // default
         return sosmall;
+<<<<<<< HEAD
 //        return so.toString().toLowerCase();
+=======
+>>>>>>> master
     }
 
     private Query getReferenceQuery(Command command) {
