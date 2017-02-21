@@ -14,6 +14,23 @@
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/gff"/>
       </source>
 
+      <source name="mtgi-tc-fasta" type="fasta">
+          <property name="fasta.loaderClassName"
+              value="org.intermine.bio.dataconversion.MTGIFastaLoaderTask"/>
+          <property name="fasta.className" value="org.intermine.model.bio.TentativeConsensus"/>
+          <property name="fasta.dataSourceName" value="DFCI"/>
+          <property name="fasta.dataSetTitle" value="MTGI FASTA data set"/>
+          <property name="fasta.taxonId" value="3880"/>
+          <property name="fasta.includes" value="*.fasta"/>
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/mtgi-mapping/current"/>
+      </source>
+
+      <source name="mtgi-gene-mapping" type="mtgi-gene-mapping">
+          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/mtgi-mapping/current"/>
+          <property name="src.data.dir.includes" value="*.tsv"/>
+          <property name="mtgi.organisms" value="3880"/>
+      </source>
+
       <source name="so" type="so">
           <property name="src.data.file" location="../../bio/sources/so/so.obo"/>
       </source>
@@ -156,8 +173,8 @@
       <post-process name="create-intergenic-region-features"/>
       <post-process name="transfer-sequences"/>
       <post-process name="populate-child-features"/>
-      <post-process name="create-overlap-view" />
       <post-process name="create-location-overlap-index"/>
+      <post-process name="create-overlap-view" />
       <post-process name="create-attribute-indexes"/>
       <post-process name="summarise-objectstore"/>
       <post-process name="create-autocomplete-index"/>

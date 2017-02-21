@@ -28,3 +28,6 @@ DataSet	Phytozome Homologs	Gene families representing clade-specific orthology/p
 DataSource	LIS	Legume Information System	http://legumeinfo.org/	Publication:26546515
 DataSet	LIS Gene Families	Gene families (built on Phytozome 10.2 Angiosperm-level gene family models) retrieved via LegumeMine web services	http://intermine.legumefederation.org/legumemine/	DataSource:LIS,Publication:26546515 	real-time
 DataSet	SRA	NCBI Sequence Read Archive (SRA) stores raw sequencing data; Published Medicago truncatula RNA-seq datasets retrieved from NCBI SRA	http://www.ncbi.nlm.nih.gov/sra/?term=SRP008485	DataSource:NCBI	10/2011
+DataSource	DFCI	Dana Farber Cancer Institute	http://compbio.dfci.harvard.edu/	Publication:11125077
+DataSet	MTGI to Gene mapping	Medicago truncatula Gene Index (MTGI) mapped to Mt4.0v2	ftp://occams.dfci.harvard.edu/pub/bio/tgi/data/Medicago_truncatula	DataSource:DFCI,Publication:11125077	11.0
+DataSet	MTGI FASTA data set	Medicago truncatula Gene Index (MTGI) FASTA sequence	ftp://occams.dfci.harvard.edu/pub/bio/tgi/data/Medicago_truncatula	DataSource:DFCI,Publication:11125077	11.0

@@ -51,6 +51,7 @@
   <class className="org.intermine.model.bio.Gene">
     <inlinelist>
       <table path="synonyms.value" showInHeader="true" lineLength="100" />
+      <table path="associatedTCs.primaryIdentifier" showInHeader="true" showLinksToObjects="true" />
     </inlinelist>
     <fields>
       <fieldconfig fieldExpr="primaryIdentifier"/>
@@ -237,6 +238,18 @@
       <fieldconfig fieldExpr="gene.symbol" label="Gene" showInInlineCollection="false" />
       <fieldconfig fieldExpr="publication.pubMedId" label="PubMed Id" />
     </fields>
+  </class>
+
+  <class className="org.intermine.model.bio.TentativeConsensus">
+    <fields>
+      <fieldconfig fieldExpr="primaryIdentifier"/>
+      <fieldconfig fieldExpr="briefDescription"/>
+      <fieldconfig fieldExpr="length" displayer="/model/sequenceShortDisplayerWithField.jsp" />
+    </fields>
+    <inlinelist>
+      <table path="synonyms.value" showInHeader="true" lineLength="100" label="Synonyms" />
+      <table path="associatedGenes.primaryIdentifier" showInHeader="true" showLinksToObjects="true" />
+    </inlinelist>
   </class>
 
 <!-- exporters -->

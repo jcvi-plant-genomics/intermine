@@ -273,4 +273,31 @@
       <attribute name="description" value="NCBI Sequence Read Archive (SRA) stores raw sequencing data; Published Medicago truncatula RNA-seq datasets retrieved from NCBI SRA" />
       <attribute name="url" value="http://www.ncbi.nlm.nih.gov/sra/?term=SRP008485" />
    </item>
+   <item id="0_43" class="Publication" implements="">
+      <attribute name="pubMedId" value="11125077" />
+   </item>
+   <item id="0_44" class="DataSource" implements="">
+      <attribute name="name" value="DFCI" />
+      <attribute name="description" value="Dana Farber Cancer Institute" />
+      <attribute name="url" value="http://compbio.dfci.harvard.edu/" />
+      <collection name="publications">
+         <reference ref_id="0_43" />
+      </collection>
+   </item>
+   <item id="0_45" class="DataSet" implements="">
+      <attribute name="version" value="11.0" />
+      <reference name="dataSource" ref_id="0_44" />
+      <attribute name="name" value="MTGI to Gene mapping" />
+      <attribute name="description" value="Medicago truncatula Gene Index (MTGI) mapped to Mt4.0v2" />
+      <attribute name="url" value="ftp://occams.dfci.harvard.edu/pub/bio/tgi/data/Medicago_truncatula" />
+      <reference name="publication" ref_id="0_43" />
+   </item>
+   <item id="0_46" class="DataSet" implements="">
+      <attribute name="version" value="11.0" />
+      <reference name="dataSource" ref_id="0_44" />
+      <attribute name="name" value="MTGI FASTA data set" />
+      <attribute name="description" value="Medicago truncatula Gene Index (MTGI) FASTA sequence" />
+      <attribute name="url" value="ftp://occams.dfci.harvard.edu/pub/bio/tgi/data/Medicago_truncatula" />
+      <reference name="publication" ref_id="0_43" />
+   </item>
 </items>

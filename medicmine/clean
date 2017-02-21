@@ -1,0 +1,7 @@
+#!/bin/sh
+rm *.{log,err}
+rm */*.log
+cd dbmodel && ant clean-all && cd ..
+cd integrate && ant clean && cd ..
+cd postprocess && ant clean-all && cd ..
+cd webapp && ant clean-all && cd ..
