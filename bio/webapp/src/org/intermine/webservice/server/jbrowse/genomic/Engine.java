@@ -552,10 +552,6 @@ public class Engine extends CommandRunner
         }
         // default
         return sosmall;
-<<<<<<< HEAD
-//        return so.toString().toLowerCase();
-=======
->>>>>>> master
     }
 
     private Query getReferenceQuery(Command command) {
