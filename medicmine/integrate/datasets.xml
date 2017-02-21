@@ -64,7 +64,7 @@
       </collection>
    </item>
    <item id="0_11" class="DataSet" implements="">
-      <attribute name="version" value="7/15/2016" />
+      <attribute name="version" value="2/23/2017" />
       <reference name="dataSource" ref_id="0_10" />
       <attribute name="name" value="GO Annotation from CACAO" />
       <attribute name="description" value="GO annotations assigned by the Community Assessment of Community Annotation with Ontologies (CACAO)" />
@@ -72,7 +72,7 @@
       <reference name="publication" ref_id="0_9" />
    </item>
    <item id="0_12" class="DataSet" implements="">
-      <attribute name="version" value="7/15/2016" />
+      <attribute name="version" value="2/23/2017" />
       <reference name="dataSource" ref_id="0_10" />
       <attribute name="name" value="GO Annotation from EnsemblPlants" />
       <attribute name="description" value="GO annotations assigned by the EnsemblPlants" />
@@ -80,7 +80,7 @@
       <reference name="publication" ref_id="0_9" />
    </item>
    <item id="0_13" class="DataSet" implements="">
-      <attribute name="version" value="7/15/2016" />
+      <attribute name="version" value="2/23/2017" />
       <reference name="dataSource" ref_id="0_10" />
       <attribute name="name" value="GO Annotation from GOC" />
       <attribute name="description" value="GO annotations assigned by the GO Consortium" />
@@ -88,7 +88,7 @@
       <reference name="publication" ref_id="0_9" />
    </item>
    <item id="0_14" class="DataSet" implements="">
-      <attribute name="version" value="7/15/2016" />
+      <attribute name="version" value="2/23/2017" />
       <reference name="dataSource" ref_id="0_10" />
       <attribute name="name" value="GO Annotation from InterPro" />
       <attribute name="description" value="GO annotations assigned by InterPro2GO" />
@@ -96,7 +96,7 @@
       <reference name="publication" ref_id="0_9" />
    </item>
    <item id="0_15" class="DataSet" implements="">
-      <attribute name="version" value="7/15/2016" />
+      <attribute name="version" value="2/23/2017" />
       <reference name="dataSource" ref_id="0_10" />
       <attribute name="name" value="GO Annotation from UniProt" />
       <attribute name="description" value="GO annotations assigned by UniProt" />
@@ -115,7 +115,7 @@
       </collection>
    </item>
    <item id="0_18" class="DataSet" implements="">
-      <attribute name="version" value="2016_07" />
+      <attribute name="version" value="2017_02" />
       <reference name="dataSource" ref_id="0_17" />
       <attribute name="name" value="Swiss-Prot data set" />
       <attribute name="description" value="High-quality, manually annotated, non-redundant protein sequence database" />
@@ -123,7 +123,7 @@
       <reference name="publication" ref_id="0_16" />
    </item>
    <item id="0_19" class="DataSet" implements="">
-      <attribute name="version" value="2016_07" />
+      <attribute name="version" value="2017_02" />
       <reference name="dataSource" ref_id="0_17" />
       <attribute name="name" value="TrEMBL data set" />
       <attribute name="description" value="Computationally analysed records, enriched with automatic annotation" />
@@ -131,7 +131,7 @@
       <reference name="publication" ref_id="0_16" />
    </item>
    <item id="0_20" class="DataSet" implements="">
-      <attribute name="version" value="2016_07" />
+      <attribute name="version" value="2017_02" />
       <reference name="dataSource" ref_id="0_17" />
       <attribute name="name" value="UniProt FASTA dataset" />
       <attribute name="description" value="Protein sequences and alternative splice forms generated using VARSPLIC" />
@@ -139,7 +139,7 @@
       <reference name="publication" ref_id="0_16" />
    </item>
    <item id="0_21" class="DataSet" implements="">
-      <attribute name="version" value="2016_07" />
+      <attribute name="version" value="2017_02" />
       <reference name="dataSource" ref_id="0_17" />
       <attribute name="name" value="UniProt keywords data set" />
       <attribute name="description" value="Keywords and categories used in UniProtKB" />
@@ -158,7 +158,7 @@
       </collection>
    </item>
    <item id="0_24" class="DataSet" implements="">
-      <attribute name="version" value="v58.0" />
+      <attribute name="version" value="v61.0" />
       <reference name="dataSource" ref_id="0_23" />
       <attribute name="name" value="InterPro data set" />
       <attribute name="description" value="Protein family and domain assignments to proteins" />
@@ -166,7 +166,7 @@
       <reference name="publication" ref_id="0_22" />
    </item>
    <item id="0_25" class="DataSet" implements="">
-      <attribute name="version" value="v58.0" />
+      <attribute name="version" value="v61.0" />
       <reference name="dataSource" ref_id="0_23" />
       <attribute name="name" value="InterPro GO Annotation data set" />
       <attribute name="description" value="Mapping between InterPro domains and GO terms" />
@@ -188,7 +188,7 @@
       <attribute name="pubMedId" value="17148475" />
    </item>
    <item id="0_29" class="DataSet" implements="">
-      <attribute name="version" value="7/15/2016" />
+      <attribute name="version" value="2/23/2017" />
       <reference name="dataSource" ref_id="0_27" />
       <attribute name="name" value="PubMed to gene mapping" />
       <attribute name="description" value="Curated associations between publications and NCBI Gene records" />
@@ -196,7 +196,7 @@
       <reference name="publication" ref_id="0_28" />
    </item>
    <item id="0_30" class="DataSet" implements="">
-      <attribute name="version" value="7/15/2016" />
+      <attribute name="version" value="2/23/2017" />
       <reference name="dataSource" ref_id="0_27" />
       <attribute name="name" value="GeneRIF" />
       <attribute name="description" value="Concise phrase describing gene function and publication associated with NCBI Gene records" />
@@ -218,7 +218,7 @@
       <attribute name="pubMedId" value="24214961" />
    </item>
    <item id="0_34" class="DataSet" implements="">
-      <attribute name="version" value="78.2" />
+      <attribute name="version" value="81.0" />
       <reference name="dataSource" ref_id="0_32" />
       <attribute name="name" value="KEGG pathways data set" />
       <attribute name="description" value="Wiring diagrams of molecular interactions, reactions, and relations" />

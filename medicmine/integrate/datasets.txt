@@ -5,24 +5,24 @@ DataSet	Coding Sequence FASTA	Medicago coding sequences	http://medicago.jcvi.org
 DataSet	Protein Sequence FASTA	Medicago protein sequences	http://medicago.jcvi.org/MTGD/?q=downloads	DataSource:MTGD,Publication:24767513	Mt4.0v2
 DataSet	RNA-seq expression	Measure of gene expression levels (FPKM) quantified by Cufflinks	http://www.medicagogenome.org	DataSource:MTGD	Mt4.0v2
 DataSource	GO	Gene Ontology Consortium	http://geneontology.org	Publication:25428369
-DataSet	GO Annotation from CACAO	GO annotations assigned by the Community Assessment of Community Annotation with Ontologies (CACAO)	http://www.geneontology.org	DataSource:GO,Publication:25428369	7/15/2016
-DataSet	GO Annotation from EnsemblPlants	GO annotations assigned by the EnsemblPlants	http://www.geneontology.org	DataSource:GO,Publication:25428369	7/15/2016
-DataSet	GO Annotation from GOC	GO annotations assigned by the GO Consortium	http://www.geneontology.org	DataSource:GO,Publication:25428369	7/15/2016
-DataSet	GO Annotation from InterPro	GO annotations assigned by InterPro2GO	http://www.geneontology.org	DataSource:GO,Publication:25428369	7/15/2016
-DataSet	GO Annotation from UniProt	GO annotations assigned by UniProt	http://www.geneontology.org	DataSource:GO,Publication:25428369	7/15/2016
+DataSet	GO Annotation from CACAO	GO annotations assigned by the Community Assessment of Community Annotation with Ontologies (CACAO)	http://www.geneontology.org	DataSource:GO,Publication:25428369	2/23/2017
+DataSet	GO Annotation from EnsemblPlants	GO annotations assigned by the EnsemblPlants	http://www.geneontology.org	DataSource:GO,Publication:25428369	2/23/2017
+DataSet	GO Annotation from GOC	GO annotations assigned by the GO Consortium	http://www.geneontology.org	DataSource:GO,Publication:25428369	2/23/2017
+DataSet	GO Annotation from InterPro	GO annotations assigned by InterPro2GO	http://www.geneontology.org	DataSource:GO,Publication:25428369	2/23/2017
+DataSet	GO Annotation from UniProt	GO annotations assigned by UniProt	http://www.geneontology.org	DataSource:GO,Publication:25428369	2/23/2017
 DataSource	UniProt	Universal Protein Resource	http://www.uniprot.org	Publication:24253303
-DataSet	Swiss-Prot data set	High-quality, manually annotated, non-redundant protein sequence database	http://web.expasy.org/docs/swiss-prot_guideline.html	DataSource:UniProt,Publication:24253303	2016_07
-DataSet	TrEMBL data set	Computationally analysed records, enriched with automatic annotation	http://www.ebi.ac.uk/uniprot/TrEMBLstats	DataSource:UniProt,Publication:24253303	2016_07
-DataSet	UniProt FASTA dataset	Protein sequences and alternative splice forms generated using VARSPLIC	ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/README.varsplic	DataSource:UniProt,Publication:24253303	2016_07
-DataSet	UniProt keywords data set	Keywords and categories used in UniProtKB	http://www.uniprot.org/docs/keywlist	DataSource:UniProt,Publication:24253303	2016_07
+DataSet	Swiss-Prot data set	High-quality, manually annotated, non-redundant protein sequence database	http://web.expasy.org/docs/swiss-prot_guideline.html	DataSource:UniProt,Publication:24253303	2017_02
+DataSet	TrEMBL data set	Computationally analysed records, enriched with automatic annotation	http://www.ebi.ac.uk/uniprot/TrEMBLstats	DataSource:UniProt,Publication:24253303	2017_02
+DataSet	UniProt FASTA dataset	Protein sequences and alternative splice forms generated using VARSPLIC	ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/README.varsplic	DataSource:UniProt,Publication:24253303	2017_02
+DataSet	UniProt keywords data set	Keywords and categories used in UniProtKB	http://www.uniprot.org/docs/keywlist	DataSource:UniProt,Publication:24253303	2017_02
 DataSource	InterPro	Protein sequence analysis & classification	http://www.ebi.ac.uk/interpro	Publication:25428371
-DataSet	InterPro data set	Protein family and domain assignments to proteins	http://www.ebi.ac.uk/interpro	DataSource:InterPro,Publication:25428371	v58.0
-DataSet	InterPro GO Annotation data set	Mapping between InterPro domains and GO terms	http://www.ebi.ac.uk/GOA/InterPro2GO	DataSource:InterPro,Publication:25428371	v58.0
+DataSet	InterPro data set	Protein family and domain assignments to proteins	http://www.ebi.ac.uk/interpro	DataSource:InterPro,Publication:25428371	v61.0
+DataSet	InterPro GO Annotation data set	Mapping between InterPro domains and GO terms	http://www.ebi.ac.uk/GOA/InterPro2GO	DataSource:InterPro,Publication:25428371	v61.0
 DataSource	NCBI	National Center for Biotechnology Information	http://www.ncbi.nlm.nih.gov	Publication:16381840
-DataSet	PubMed to gene mapping	Curated associations between publications and NCBI Gene records	ftp://ftp.ncbi.nlm.nih.gov/gene/DATA	DataSource:NCBI,Publication:17148475	7/15/2016
-DataSet	GeneRIF	Concise phrase describing gene function and publication associated with NCBI Gene records	http://www.ncbi.nlm.nih.gov/gene/about-generif	DataSource:NCBI,Publication:17148475	7/15/2016
+DataSet	PubMed to gene mapping	Curated associations between publications and NCBI Gene records	ftp://ftp.ncbi.nlm.nih.gov/gene/DATA	DataSource:NCBI,Publication:17148475	2/23/2017
+DataSet	GeneRIF	Concise phrase describing gene function and publication associated with NCBI Gene records	http://www.ncbi.nlm.nih.gov/gene/about-generif	DataSource:NCBI,Publication:17148475	2/23/2017
 DataSource	GenomeNet	Japanese network of database and computational services for genome research	http://www.genome.jp	Publication:9397687
-DataSet	KEGG pathways data set	Wiring diagrams of molecular interactions, reactions, and relations	http://www.kegg.jp/kegg/pathway.html	DataSource:GenomeNet,Publication:24214961	78.2
+DataSet	KEGG pathways data set	Wiring diagrams of molecular interactions, reactions, and relations	http://www.kegg.jp/kegg/pathway.html	DataSource:GenomeNet,Publication:24214961	81.0
 DataSource	Phytozome	Plant Comparative Genomics portal	https://phytozome.jgi.doe.gov/	Publication:22110026
 DataSet	Phytozome Homologs	Gene families representing clade-specific orthology/paralogy relationships via PhytoMine web services	https://phytozome.jgi.doe.gov/phytomine/	DataSource:Phytozome,Publication:22110026	real-time
 DataSource	LIS	Legume Information System	http://legumeinfo.org/	Publication:26546515
