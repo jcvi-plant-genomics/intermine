@@ -152,7 +152,7 @@ public final class FriendlyMineLinkGenerator implements InterMineLinkGenerator
                 q.addConstraint(Constraints.neq("Gene.homolog.gene2.organism.shortName", req.getDomain()), "B");
                 q.setConstraintLogic("A and B");
             } else {
-                // query for standard homologue data model
+                // query for the standard homologue data model
                 q.addViews(
                     "Gene.homologues.homologue.primaryIdentifier",
                     "Gene.homologues.homologue.symbol",
