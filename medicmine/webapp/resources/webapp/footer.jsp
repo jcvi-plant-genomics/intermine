@@ -73,7 +73,7 @@
 
     <!-- mines -->
     <ul class="footer-links">
-        <li><a href="http://medicmine.jcvi.org/medicmine/begin.do" target="_blank">JCVI MedicMine (Medicago)</a></li>
+        <li><a href="http://www.medicagogenome.org/medicmine/begin.do" target="_blank">JCVI MedicMine (Medicago)</a></li>
         <li><a href="http://intermine.legumefederation.org/legumemine/begin.do" target="_blank">LegFed LegumeMine (various legumes)</a></li>
         <li><a href="http://mines.legumeinfo.org/beanmine/begin.do" target="_blank">LIS BeanMine (string bean)</a></li>
         <li><a href="http://mines.legumeinfo.org/soymine/begin.do" target="_blank">LIS Soymine (soybean)</a></li>
