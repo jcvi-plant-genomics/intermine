@@ -96,7 +96,7 @@
             <property name="src.data.file" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/locushistory/araport-locus-history.xml" />
         </source>
 
-        <source name="aip-gff" type="aip-gff">
+        <source name="araport-gff" type="araport-gff">
             <property name="gff3.taxonId" value="3702"/>
             <property name="gff3.seqDataSourceName" value="TAIR"/>
             <property name="gff3.dataSourceName" value="Araport"/>
