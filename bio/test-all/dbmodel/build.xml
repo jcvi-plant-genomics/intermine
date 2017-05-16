@@ -63,6 +63,12 @@
     <merge-additions file="bio/sources/human/omim/omim_additions.xml"/>
     <merge-additions file="bio/sources/human/atlas-express/atlas-express_additions.xml"/>
     <merge-additions file="bio/sources/human/clinvar/clinvar_additions.xml"/>
+    <merge-additions file="bio/sources/araport/araport-gff/araport-gff_additions.xml"/>
+    <merge-additions file="bio/sources/araport/araport-chado-db/araport-chado-db-phenotype_genotype_additions.xml"/>
+    <merge-additions file="bio/sources/araport/araport-chado-db/araport-chado-db-stock_additions.xml"/>
+    <merge-additions file="bio/sources/araport/araport-chado-db/araport-chado-db_controlledvocabulary_additions.xml"/>
+    <merge-additions file="bio/sources/araport/araport-chado-db/araport-chado-db_datalineage_additions.xml"/>
+    <merge-additions file="bio/sources/araport/araport-chado-db/araport-chado-db_provenance_additions.xml"/>
   </target>
 
 </project>
