@@ -73,7 +73,7 @@
 <!-- /quasi-static BAR expression sources -->
 
 <!-- also those should be rather static-->
-        <source name="aip-chromosome-fasta" type="fasta">
+        <source name="araport-chromosome-fasta" type="fasta">
             <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
             <property name="fasta.dataSourceName" value="TAIR"/>
             <property name="fasta.dataSetTitle" value="Genome Assembly"/>
@@ -180,9 +180,9 @@
             <property name="src.data.dir.includes" value="keywlist.xml"/>
         </source>
 
-        <source name="aip-cds-fasta" type="fasta">
+        <source name="araport-cds-fasta" type="araport-fasta">
             <property name="fasta.loaderClassName"
-                value="org.intermine.bio.dataconversion.AIPCDSFastaLoaderTask"/>
+                value="org.intermine.bio.dataconversion.AraportCDSFastaLoaderTask"/>
             <property name="fasta.taxonId" value="3702"/>
             <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
             <property name="fasta.classAttribute" value="primaryIdentifier"/>
@@ -192,9 +192,9 @@
             <property name="src.data.dir" location="/usr/local/projdata/0611/projects/AIP/ThaleMineData/genome/fasta/"/>
         </source>
 
-        <source name="aip-pep-fasta" type="fasta">
+        <source name="araport-pep-fasta" type="araport-fasta">
             <property name="fasta.loaderClassName"
-                value="org.intermine.bio.dataconversion.AIPProteinFastaLoaderTask"/>
+                value="org.intermine.bio.dataconversion.AraportProteinFastaLoaderTask"/>
             <property name="fasta.skipIfProteinLoaded" value="true"/>
             <property name="fasta.taxonId" value="3702"/>
             <property name="fasta.sequenceType" value="protein"/>
