@@ -14,7 +14,7 @@
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/gff"/>
       </source>
 
-      <source name="mtgi-tc-fasta" type="fasta">
+      <source name="mtgi-tc-fasta" type="medicago-fasta">
           <property name="fasta.loaderClassName"
               value="org.intermine.bio.dataconversion.MTGIFastaLoaderTask"/>
           <property name="fasta.className" value="org.intermine.model.bio.TentativeConsensus"/>
@@ -89,7 +89,7 @@
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/fasta"/>
       </source>
 
-      <source name="medicago-cds-fasta" type="fasta">
+      <source name="medicago-cds-fasta" type="medicago-fasta">
           <property name="fasta.loaderClassName"
               value="org.intermine.bio.dataconversion.MedicagoCDSFastaLoaderTask"/>
           <property name="fasta.taxonId" value="3880"/>
@@ -101,7 +101,7 @@
           <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/fasta/"/>
       </source>
 
-      <source name="medicago-pep-fasta" type="fasta">
+      <source name="medicago-pep-fasta" type="medicago-fasta">
           <property name="fasta.loaderClassName"
               value="org.intermine.bio.dataconversion.MedicagoProteinFastaLoaderTask"/>
           <property name="fasta.taxonId" value="3880"/>
