@@ -63,6 +63,7 @@
     <merge-additions file="bio/sources/human/omim/omim_additions.xml"/>
     <merge-additions file="bio/sources/human/atlas-express/atlas-express_additions.xml"/>
     <merge-additions file="bio/sources/human/clinvar/clinvar_additions.xml"/>
+    <merge-additions file="bio/sources/araport/araport-gff/araport-gff_additions.xml"/>
   </target>
 
 </project>

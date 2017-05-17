@@ -105,6 +105,7 @@
       </li>
     </ul>
   <ul id="loginbar">
+        <li><a href="https://www.araport.org" target="_blank" alt="Araport - Arabidopsis Information Portal">Araport Home</a></li>
         <li><a href="#" onclick="showContactForm();return false;"><fmt:message key="feedback.link"/></a></li>
         <c:if test="${PROFILE.loggedIn}">
             <li>

@@ -44,7 +44,7 @@ public class EntrezGeneIdResolverFactoryTest extends TestCase {
 
         factory.readConfig(idresolverConfig);
 
-        assertEquals(5, factory.getXrefs().size());
+        assertEquals(6, factory.getXrefs().size());
         assertTrue("7955 is one of " + factory.getXrefs().keySet(),
                 factory.getXrefs().containsKey("7955"));
         assertFalse("OMIM is not one of " + factory.getXrefs().values(),

@@ -16,10 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Iterator;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -35,22 +33,10 @@ import org.intermine.model.bio.BioEntity;
 import org.intermine.model.bio.DataSet;
 import org.intermine.model.bio.DataSource;
 import org.intermine.model.bio.Organism;
-import org.intermine.model.bio.Protein;
-import org.intermine.objectstore.ObjectStore;
 import org.intermine.objectstore.ObjectStoreException;
 import org.intermine.objectstore.query.PendingClob;
 import org.intermine.task.FileDirectDataLoaderTask;
 import org.intermine.metadata.Util;
-import org.intermine.metadata.Model;
-import org.intermine.metadata.ConstraintOp;
-
-import org.intermine.objectstore.query.Query;
-import org.intermine.objectstore.query.QueryClass;
-import org.intermine.objectstore.query.QueryField;
-import org.intermine.objectstore.query.QueryValue;
-import org.intermine.objectstore.query.Results;
-import org.intermine.objectstore.query.ResultsRow;
-import org.intermine.objectstore.query.SimpleConstraint;
 
 /**
  * A task that can read a set of FASTA files and create the corresponding Sequence objects in an
@@ -66,8 +52,6 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
 
     private String sequenceType = "dna";
     private String classAttribute = "primaryIdentifier";
-    private boolean skipIfProteinLoaded = false;
-    private boolean trimProteinStopCodon = false;
     private Organism org;
     private String className;
     private int storeCount = 0;
@@ -87,7 +71,6 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
     private String dataSetTitle;
 
     private Map<String, DataSet> dataSets = new HashMap<String, DataSet>();
-    private Map<String, ArrayList<String>> md5checksumMap = new HashMap<String, ArrayList<String>>();
 
     /**
      * Set the Taxon Id of the Organism we are loading.  Can be space delimited list of taxonIds
@@ -107,31 +90,6 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
             this.sequenceType = "dna";
         } else {
             this.sequenceType = sequenceType;
-        }
-    }
-
-    /**
-     * Set the flag to skip loading Protein FASTA record if it's a duplicate of an already
-     * loaded protein entity (check for duplicate using md5checksum)
-     * @param skipIfProteinLoaded boolean
-     */
-    public void setSkipIfProteinLoaded(String skipIfProteinLoaded) {
-        if ("true".equalsIgnoreCase(skipIfProteinLoaded)) {
-            this.skipIfProteinLoaded = true;
-        } else {
-            this.skipIfProteinLoaded = false;
-        }
-    }
-
-    /**
-     * Set the flag to trim stop-codon (asterisk, *) from Protein FASTA record
-     * @param trimProteinStopCodon boolean
-     */
-    public void setTrimProteinStopCodon(String trimProteinStopCodon) {
-        if ("true".equalsIgnoreCase(trimProteinStopCodon)) {
-            this.trimProteinStopCodon = true;
-        } else {
-            this.trimProteinStopCodon = false;
         }
     }
 
@@ -255,16 +213,8 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
             SequenceIterator iter =
                     (SequenceIterator) SeqIOTools.fileToBiojava("fasta", sequenceType, reader);
 
-            if (skipIfProteinLoaded && sequenceType.equals("protein")) {
-                ObjectStore os = getIntegrationWriter().getObjectStore();
-                Model model = os.getModel();
-
-                // cache all the previously loaded md5sum's into a HashMap
-                cacheMd5checksums(os, model);
-            }
-
             if (!iter.hasNext()) {
-                System.err.println("no fasta sequences found - exiting");
+                System.err .println("no fasta sequences found - exiting");
                 return;
             }
 
@@ -321,25 +271,9 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
                 org.intermine.model.bio.Sequence.class);
 
         String sequence = bioJavaSequence.seqString();
-        // if boolean trimProteinStopCodon == true, check if Protein FASTA sequence
-        // ends with an asterisk (*). If true, trim off the stop codon
-        if (trimProteinStopCodon) {
-            if (className.endsWith("Protein") && sequence != null && sequence.endsWith("*")) {
-                sequence = sequence.substring(0, sequence.length() - 1);
-            }
-        }
-
         String md5checksum = Util.getMd5checksum(sequence);
-        // if boolean skipIfProteinLoaded == true, check if md5checksum of FASTA in the
-        // current data set is already loaded by a previous data source/set
-        if (skipIfProteinLoaded) {
-            if (className.endsWith("Protein") && isProteinLoaded(md5checksum)) {
-                return;
-            }
-        }
-
         flymineSequence.setResidues(new PendingClob(sequence));
-        flymineSequence.setLength(sequence.length());
+        flymineSequence.setLength(bioJavaSequence.length());
         flymineSequence.setMd5checksum(md5checksum);
         Class<? extends InterMineObject> imClass;
         Class<?> c;
@@ -423,29 +357,6 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
         return dataSet;
     }
 
-    /**
-     * Query and cache all md5checksums of Proteins already stored in
-     * the database.
-     * @throws ObjectStoreException if there is an ObjectStore problem
-     */
-    protected void cacheMd5checksums(ObjectStore os, Model model) throws ObjectStoreException {
-        Query query = new Query();
-        QueryClass queryClass = new QueryClass(model.getClassDescriptorByName("Protein").getType());
-        query.addFrom(queryClass);
-        query.addToSelect(queryClass);
-
-        Results resultSet = os.execute(query);
-        Iterator<ResultsRow> iterator = ((Iterator) resultSet.iterator());
-        while(iterator.hasNext()) {
-            ResultsRow<?> item = (ResultsRow<?>) iterator.next();
-            Protein protein = (Protein) item.get(0);
-            String primaryAcc = protein.getPrimaryAccession();
-            String md5sum = protein.getMd5checksum();
-            if (md5checksumMap.get(md5sum) == null) md5checksumMap.put(md5sum, new ArrayList<String>());
-            md5checksumMap.get(md5sum).add(primaryAcc);
-        }
-    }
-
 
     /**
      * Do any extra processing needed for this record (extra attributes, objects, references etc.)
@@ -524,17 +435,5 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
             taxonIds.put(name, taxonId);
         }
     }
-
-    /**
-     * based on md5checksum, check if protein already loaded by different source
-     * if true, skip loading Protein entity from the current FASTA source
-     */
-    private boolean isProteinLoaded(String md5checksum) {
-        if (md5checksumMap.containsKey(md5checksum)) {
-            return true;
-        }
-        return false;
-    }
-
 }
 

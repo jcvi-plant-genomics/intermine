@@ -196,6 +196,8 @@
 </item>
 <item id="6_2" class="Gene">
 <attribute name="briefDescription" value="BR-signaling kinase 3"/>
+<attribute name="computationalDescription" value="BR-signaling kinase 3 (BSK3); FUNCTIONS IN: binding, protein kinase activity, kinase activity, ATP binding; INVOLVED IN: brassinosteroid mediated signaling pathway, N-terminal protein myristoylation; LOCATED IN: plasma membrane, membrane; EXPRESSED IN: 22 plant structures; EXPRESSED DURING: 13 growth stages; CONTAINS InterPro DOMAIN/s: Tetratricopeptide-like helical (InterPro:IPR011990), Protein kinase, catalytic domain (InterPro:IPR000719), Serine-threonine/tyrosine-protein kinase (InterPro:IPR001245), Protein kinase-like domain (InterPro:IPR011009); BEST Arabidopsis thaliana protein match is: Protein kinase protein with tetratricopeptide repeat domain (TAIR:AT1G01740.2); Has 30201 Blast hits to 17322 proteins in 780 species: Archae - 12; Bacteria - 1396; Metazoa - 17338; Fungi - 3422; Plants - 5037; Viruses - 0; Other Eukaryotes - 2996 (source: NCBI BLink)."/>
+<attribute name="curatorSummary" value="Encodes BR-signaling kinase 3 (BSK3), one of the three homologous BR-signaling kinases (BSK1, AT4G35230; BSK2, AT5G46570; BSK3, AT4G00710).  Mediates signal transduction from receptor kinase BRI1 by functioning as the substrate of BRI1. Plasma membrane localized."/>
 <attribute name="length" value="3406"/>
 <attribute name="primaryIdentifier" value="AT4G00710"/>
 <attribute name="symbol" value="BSK3"/>
@@ -304,6 +306,10 @@
 <collection name="dataSets"><reference ref_id="2_1"/></collection>
 </item>
 <item id="8_1" class="MRNA">
+<attribute name="briefDescription" value="Protein kinase protein with tetratricopeptide repeat domain"/>
+<attribute name="computationalDescription" value="Protein kinase protein with tetratricopeptide repeat domain; FUNCTIONS IN: protein serine/threonine kinase activity, binding, protein kinase activity, kinase activity, ATP binding; INVOLVED IN: protein amino acid phosphorylation, N-terminal protein myristoylation; LOCATED IN: plasma membrane; EXPRESSED IN: 22 plant structures; EXPRESSED DURING: 13 growth stages; CONTAINS InterPro DOMAIN/s: Tetratricopeptide-like helical (InterPro:IPR011990), Protein kinase, catalytic domain (InterPro:IPR000719), Serine/threonine-protein kinase domain (InterPro:IPR002290), Serine-threonine/tyrosine-protein kinase (InterPro:IPR001245), Tyrosine-protein kinase, catalytic domain (InterPro:IPR020635), Protein kinase-like domain (InterPro:IPR011009); BEST Arabidopsis thaliana protein match is: BR-signaling kinase 3 (TAIR:AT4G00710.1); Has 33834 Blast hits to 33303 proteins in 1392 species: Archae - 10; Bacteria - 2383; Metazoa - 7709; Fungi - 204; Plants - 21978; Viruses - 102; Other Eukaryotes - 1448 (source: NCBI BLink)."/>
+<attribute name="confidenceClass" value="4"/>
+<attribute name="confidenceRating" value="***"/>
 <attribute name="length" value="2459"/>
 <attribute name="primaryIdentifier" value="AT1G01740.1"/>
 <attribute name="symbol" value="BSK4"/>
@@ -323,6 +329,7 @@
 </item>
 <item id="6_1" class="Gene">
 <attribute name="briefDescription" value="Protein kinase protein with tetratricopeptide repeat domain"/>
+<attribute name="computationalDescription" value="Protein kinase protein with tetratricopeptide repeat domain; FUNCTIONS IN: protein serine/threonine kinase activity, binding, protein kinase activity, kinase activity, ATP binding; INVOLVED IN: protein amino acid phosphorylation, N-terminal protein myristoylation; LOCATED IN: plasma membrane; EXPRESSED IN: 22 plant structures; EXPRESSED DURING: 13 growth stages; CONTAINS InterPro DOMAIN/s: Tetratricopeptide-like helical (InterPro:IPR011990), Protein kinase, catalytic domain (InterPro:IPR000719), Serine/threonine-protein kinase domain (InterPro:IPR002290), Serine-threonine/tyrosine-protein kinase (InterPro:IPR001245), Tyrosine-protein kinase, catalytic domain (InterPro:IPR020635), Protein kinase-like domain (InterPro:IPR011009); BEST Arabidopsis thaliana protein match is: BR-signaling kinase 3 (TAIR:AT4G00710.1); Has 33834 Blast hits to 33303 proteins in 1392 species: Archae - 10; Bacteria - 2383; Metazoa - 7709; Fungi - 204; Plants - 21978; Viruses - 102; Other Eukaryotes - 1448 (source: NCBI BLink)."/>
 <attribute name="length" value="2459"/>
 <attribute name="primaryIdentifier" value="AT1G01740"/>
 <attribute name="symbol" value="BSK4"/>
@@ -366,6 +373,10 @@
 <collection name="dataSets"><reference ref_id="2_1"/></collection>
 </item>
 <item id="8_2" class="MRNA">
+<attribute name="briefDescription" value="Protein kinase protein with tetratricopeptide repeat domain"/>
+<attribute name="computationalDescription" value="Protein kinase protein with tetratricopeptide repeat domain; FUNCTIONS IN: protein serine/threonine kinase activity, binding, protein kinase activity, kinase activity, ATP binding; INVOLVED IN: protein amino acid phosphorylation; EXPRESSED IN: 22 plant structures; EXPRESSED DURING: 13 growth stages; CONTAINS InterPro DOMAIN/s: Tetratricopeptide-like helical (InterPro:IPR011990), Protein kinase, catalytic domain (InterPro:IPR000719), Serine/threonine-protein kinase domain (InterPro:IPR002290), Tyrosine-protein kinase, catalytic domain (InterPro:IPR020635), Serine-threonine/tyrosine-protein kinase (InterPro:IPR001245), Protein kinase-like domain (InterPro:IPR011009); BEST Arabidopsis thaliana protein match is: BR-signaling kinase 3 (TAIR:AT4G00710.1)."/>
+<attribute name="confidenceClass" value="4"/>
+<attribute name="confidenceRating" value="***"/>
 <attribute name="length" value="2459"/>
 <attribute name="primaryIdentifier" value="AT1G01740.2"/>
 <attribute name="symbol" value="BSK4"/>
@@ -441,6 +452,11 @@
 <reference name="dataSource" ref_id="1_1"/>
 </item>
 <item id="8_3" class="MRNA">
+<attribute name="briefDescription" value="BR-signaling kinase 3"/>
+<attribute name="computationalDescription" value="BR-signaling kinase 3 (BSK3); FUNCTIONS IN: binding, protein kinase activity, kinase activity, ATP binding; INVOLVED IN: brassinosteroid mediated signaling pathway, N-terminal protein myristoylation; LOCATED IN: plasma membrane, membrane; EXPRESSED IN: 22 plant structures; EXPRESSED DURING: 13 growth stages; CONTAINS InterPro DOMAIN/s: Tetratricopeptide-like helical (InterPro:IPR011990), Protein kinase, catalytic domain (InterPro:IPR000719), Serine-threonine/tyrosine-protein kinase (InterPro:IPR001245), Protein kinase-like domain (InterPro:IPR011009); BEST Arabidopsis thaliana protein match is: Protein kinase protein with tetratricopeptide repeat domain (TAIR:AT1G01740.2); Has 30201 Blast hits to 17322 proteins in 780 species: Archae - 12; Bacteria - 1396; Metazoa - 17338; Fungi - 3422; Plants - 5037; Viruses - 0; Other Eukaryotes - 2996 (source: NCBI BLink)."/>
+<attribute name="confidenceClass" value="2"/>
+<attribute name="confidenceRating" value="****"/>
+<attribute name="curatorSummary" value="Encodes BR-signaling kinase 3 (BSK3), one of the three homologous BR-signaling kinases (BSK1, AT4G35230; BSK2, AT5G46570; BSK3, AT4G00710).  Mediates signal transduction from receptor kinase BRI1 by functioning as the substrate of BRI1. Plasma membrane localized."/>
 <attribute name="length" value="3406"/>
 <attribute name="primaryIdentifier" value="AT4G00710.1"/>
 <attribute name="symbol" value="BSK3"/>

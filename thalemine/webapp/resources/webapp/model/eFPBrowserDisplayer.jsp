@@ -89,7 +89,6 @@
         var req_url = bar_eFPBrowser_url + "?locus=" + agi + "&source=" + datasource;
         var request = new XMLHttpRequest();
         request.open('GET', req_url, true);
-        request.setRequestHeader('Authorization', 'Bearer ' + "${WEB_PROPERTIES['araport.accessToken']}");
         request.responseType = 'blob';
         request.onload = function () {
             if (this.status === 200) {

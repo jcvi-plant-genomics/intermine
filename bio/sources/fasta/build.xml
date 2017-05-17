@@ -41,8 +41,6 @@
                 dataSetTitle="${fasta.dataSetTitle}"
                 dataSourceName="${fasta.dataSourceName}"
                 sequenceType="${fasta.sequenceType}"
-                skipIfProteinLoaded="${fasta.skipIfProteinLoaded}"
-                trimProteinStopCodon="${fasta.trimProteinStopCodon}"
                 fastaTaxonId="${fasta.taxonId}">
       <fileset dir="${src.data.dir}" includes="${fasta.includes}"/>
     </read-fasta>

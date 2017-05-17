@@ -157,9 +157,9 @@ public class IntronTest extends TestCase{
 
         Set expectedIdentifiers =
             new HashSet(Arrays.asList(new Object[] {
-                    "intron_chrX_201..300",
-                    "intron_chrX_501..600",
-                    "intron_chrX_501..700",
+                    "intron_X_201..300",
+                    "intron_X_501..600",
+                    "intron_X_501..700",
             }));
 
         assertEquals(expectedIdentifiers, actualIdentifiers);

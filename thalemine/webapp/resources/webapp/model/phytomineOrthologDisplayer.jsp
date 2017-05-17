@@ -37,9 +37,8 @@
    // for local test only
    // var webapp_root_url="http://phytozome.jgi.doe.gov/phytomine/";
    var webapp_root_url = "${WEB_PROPERTIES['phytomine.homolog.prefix']}";
-   var bearer_token = "Bearer ${WEB_PROPERTIES['araport.accessToken']}";
 
-   var phytomine = new imjs.Service({root: webapp_root_url, headers: { "Authorization": bearer_token }});
+   var phytomine = new imjs.Service({root: webapp_root_url});
 
    var options = {
      type: 'table',
