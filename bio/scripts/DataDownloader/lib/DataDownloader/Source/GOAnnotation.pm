@@ -2,23 +2,14 @@ package DataDownloader::Source::GOAnnotation;
 
 =head1 NAME
 
-DataDownloader::Source::GoAnnotation;
+DataDownloader::Source::GOAnnotation;
 
 =head1 SYNOPSIS
 
-Download Gene Ontology:
- ftp.geneontology.org/pub/go/ontology/gene_ontology.obo
-     > DATA_DIR/go_annotation/GO/DATE/gene_ontology.obo
-     link DATA_DIR/go-annotation/GO/DATE/gene_ontology.obo to DATA_DIR/go-annotation/gene_ontology.obo
-
-Download Gene Ontology Annotation from uniprot and parse it for specified organisms
- ftp.ebi.ac.uk/pub/databases/GO/goa/UNIPROT/gene_association.goa_uniprot.gz
-     > DATA_DIR/go-annotation/uniprot/DATE/downloaded_gene_association.goa_uniprot
-From downloaded file produce files gene_association_[SUFFIX] (sorted for each taxon)
-     link to current directory: DATA_DIR/go-annotation/uniprot/current
 
 Download Gene ontology association files for specified organisms
- ftp.geneontology.org/pub/go/gene-associations/gene_association.DB_SUFFIX.gz
+
+http://geneontology.org/gene-associations/gene_association.DB_SUFFIX.gz
      > DATA_DIR/go-annotation/TAXON_ID/DATE/gene_association.DB_SUFFIX.gz
 sort downloaded file as above
      link dir DATA_DIR/go-annotation/TAXON_ID/DATE DATA_DIR/go-annotation/TAXON_ID/current
@@ -26,7 +17,7 @@ sort downloaded file as above
 =cut
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'DataDownloader::Source::ABC';
 use PerlIO::gzip;
 use File::Basename;
 use autodie qw(open close);
@@ -37,13 +28,25 @@ use constant {
     DESCRIPTION => "Gene Ontology Assignments from Uniprot and the Gene Ontology Site",
     SOURCE_LINK => "http://www.geneontology.org",
     SOURCE_DIR => "go-annotation",
-    METHOD => 'FTP',
-
 };
-my %GOA_TAXA = ();
-my %UNIPROT_TAXA = ( '3880' => 'medtr' );
+
+my %GOA_TAXA = (flybase => 'gene_association.fb', wormbase => 'gene_association.wb', mgi => 'gene_association.mgi', human => 'goa_human.gaf', zfin => 'gene_association.zfin', sgd => 'gene_association.sgd', rgd => 'gene_association.rgd', thale => 'gene_association.tair');
+%GOA_TAXA = ();          #reset GOA_TAXA, not required for MedicMine
 sub field2_of { return [ split( /\t/, shift ) ]->[1] || '' }
 my $order = sub { field2_of($a) cmp field2_of($b) };
+
+my $goa_cleaner = sub {
+    my $self = shift;
+    $self->unzip_dir();
+    my $file = substr( $self->get_destination, 0, -3 );
+    $self->debug( "Sorting " . $file );
+    open( my $in, '<', $file );
+    unlink $file;    # Filter - don't clobber
+    open( my $out, '>', $file );
+    print $out sort( $order (<$in>) );
+};
+
+my %UNIPROT_TAXA = ( '3880' => 'medtr' );
 
 my $uniprot_cleaner = sub {
     my $self = shift;
@@ -73,25 +76,13 @@ my $uniprot_cleaner = sub {
     unlink $file;
 };
 
-my $goa_cleaner = sub {
-    my $self = shift;
-    $self->unzip_dir();
-    my $file = substr( $self->get_destination, 0, -3 );
-    $self->debug( "Sorting " . $file );
-    open( my $in, '<', $file );
-    unlink $file;    # Filter - don't clobber
-    open( my $out, '>', $file );
-    print $out sort( $order (<$in>) );
-};
-
 sub BUILD {
     my $self    = shift;
     my @sources = (
         {
             SUBTITLE   => "GO",
-            HOST       => "ftp.geneontology.org",
-            REMOTE_DIR => "pub/go/ontology",
-            FILE       => "gene_ontology.obo",
+            SERVER     => "http://purl.obolibrary.org/obo",
+            FILE       => "go.obo",
         }
     );
 
@@ -106,29 +97,18 @@ sub BUILD {
             CLEANER    => $uniprot_cleaner,
           };
     }
+
     while ( my ( $taxon, $db_suffix ) = each %GOA_TAXA ) {
         push @sources,
           {
             SUBTITLE   => "GOA - " . $taxon,
-            HOST       => "ftp.geneontology.org",
-            REMOTE_DIR => "pub/go/gene-associations",
-            FILE       => "gene_association.$db_suffix.gz",
+            SERVER     => "http://www.geneontology.org/gene-associations",
+            FILE       => "$db_suffix.gz",
             SUB_DIR    => [$taxon],
             CLEANER    => $goa_cleaner,
           };
     }
     $self->set_sources( [@sources] );
-}
-
-sub generate_version_string {
-    my $self = shift;
-    my $string = "Version: " . $self->get_version;
-    for my $source ($self->get_all_sources) {
-        my $ftp = $source->connect;
-        my $mod_time = $ftp->mdtm($source->get_file);
-        $string .= "\n" . $source->get_file . ": " . get_ymd($mod_time);
-    }
-    return $string;
 }
 
 1;
