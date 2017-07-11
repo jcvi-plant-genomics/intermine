@@ -174,6 +174,21 @@ public final class OrganismRepository
     }
 
     /**
+     * Create an OrganismData for a given taxon ID, genus, species and variety.
+     *
+     * @param taxonId taxon ID for organism
+     * @param variety variety within species
+     */
+    public OrganismData createOrganismDataByTaxonGenusSpeciesVariety(int taxonId, String genus, String species, String variety) {
+        OrganismData od = new OrganismData();
+        od.setTaxonId(taxonId);
+        od.setGenus(genus);
+        od.setSpecies(species);
+        od.setVariety(variety);
+        return od;
+    }
+
+    /**
      * Look up OrganismData objects by abbreviation, abbreviations are not case sensitive.
      * Return null if there is no such organism.
      * @param abbreviation the abbreviation

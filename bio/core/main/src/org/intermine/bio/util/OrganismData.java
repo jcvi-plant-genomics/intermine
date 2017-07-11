@@ -13,16 +13,22 @@ package org.intermine.bio.util;
 
 /**
  * A class to hold data about one organism.
- * @author Kim Rutherford
+ * SH: Added variety.
+ *
+ * @author Kim Rutherford, Sam Hokin
  */
-public class OrganismData
-{
+public class OrganismData {
+
+    public static final String DEFAULT_VARIETY = "reference";
+
     private String species;
     private String genus;
     private String abbreviation;
     private int taxonId;
     private String ensemblPrefix;
     private String uniprot;
+    private String variety = DEFAULT_VARIETY;
+
 
     /**
      * Create a new OrganismData object.  Not public because these are created only by
@@ -61,6 +67,14 @@ public class OrganismData
     }
 
     /**
+     * Get the variety of this organism.
+     * @return the variety
+     */
+    public String getVariety() {
+        return variety;
+    }
+
+    /**
      * Get the abbreviation of this organism.  eg. "Dmel"
      * @return the abbreviation
      */
@@ -80,7 +94,7 @@ public class OrganismData
      * Set the species of this organism.
      * @param species the species to set
      */
-    void setSpecies(String species) {
+    public void setSpecies(String species) {
         this.species = species;
     }
 
@@ -88,8 +102,20 @@ public class OrganismData
      * Set the genus of this organism.
      * @param genus the genus to set
      */
-    void setGenus(String genus) {
+    public void setGenus(String genus) {
         this.genus = genus;
+    }
+
+    /**
+     * Set the variety of this organism.
+     * @param variety the variety to set
+     */
+    public void setVariety(String variety) {
+        if (variety==null) {
+            this.variety = DEFAULT_VARIETY;
+        } else {
+            this.variety = variety;
+        }
     }
 
     /**
@@ -141,8 +167,7 @@ public class OrganismData
      */
     @Override
     public String toString() {
-        return genus + " " + species + ", " + abbreviation + ", " + taxonId + ", " + ensemblPrefix
-                + ", " + uniprot;
+        return genus + " " + species + " ("+variety+"), " + abbreviation + ", " + taxonId + ", " + ensemblPrefix + ", " + uniprot;
     }
 
     /**

@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.intermine.bio.util.BioConverterUtil;
+import org.intermine.bio.util.OrganismData;
 import org.intermine.dataconversion.DBConverter;
 import org.intermine.dataconversion.ItemWriter;
 import org.intermine.metadata.Model;
@@ -111,18 +112,16 @@ public abstract class BioDBConverter extends DBConverter
 
     /**
      * Make a Location Relation between a LocatedSequenceFeature and a Chromosome.
+     * NOTE: removed taxonId, not used.
      * @param chromosomeId Chromosome Item identifier
      * @param locatedSequenceFeatureId the Item identifier of the feature
      * @param start the start position
      * @param end the end position
      * @param strand the strand
-     * @param taxonId the taxon id to use when finding the Chromosome for the Location
      * @return the new Location object
      */
-    protected Item makeLocation(String chromosomeId, String locatedSequenceFeatureId,
-                                int start, int end, int strand, int taxonId) {
+    protected Item makeLocation(String chromosomeId, String locatedSequenceFeatureId, int start, int end, int strand) {
         Item location = createItem("Location");
-
         if (start < end) {
             location.setAttribute("start", String.valueOf(start));
             location.setAttribute("end", String.valueOf(end));
@@ -136,8 +135,10 @@ public abstract class BioDBConverter extends DBConverter
         return location;
     }
 
+
     /**
      * The Organism item created from the taxon id passed to the constructor.
+     * UPDATE: sets the variety=DEFAULT_VARIETY since not provided.
      * @param taxonId NCBI taxonomy id of organism to create
      * @return the Organism Item
      */
@@ -147,12 +148,40 @@ public abstract class BioDBConverter extends DBConverter
         if (organism == null) {
             organism = createItem("Organism");
             organism.setAttribute("taxonId", taxonString);
+	    organism.setAttribute("variety", OrganismData.DEFAULT_VARIETY);
             try {
                 store(organism);
             } catch (ObjectStoreException e) {
                 throw new RuntimeException("failed to store organism with taxonId: " + taxonId, e);
             }
             organisms.put(taxonString, organism);
+        }
+        return organism;
+    }
+
+    /**
+     * The Organism item created from the taxon id and variety. Sets variety=DEFAULT_VARIETY if null.
+     * @param taxonId NCBI taxonomy id of organism to create
+     * @pasram variety the organism variety
+     * @return the Organism Item
+     */
+    public Item getOrganismItem(int taxonId, String variety) {
+        String key = String.valueOf(taxonId)+"."+variety;
+        Item organism = organisms.get(key);
+        if (organism == null) {
+            organism = createItem("Organism");
+            organism.setAttribute("taxonId", String.valueOf(taxonId));
+            if (variety==null) {
+                organism.setAttribute("variety", OrganismData.DEFAULT_VARIETY);
+            } else {
+                organism.setAttribute("variety", variety);
+            }
+            try {
+                store(organism);
+            } catch (ObjectStoreException e) {
+                throw new RuntimeException("failed to store organism with taxonId:"+taxonId+" and variety:"+variety, e);
+            }
+            organisms.put(key, organism);
         }
         return organism;
     }
