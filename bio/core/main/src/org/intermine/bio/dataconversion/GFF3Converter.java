@@ -685,7 +685,14 @@ public class GFF3Converter extends DataConverter
     public Item getOrganism() throws ObjectStoreException {
         if (organism == null) {
             organism = createItem("Organism");
-            organism.setAttribute("taxonId", orgTaxonId);
+            String taxonId = orgTaxonId;
+            if (orgTaxonId.contains("_")) {
+                String[] parts = orgTaxonId.split("_");
+                taxonId = parts[0];
+                String variety = parts[1];
+                organism.setAttribute("variety", variety);
+            }
+            organism.setAttribute("taxonId", taxonId);
             store(organism);
         }
         return organism;

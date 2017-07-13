@@ -4,4 +4,8 @@
 <classes>
 <!-- add any <class> elements here -->
 
+    <class name="Organism" is-interface="true">
+        <attribute name="variety" type="java.lang.String"/>
+    </class>
+
 </classes>

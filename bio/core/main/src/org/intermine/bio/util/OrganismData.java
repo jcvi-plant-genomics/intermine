@@ -15,7 +15,8 @@ package org.intermine.bio.util;
  * A class to hold data about one organism.
  * SH: Added variety.
  *
- * @author Kim Rutherford, Sam Hokin
+ * @author Kim Rutherford
+ * @author Sam Hokin
  */
 public class OrganismData {
 

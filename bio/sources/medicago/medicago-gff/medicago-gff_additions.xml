@@ -16,4 +16,7 @@
   <class name="NcRNA" extends="Transcript" is-interface="true"></class>
   <class name="TRNA" extends="NcRNA" is-interface="true"></class>
   <class name="TransposableElementGene" extends="Gene" is-interface="true"></class>
+  <class name="Organism" is-interface="true">
+      <attribute name="variety" type="java.lang.String"/>
+  </class>
 </classes>

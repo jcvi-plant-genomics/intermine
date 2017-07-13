@@ -24,11 +24,14 @@ import org.apache.commons.collections.keyvalue.MultiKey;
 /**
  * A class to hold information about organisms.
  * @author Kim Rutherford
+ * @author Sam Hokin
+ * @author Vivek Krishnakumar
  */
 public final class OrganismRepository
 {
     private static OrganismRepository or = null;
     private Map<Integer, OrganismData> taxonMap = new HashMap<Integer, OrganismData>();
+    private Map<MultiKey, OrganismData> taxonVarietyMap = new HashMap<MultiKey, OrganismData>();
     private Map<String, OrganismData> abbreviationMap = new HashMap<String, OrganismData>();
     private Map<String, OrganismData> shortNameMap = new HashMap<String, OrganismData>();
     private Map<MultiKey, OrganismData> genusSpeciesMap = new HashMap<MultiKey, OrganismData>();
@@ -159,6 +162,24 @@ public final class OrganismRepository
     }
 
     /**
+     * Look up OrganismData objects by taxon id and variety.
+     * Create and return a new OrganismData object if there is no existing one.
+     * @param taxonId the taxon id
+     * @param variety variety within species
+     * @return the OrganismData
+     */
+    public OrganismData getOrganismDataByTaxonVarietyInternal(int taxonId, String variety) {
+        OrganismData od = taxonVarietyMap.get(new MultiKey(taxonId, variety));
+        if (od == null) {
+            od = new OrganismData();
+            od.setTaxonId(taxonId);
+            od.setVariety(variety);
+            taxonVarietyMap.put(new MultiKey(od.getTaxonId(), od.getVariety()), od);
+        }
+        return od;
+    }
+
+    /**
      * Look up OrganismData objects by taxon id.  If there is no taxon, look in strains.  Return
      * null if there is no such organism.
      *
@@ -170,6 +191,19 @@ public final class OrganismRepository
         if (od == null) {
             od = strains.get(taxonId);
         }
+        return od;
+    }
+
+    /**
+     * Look up OrganismData objects by taxon id and variety.
+     * Return null if there is no such organism.
+     *
+     * @param taxonId the taxon id
+     * @param variety variety within species
+     * @return the OrganismData
+     */
+    public OrganismData getOrganismDataByTaxonVariety(int taxonId, String variety) {
+        OrganismData od = taxonVarietyMap.get(new MultiKey(taxonId, variety));
         return od;
     }
 

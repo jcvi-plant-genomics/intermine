@@ -1,7 +1,7 @@
 package org.intermine.bio.dataconversion;
 
 /*
- * Copyright (C) 2002-2016 FlyMine
+ * Copyright (C) 2002-2017 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -271,7 +271,7 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
 
             while (iter.hasNext()) {
                 Sequence bioJavaSequence = iter.nextSequence();
-                processSequence(getOrganism(bioJavaSequence), bioJavaSequence);
+                processSequence(getOrganism(), bioJavaSequence);
             }
 
             reader.close();
@@ -292,14 +292,20 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
 
     /**
      * Get and store() the Organism object to reference when creating new objects.
-     * @param bioJavaSequence the biojava sequence to be parsed
      * @throws ObjectStoreException if there is a problem
      * @return the new Organism
      */
-    protected Organism getOrganism(Sequence bioJavaSequence) throws ObjectStoreException {
+    protected Organism getOrganism() throws ObjectStoreException {
         if (org == null) {
             org = getDirectDataLoader().createObject(Organism.class);
-            org.setTaxonId(new Integer(fastaTaxonId));
+            String taxonId = fastaTaxonId;
+            if (fastaTaxonId.contains("_")) {
+                String[] parts = fastaTaxonId.split("_");
+                taxonId = parts[0];
+                String variety = parts[1];
+                org.setVariety(variety);
+            }
+            org.setTaxonId(new Integer(taxonId));
             getDirectDataLoader().store(org);
         }
         return org;
@@ -515,12 +521,20 @@ public class FastaLoaderTask extends FileDirectDataLoaderTask
         String[] fastaTaxonIds = fastaTaxonId.split(" ");
         for (String taxonIdStr : fastaTaxonIds) {
             Integer taxonId = null;
+            OrganismData organismData = null;
             try {
-                taxonId = Integer.valueOf(taxonIdStr);
+                if (taxonIdStr.contains("_")) {
+                    String[] parts = taxonIdStr.split("_");
+                    taxonId = Integer.valueOf(parts[0]);
+                    String variety = parts[1];
+                    organismData = repo.getOrganismDataByTaxonVarietyInternal(taxonId.intValue(), variety);
+                } else {
+                    taxonId = Integer.valueOf(taxonIdStr);
+                    organismData = repo.getOrganismDataByTaxonInternal(taxonId.intValue());
+                }
             } catch (NumberFormatException e) {
                 throw new RuntimeException("invalid taxonId: " + taxonIdStr);
             }
-            OrganismData organismData = repo.getOrganismDataByTaxonInternal(taxonId.intValue());
             String name = organismData.getGenus() + " " + organismData.getSpecies();
             taxonIds.put(name, taxonId);
         }
