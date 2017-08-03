@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 FlyMine
+ * Copyright (C) 2002-2017 FlyMine
  *
  * This code may be freely distributed and modified under the
  * terms of the GNU Lesser General Public Licence.  This should
@@ -7,6 +7,19 @@
  * information or http://www.gnu.org/copyleft/lesser.html.
  *
  */
+
+InterMine 1.8.3 (2017 July 12)
+
+#1623 Add branding parameters for external apps. 
+
+InterMine 1.8.2 (2017 July)
+
+#205 - add 4 numbers used to calculate enrichment to web services
+#1603 - revert logo changes on footer (temporarily)
+
+InterMine 1.8.1 (2017 June)
+
+Update copyright notice
 
 InterMine 1.8 (2017 June)
 
