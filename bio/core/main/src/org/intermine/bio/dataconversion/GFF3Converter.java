@@ -310,6 +310,8 @@ public class GFF3Converter extends DataConverter
         // If pid set in gff_config.propeties, look for the attribute field, e.g. locus_tag
         if (configAttr.containsKey(this.orgTaxonId)) {
             if (configAttr.get(this.orgTaxonId).containsKey("primaryIdentifier")) {
+                // TODO we need to check if this is class-specific config
+                // could be unrelated to the type we are looking at
                 primaryIdentifier = getPrimaryIdentifier(record, term);
             }
         }
@@ -383,10 +385,17 @@ public class GFF3Converter extends DataConverter
                 feature.setAttribute("scoreType", record.getSource());
             }
         }
+
         for (Item synonym : synonymsToAdd) {
             handler.addItem(synonym);
+            // this is just to keep track of the synonyms for this record.
+            // if we end up removing this entry, we need to delete these too.
+            handler.addSynonym(synonym);
         }
+        handler.addSynonyms(synonyms);
+
         handler.process(record);
+
         if (handler.getDataSetReferenceList().getRefIds().size() > 0) {
             feature.addCollection(handler.getDataSetReferenceList());
         }
@@ -430,7 +439,7 @@ public class GFF3Converter extends DataConverter
     }
 
     private String getPrimaryIdentifier(GFF3Record record, String term) {
-        String primaryIdentifier = null;
+        String primaryIdentifier = record.getId();
         String cls = configAttrClass.get(this.orgTaxonId).get("primaryIdentifier");
         if ("all".equals(cls) || term.equals(cls)) {
             String pidAttr = configAttr.get(this.orgTaxonId).get("primaryIdentifier");
