@@ -1,0 +1,3 @@
+[submodule "bio/sources/legfed"]
+	path = bio/sources/legfed
+	url = https://github.com/LegumeFederation/intermine-bio-sources-legfed.git
