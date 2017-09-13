@@ -19,6 +19,7 @@
 
 <div id="PhytozomeHomologDisplayer" class="collection-table imtables-dashboard container-fluid imtables">
   <c:set var="name" value="${object.primaryIdentifier}"/>
+  <c:set var="organism" value="${object.organism.shortName}"/>
 
   <c:choose>
   <c:when test="${WEB_PROPERTIES['phytomine.url'] != null}">
@@ -34,6 +35,7 @@
  <script type="text/javascript">
 
    var geneId = "${name}";
+   var geneOrg = "${organism}";
    // for local test only
    // var webapp_root_url="http://phytozome.jgi.doe.gov/phytomine/";
    var webapp_root_url = "${WEB_PROPERTIES['phytomine.url']}";
@@ -41,10 +43,39 @@
    var phytomine = new imjs.Service({root: webapp_root_url});
 
    var options = {
-     type: 'table',
-     service: phytomine,
-     query: {"model":{"name":"genomic"},"select":["Homolog.gene2.name","Homolog.organism2.shortName","Homolog.gene2.briefDescription"],"constraintLogic":"A and B","where":[{"path":"Homolog.organism1.taxonId","op":"=","code":"A","value":"3880"},{"path":"Homolog.gene1.name","op":"=","code":"B","value":geneId}]},
-     properties: { pageSize: 10 }
+          type: 'table',
+          service: phytomine,
+          query: {
+              "model":{"name":"genomic"},
+              "select": [
+                "Homolog.ortholog_gene.primaryIdentifier",
+                "Homolog.ortholog_gene.organism.shortName",
+                "Homolog.ortholog_gene.briefDescription"
+              ],
+              "where": [
+                {
+                  "path": "Homolog.gene",
+                  "op": "LOOKUP",
+                  "value": geneId,
+                  "extraValue": geneOrg,
+                  "code": "A"
+                },
+                {
+                  "path": "Homolog.ortholog_gene.organism.shortName",
+                  "op": "!=",
+                  "value": geneOrg,
+                  "code": "B"
+                }
+              ],
+              "orderBy": [
+                {
+                  "path": "Homolog.ortholog_gene.organism.shortName",
+                  "direction": "ASC"
+                }
+              ],
+              "constraintLogic":"A and B"
+          },
+         properties: { pageSize: 10 }
     };
 
    var wrapSpan = function(text){
