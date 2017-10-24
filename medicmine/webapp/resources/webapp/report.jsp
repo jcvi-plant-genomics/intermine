@@ -286,14 +286,19 @@
   </div>
 
   <c:set var="getFriendly" value="no"></c:set>
+  <c:set var="getLisLinks" value="no"></c:set>
   <c:if test="${fn:endsWith(fn:toLowerCase(object.type), 'gene')}">
      <c:set var="getFriendly" value="yes"></c:set>
+     <c:set var="getLisLinks" value="yes"></c:set>
   </c:if>
   <c:set var="object_bk" value="${object}"/>
   <c:set var="object" value="${reportObject.object}" scope="request"/>
   <div id="external-links">
   <c:if test="${getFriendly == 'yes'}">
     <tiles:insert name="otherMinesLink.tile" />
+  </c:if>
+  <c:if test="${getLisLinks == 'yes'}">
+    <tiles:insert name="lisLinks.tile" />
   </c:if>
     <tiles:insert name="attributeLinks.tile" >
     <tiles:put name="reportObject" beanName="object" />

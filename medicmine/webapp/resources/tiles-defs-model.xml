@@ -35,3 +35,6 @@
 <!-- End of Genomic Region Search configuration -->
 
 <definition name="friendlyMineLinkDisplayer.tile" path="/model/friendlyMineLinkDisplayer.jsp" controllerUrl="/initFriendlyMineLinkDisplayer.do"/>
+
+<!-- Links to LIS pages -->
+<definition name="lisLinks.tile" path="/model/lisLinksDisplayer.jsp"/>
