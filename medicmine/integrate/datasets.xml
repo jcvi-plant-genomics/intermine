@@ -263,7 +263,7 @@
       <reference name="dataSource" ref_id="0_39" />
       <attribute name="name" value="LIS Gene Families" />
       <attribute name="description" value="Gene families (built on Phytozome 10.2 Angiosperm-level gene family models) retrieved via LegumeMine web services" />
-      <attribute name="url" value="http://intermine.legumefederation.org/legumemine/" />
+      <attribute name="url" value="https://mines.legumeinfo.org/legumemine/" />
       <reference name="publication" ref_id="0_40" />
    </item>
    <item id="0_42" class="DataSet" implements="">
