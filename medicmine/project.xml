@@ -1,3 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!DOCTYPE project [
+
+  <!ENTITY medicmine_data_dir "/usr/local/projdata/0372/projects/MTG4/MedicMineData">
+  <!ENTITY medtr_variety_primary "A17">
+  <!ENTITY medtr_taxon_id "3880">
+  <!ENTITY arath_taxon_id "3702">
+
+]>
+
 <project type="bio">
   <property name="target.model" value="genomic"/>
   <property name="source.location" location="../bio/sources/"/>
@@ -6,12 +17,12 @@
   <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
   <sources>
       <source name="medicago-gff" type="medicago-gff">
-          <property name="gff3.taxonId" value="3880"/>
+          <property name="gff3.taxonId" value="&medtr_taxon_id;"/>
           <property name="gff3.seqDataSourceName" value="MTGD"/>
           <property name="gff3.dataSourceName" value="MTGD"/>
           <property name="gff3.seqClsName" value="Chromosome"/>
           <property name="gff3.dataSetTitle" value="Genome Annotation"/>
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/A17/current/gff"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/genome/A17/current/gff"/>
       </source>
 
       <source name="mtgi-tc-fasta" type="medicago-fasta">
@@ -20,63 +31,55 @@
           <property name="fasta.className" value="org.intermine.model.bio.TentativeConsensus"/>
           <property name="fasta.dataSourceName" value="DFCI"/>
           <property name="fasta.dataSetTitle" value="MTGI FASTA data set"/>
-          <property name="fasta.taxonId" value="3880"/>
+          <property name="fasta.taxonId" value="&medtr_taxon_id;"/>
           <property name="fasta.includes" value="*.fasta"/>
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/mtgi-mapping/current"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/mtgi-mapping/current"/>
       </source>
 
       <source name="mtgi-gene-mapping" type="mtgi-gene-mapping">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/mtgi-mapping/current"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/mtgi-mapping/current"/>
           <property name="src.data.dir.includes" value="*.tsv"/>
-          <property name="mtgi.organisms" value="3880"/>
-      </source>
-
-      <source name="so" type="so">
-          <property name="src.data.file" location="../../bio/sources/so/so.obo"/>
+          <property name="mtgi.organisms" value="&medtr_taxon_id;"/>
       </source>
 
       <source name="rnaseq-expression" type="rnaseq-expression">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/rnaseq-expression"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/rnaseq-expression"/>
           <property name="src.data.dir.includes" value="*.tsv"/>
-          <property name="rnaseq.organisms" value="3880"/>
+          <property name="rnaseq.organisms" value="&medtr_taxon_id;"/>
           <property name="dataSourceName" value="RNASeq"/>
           <property name="dataSetName" value="RNASeq data set"/>
       </source>
 
       <source name="phytozome-homologs" type="phytozome-homologs">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/orthologs/phytozome"/>
-          <property name="phytozome.organisms" value="3880 3702"/>
-      </source>
-
-      <source name="go" type="go">
-          <property name="src.data.file" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/go-annotation/current/gene_ontology.obo"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/orthologs/phytozome/current"/>
+          <property name="phytozome.organisms" value="&medtr_taxon_id; &arath_taxon_id;"/>
       </source>
 
       <source name="go-annotation" type="go-annotation">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/go-annotation/current/uniprot"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/go-annotation/current/uniprot"/>
           <property name="ontologyPrefix" value="GO"/>
       </source>
 
       <source name="uniprot" type="uniprot">
-          <property name="uniprot.organisms" value="3880"/>
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/uniprot/current"/>
+          <property name="uniprot.organisms" value="&medtr_taxon_id;"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/uniprot/current"/>
       </source>
 
       <source name="uniprot-fasta" type="fasta">
-          <property name="fasta.taxonId" value="3880"/>
+          <property name="fasta.taxonId" value="&medtr_taxon_id;"/>
           <property name="fasta.className" value="org.intermine.model.bio.Protein"/>
           <property name="fasta.classAttribute" value="primaryAccession"/>
           <property name="fasta.dataSetTitle" value="UniProt data set"/>
           <property name="fasta.dataSourceName" value="UniProt"/>
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/uniprot/current"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/uniprot/current"/>
           <property name="fasta.includes" value="uniprot_sprot_varsplic.fasta"/>
           <property name="fasta.sequenceType" value="protein" />
           <property name="fasta.loaderClassName"
-              value="org.intermine.bio.dataconversion.UniProtFastaLoaderTask"/>I
+              value="org.intermine.bio.dataconversion.UniProtFastaLoaderTask"/>
       </source>
 
       <source name="uniprot-keywords" type="uniprot-keywords">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/uniprot/current"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/uniprot/current"/>
           <property name="src.data.dir.includes" value="keywlist.xml"/>
       </source>
 
@@ -84,27 +87,27 @@
           <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
           <property name="fasta.dataSourceName" value="MTGD"/>
           <property name="fasta.dataSetTitle" value="Genome Assembly"/>
-          <property name="fasta.taxonId" value="3880"/>
+          <property name="fasta.taxonId" value="&medtr_taxon_id;"/>
           <property name="fasta.includes" value="*v4*fasta"/>
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/A17/current/fasta"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/genome/&medtr_variety_primary;/current/fasta"/>
       </source>
 
       <source name="medicago-cds-fasta" type="medicago-fasta">
           <property name="fasta.loaderClassName"
               value="org.intermine.bio.dataconversion.MedicagoCDSFastaLoaderTask"/>
-          <property name="fasta.taxonId" value="3880"/>
+          <property name="fasta.taxonId" value="&medtr_taxon_id;"/>
           <property name="fasta.className" value="org.intermine.model.bio.CDS"/>
           <property name="fasta.classAttribute" value="primaryIdentifier"/>
           <property name="fasta.includes" value="*GenesCDSSeq*fasta"/>
           <property name="fasta.dataSetTitle" value="Coding Sequence FASTA"/>
           <property name="fasta.dataSourceName" value="MTGD"/>
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/A17/current/fasta/"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/genome/&medtr_variety_primary;/current/fasta"/>
       </source>
 
       <source name="medicago-pep-fasta" type="medicago-fasta">
           <property name="fasta.loaderClassName"
               value="org.intermine.bio.dataconversion.MedicagoProteinFastaLoaderTask"/>
-          <property name="fasta.taxonId" value="3880"/>
+          <property name="fasta.taxonId" value="&medtr_taxon_id;"/>
           <property name="fasta.className" value="org.intermine.model.bio.Protein"/>
           <property name="fasta.classAttribute" value="primaryIdentifier"/>
           <property name="fasta.includes" value="*GenesProteinSeq*fasta"/>
@@ -113,40 +116,48 @@
           <property name="fasta.trimProteinStopCodon" value="true"/>
           <property name="fasta.dataSetTitle" value="Protein Sequence FASTA"/>
           <property name="fasta.dataSourceName" value="MTGD"/>
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/genome/A17/current/fasta/"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/genome/&medtr_variety_primary;/current/fasta"/>
       </source>
 
       <source name="interpro" type="interpro">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/interpro/current"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/interpro/current"/>
           <property name="src.data.dir.includes" value="interpro.xml"/>
       </source>
 
       <source name="protein2ipr" type="protein2ipr">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/interpro/current"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/interpro/current"/>
           <property name="src.data.dir.includes" value="protein2ipr.dat"/>
-          <property name="protein2ipr.organisms" value="3880"/>
+          <property name="protein2ipr.organisms" value="&medtr_taxon_id;"/>
       </source>
 
       <source name="interpro-go" type="interpro-go">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/interpro/ontology/current"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/interpro/ontology/current"/>
       </source>
 
       <source name="kegg-pathway" type="kegg-pathway">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/kegg/current"/>
-          <property name="kegg.organisms" value="3880"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/kegg/current"/>
+          <property name="kegg.organisms" value="&medtr_taxon_id;"/>
       </source>
 
       <source name="pubmed-gene" type="pubmed-gene" >
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/pubmed/current"/>
-          <property name="pubmed.organisms" value="3880"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/pubmed/current"/>
+          <property name="pubmed.organisms" value="&medtr_taxon_id;"/>
           <property name="src.data.dir.includes" value="gene2pubmed"/>
       </source>
 
       <source name="generif" type="generif">
-          <property name="src.data.dir" location="/usr/local/projdata/0372/projects/MTG4/MedicMineData/generif/current"/>
-          <property name="generif.organisms" value="3880"/>
+          <property name="src.data.dir" location="&medicmine_data_dir;/generif/current"/>
+          <property name="generif.organisms" value="&medtr_taxon_id;"/>
           <property name="generif.datasourcename" value="GeneRIF"/>
           <property name="generif.datasetname" value="GeneRIF data set"/>
+      </source>
+
+      <source name="so" type="so">
+          <property name="src.data.file" location="../../bio/sources/so/so.obo"/>
+      </source>
+
+      <source name="go" type="go">
+          <property name="src.data.file" location="&medicmine_data_dir;/go-annotation/current/go-basic.obo"/>
       </source>
 
       <source name="entrez-organism" type="entrez-organism">
@@ -168,7 +179,7 @@
       <post-process name="create-gene-flanking-features" />
       <post-process name="do-sources" />
       <post-process name="create-intron-features">
-          <property name="organisms" value="3880"/>
+          <property name="organisms" value="&medtr_taxon_id;"/>
       </post-process>
       <post-process name="create-intergenic-region-features"/>
       <post-process name="transfer-sequences"/>
